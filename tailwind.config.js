@@ -52,24 +52,52 @@ export default {
         '50': '50px',
         '85':'85px',
       },
+      screens: {
+        'sm': '640px',
+        // => @media (min-width: 640px) { ... }
+  
+        'md': '768px',
+        // => @media (min-width: 768px) { ... }
+  
+        'lg': '1024px',
+        // => @media (min-width: 1024px) { ... }
+  
+        'xl': '1280px',
+        // => @media (min-width: 1280px) { ... }
+  
+        '2xl': '1536px',
+        // => @media (min-width: 1536px) { ... }
+      },
       letterSpacing: {
        'latter-spacing':'12px',
       },
       height:{
         '1':'1px',
         '340':'340px',
+        '380':'380px',
         '400':'400px',
         '460':'460px',
         '600':'600px',
 
       },
       animation: {
-        'fade-up': 'fadeUp 1s ease-in-out forwards',
+        'fadeup': 'fadeUp 1s ease-in-out forwards',
+       'float': 'float 3s ease-in-out infinite',
+       'wave1': "wave 2s infinite ease-out",
+       'wave2': "wave 2s infinite ease-out 1s",
       },
       keyframes: {
         fadeUp: {
           '0%': { opacity: '0', transform: 'translateY(0px)' },
           '100%': { opacity: '1', transform: 'translateY(10)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        wave: {
+          "0%": { transform: "scale(1)", opacity: "1" },
+          "100%": { transform: "scale(3)", opacity: "0" },
         },
       },
       
