@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import './App.css'
-// import Header from './Components/Core/Header'
 import Home from './Components/Home/Home'
+import AppRouter from './Router/AppRouter'
+
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div>
-    <Home/>
+      <AppRouter/>
+    {/* <Home/> */}
+    {/* <ConferenceTracks/> */}
     </div>
   )
 }

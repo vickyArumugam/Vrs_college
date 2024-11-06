@@ -48,13 +48,13 @@ const Home = ({ endValue = 750 }) => {
     return (
         <div>
             <Header />
-            <section className="w-full h-auto py-4 bg-[url('public/images/corporate-businessman-giving-presentation-large-audience.jpg')] bg-cover bg-center">
+            <section className=" sm:max-w-full h-auto py-4 bg-[url('public/images/corporate-businessman-giving-presentation-large-audience.jpg')] bg-cover bg-center">
                 <div className="absolute inset-0 bg-black opacity-75"></div> 
-                <div className="w-full h-[600px] max-w-[80rem] mx-auto text-center relative text-white">
-                    <h1 className='text-[54px] font-bold font-Helvetica mt-40 '>
+                <div className="sm:max-w-full h-[600px]  mx-auto text-center relative text-white">
+                    <h1 className='text-[54px] font-bold font-Helvetica sm:mt-40 '>
                         5<sup className={`${colors[colorIndex]}`}>th</sup> International Conference
                     </h1>
-                    <h2 className="text-[40px] h-20 text-[#C8F51E] font-medium font-Helvetica animate-fade-up">
+                    <h2 className=" text-[20px] sm:text-[40px] h-20 text-[#C8F51E] font-medium font-Helvetica animate-fade-up">
                         on Veracity Research in Scientific Computing and Engineering Trends
                     </h2>
                     <h2 className='text-[50px] font-medium font-Helvetica'>
@@ -64,7 +64,7 @@ const Home = ({ endValue = 750 }) => {
                     <button className='uppercase w-52 h-12 mb-60 mt-5 text-[#afcf38] bg-white text-[23px] font-semibold  rounded-full p-2 mr-4 pr-7 '>
                         Register
                     </button>
-                    <img src="public/images/right-arrow_14625513.gif" alt="arrow" className='w-10 h-10 absolute top-[58.8%] left-[52.9%]' />
+                    <img src="/images/right-arrow_14625513.gif" alt="arrow" className='w-10 h-10 absolute  top-[58.9%] left-[52%]' />
                 </div>
             </section>
 
@@ -72,7 +72,7 @@ const Home = ({ endValue = 750 }) => {
                 <div className='my-20 max-w-[80rem] mx-auto'>
                     <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E] '>About the Conference</h1>
                 </div>
-                <div className=' flex w-5/12  mb-20 '>
+                <div className=' flex justify-center items-center w-5/12  mb-20 '>
                     <h1 className='text-white text-2xl font-thin text-justify'>
                         The International Conference on Engineering Trends is a biennial conference which aims to provide high quality research by
                         bringing together researchers and practitioners from academia and industry. It is an international forum to communicate and
@@ -82,9 +82,10 @@ const Home = ({ endValue = 750 }) => {
                         analysis, and modeling of the aforementioned key areas. This conference will be an ideal platform for researchers to exchange
                         and share innovative ideas, experience, challenges, and establish research relations worldwide.
                     </h1>
+                    <img src="/images/freepik__background__56115.png" alt="img" className='w-96 h-400 absolute left-[5%] top-[30%] ' />
 
                 </div>
-                <img src="public/images/freepik__background__56115.png" alt="img" className='w-96 h-400 absolute left-[5%] top-[30%] ' />
+               
 
             </section>
 
@@ -127,8 +128,8 @@ const Home = ({ endValue = 750 }) => {
                 </div>
             </section>
 
-            <section className="w-full flex flex-col justify-center items-center py-4 bg-[url('public/images/bg-img-2.png')] bg-cover bg-center relative">
-                <div className="absolute inset-0 bg-black opacity-25"></div>
+            <section className="w-full flex flex-col justify-center items-center py-4 bg-[url('/images/bg-img-2.png')] bg-cover bg-center relative">
+                <div className="absolute inset-0 bg-gray-400 opacity-25"></div>
                 <div className=' text-center relative'>
                     <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E]  uppercase' >Key Invitees</h1>
                 </div>
@@ -137,7 +138,7 @@ const Home = ({ endValue = 750 }) => {
                         <div className="absolute inset-0 rounded-full w-20 h-20 border-4 border-[#C8F51E] animate-wave1 left-[43%] top-[31%]" />
                         <div className="absolute inset-0 rounded-full w-20 h-20 border-4 border-[#C8F51E] animate-wave2 left-[43%] top-[31%]" />
                         <img
-                            src="public/images/download-1-2048x2048.png"
+                            src="/images/download-1-2048x2048.png"
                             className="w-60 relative"
                             alt="Mr. Thirumal Margabandu"
                         />
@@ -148,20 +149,18 @@ const Home = ({ endValue = 750 }) => {
                             Software Test & Digital Transformation Consultant, Maargam IT, London, UK.
                         </h1>
                     </div>
-                </div>
+                </div>    
             </section>
 
             <section className='w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4'>
                 <div className=' text-center mb-20'>
                     <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E] mt-20 uppercase'>Chief Patrons</h1>
                 </div>
-
                 <div className=' max-w-[70%] flex flex-wrap gap-20 mb-20'>
-
                     <div className=' flex justify-center items-center gap-4 m-0    rounded-lg '>
                         <div class=" w-full min-h-100 flex flex-col justify-center items-center rounded-xl  border-2 border-[#C8F51E] shadow-sm  p-10 bg-black">
                         {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
-                            <img src="public\images\download-1-2048x2048.png" className='w-60 relative ' />
+                            <img src="/images/download-1-2048x2048.png" className='w-60 relative ' />
                             <h1 className=' text-20 text-center font-bold text-white relative'>Mr. Thirumal Margabandu</h1>
                             <h1 className='text-center text-17 text-white relative'>Software Test & Digital Transformation Consultant, Maargam IT, London, UK.</h1>
                         </div>
@@ -169,7 +168,7 @@ const Home = ({ endValue = 750 }) => {
 
                     <div className=' flex justify-center items-center gap-4    rounded-lg '>
                         <div class=" w-full   min-h-80 flex flex-col justify-center items-center rounded-xl  bg-black border border-[#C8F51E] shadow-sm  p-10">
-                            <img src="public\images\download-1-2048x2048.png" className='w-60 ' />
+                            <img src="/images/download-1-2048x2048.png" className='w-60 ' />
                             <h1 className=' text-20 text-center font-bold text-white '>Mr. Thirumal Margabandu</h1>
                             <h1 className='text-center text-17 text-white'>Software Test & Digital Transformation Consultant, Maargam IT, London, UK.</h1>
                         </div>
@@ -177,7 +176,7 @@ const Home = ({ endValue = 750 }) => {
 
                     <div className=' flex justify-center items-center gap-4    rounded-lg '>
                         <div class=" w-full   min-h-80 flex flex-col justify-center items-center rounded-xl bg-black border border-[#C8F51E] shadow-sm  p-10">
-                            <img src="public\images\download-1-2048x2048.png" className='w-60 ' />
+                            <img src="/images/download-1-2048x2048.png" className='w-60 ' />
                             <h1 className=' text-20 text-center font-bold text-white '>Mr. Thirumal Margabandu</h1>
                             <h1 className='text-center text-17 text-white'>Software Test & Digital Transformation Consultant, Maargam IT, London, UK.</h1>
                         </div>
@@ -185,7 +184,7 @@ const Home = ({ endValue = 750 }) => {
 
                     <div className=' flex justify-center items-center gap-4    rounded-lg '>
                         <div class=" w-full   min-h-80 flex flex-col justify-center items-center rounded-xl bg-black border border-[#C8F51E] shadow-sm  p-10">
-                            <img src="public\images\download-1-2048x2048.png" className='w-60 ' />
+                            <img src="/images/download-1-2048x2048.png" className='w-60 ' />
                             <h1 className=' text-20 text-center font-bold text-white '>Mr. Thirumal Margabandu</h1>
                             <h1 className='text-center text-17 text-white'>Software Test & Digital Transformation Consultant, Maargam IT, London, UK.</h1>
                         </div>
@@ -209,7 +208,7 @@ const Home = ({ endValue = 750 }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='flex justify-center gap-20'>
+                    <div className='  flex  justify-center gap-20'>
                         <div className='w-64 h-380  bg-[#0B0A2A] border-2 border-b-white  p-8'>
                             <div className=''>
                                 <h1 className=' font-roboto text-20 text-center font-bold'>Academicians</h1>
@@ -278,10 +277,10 @@ const Home = ({ endValue = 750 }) => {
 
             <section className='bg-white'>
                 <div className=' w-full h-20 flex justify-center items-center  gap-10 '>
-                    <img src="public\images\facebook_5968764 (1).png" alt='facebook-icon' className='transform transition-transform duration-200 hover:scale-110 border-3 hover:border-[#C8F51E] rounded-full' />
-                    <img src="public\images\twitter_3955031.png" alt="twitter-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
-                    <img src="public\images\instagram_1384015.png" alt="insta-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
-                    <img src="public\images\social_15707814.png" alt="youtube-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
+                    <img src="/images/facebook_5968764 (1).png" alt='facebook-icon' className='transform transition-transform duration-200 hover:scale-110 border-3 hover:border-[#C8F51E] rounded-full' />
+                    <img src="/images/twitter_3955031.png" alt="twitter-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
+                    <img src="/images/instagram_1384015.png" alt="insta-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
+                    <img src="/images/social_15707814.png" alt="youtube-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
                 </div>
                 <div className='bg-footer-bg p-2 text-footer-text  text-center '>
                     <p className='text-[#C8F51E]'>
