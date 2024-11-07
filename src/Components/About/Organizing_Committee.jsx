@@ -96,7 +96,7 @@ const Organizing_Committee = () => {
     <div>
         <AboutHeader/>
         <AboutLocation/>
-        <div className="flex flex-col items-center justify-center p-8 gap-6">
+        <div className="flex flex-col items-center justify-center p-8 gap-6 ">
                 <div className="w-full flex flex-col items-center text-center">
                     <div className="w-full max-w-[360px] bg-box-editiorial text-white font-bold py-2 rounded-t">
                         Chairman

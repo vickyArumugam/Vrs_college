@@ -36,12 +36,12 @@ export default function Header() {
                     <img src="/images/cropped-ICVRSCET-1.png" alt="logo" />
                 </div>
                 <div className='content-center hidden sm:flex'>
-                    <ul className='text-[#C8F51E] text-xl font-bold flex gap-5 items-center relative '>
+                    <ul className='text-[#C8F51E] text-xl font-bold flex gap-10 items-center relative '>
                         <li>
-                            <a href="/" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900'>HOME</a>
+                            <a href="/" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19'>HOME</a>
                         </li>
                         <li>
-                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900' onMouseEnter={() => handleMouseEnter('about')}>ABOUT US</a>
+                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19' onMouseEnter={() => handleMouseEnter('about')}>ABOUT US</a>
                             {openDropdown === 'about' && (
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
                                     <ul onMouseLeave={handleMouseLeave} className='text-left '>
@@ -56,7 +56,7 @@ export default function Header() {
                             )}
                         </li>
                         <li>
-                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900' onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'DESK</a>
+                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19' onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'DESK</a>
                             {openDropdown === 'authors' && (
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
                                     <ul onMouseLeave={handleMouseLeave} className='text-left'>
@@ -69,8 +69,8 @@ export default function Header() {
                                 </div>
                             )}
                         </li>
-                        <li>
-                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900' onMouseEnter={() => handleMouseEnter('reach')}>REACH US</a>
+                        <li> 
+                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19' onMouseEnter={() => handleMouseEnter('reach')}>REACH US</a>
                             {openDropdown === 'reach' && (
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
                                     <ul onMouseLeave={handleMouseLeave} className='text-left'>

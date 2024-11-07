@@ -10,7 +10,7 @@ const About_Vrscet = () => {
             <section className='w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4 relative'>
 
                 <div className=' flex justify-center items-center w-5/12  my-20 '>
-                    <h1 className='text-white text-2xl font-thin text-justify'>
+                    <h1 className='text-white text-2xl  font-Andika font-thin text-justify leading-relaxed tracking-wider hover:text-[#C8F51E]'>
                         V.R.S. College of Engineering and Technology was established in the year 1994 under the aegis of S.P.S Educational Trust.
                          The college excels with the approval of All India Council for Technical Education, New Delhi, Affiliation of Anna University, 
                          Chennai, Reaccreditation by NAAC, Bengaluru [earlier by NBA, New Delhi] and Recertification by ISO 9001 : 2008. It is managed by

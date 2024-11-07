@@ -8,9 +8,8 @@ function About_Conference() {
     <div>
          <AboutHeader/>
          <section className='w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4 relative'>
-              
                 <div className=' flex justify-center items-center w-5/12  my-20 '>
-                    <h1 className='text-white text-2xl font-thin text-justify'>
+                    <h1 className='text-white text-2xl font-Andika leading-relaxed tracking-wider font-thin text-justify hover:text-[#C8F51E]'>
                     The International Conference on Engineering Trends is a biennial conference which aims to provide high quality
                      research by bringing together researchers and practitioners from academia and industry. It is an international
                       forum to communicate and discuss various research findings, technological advancements and innovations in broad

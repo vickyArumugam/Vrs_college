@@ -37,7 +37,10 @@ export default {
         'Helvetica': ['Helvetica', 'sans-serif'],
         'roboto': ['Roboto', 'sans-serif'],
         'montserrat-subrayada': ['Montserrat Subrayada', 'Sans-serif'],
-        'Trebuchet':['Trebuchet MS','Tahoma, sans-serif']
+        'Trebuchet':['Trebuchet MS','Tahoma, sans-serif'],
+        'Kaisei-Decol':['Kaisei Decol','serif'],
+        'Playwrite':['Playwrite GB S', 'cursive'],
+        'Andika':['Andika', 'sans-serif'],
       },
       fontSize: {
         '14':'14px',

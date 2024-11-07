@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Core/Header';
 
-const Home = ({ endValue = 750 }) => {
+const Home = () => {
     const colors = ['text-red-500', 'text-[#C8F51E]', 'text-yellow-300'];
     const [colorIndex, setColorIndex] = useState(0);
-
-    const [value1, setValue1] = useState(0);
-    const [value2, setValue2] = useState(0);
-    const [value3, setValue3] = useState(0);
-    const [value4, setValue4] = useState(0);
-
-    const targets = [750, 750, 1500, 2500];
-
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -21,27 +13,47 @@ const Home = ({ endValue = 750 }) => {
         return () => clearInterval(intervalId);
     }, []);
 
+    const [value1, setValue1] = useState(0);
+    const [value2, setValue2] = useState(0);
+    const [value3, setValue3] = useState(0);
+    const [value4, setValue4] = useState(0);
+    const targets = [750, 750, 1500, 2500];
+
     useEffect(() => {
         const incrementTime = 20;
         const totalIncrements = 100;
-
-
         const increments = targets.map(target => target / totalIncrements);
 
-        const interval = setInterval(() => {
-            setValue1((prev) => Math.min(prev + increments[0], targets[0]));
-            setValue2((prev) => Math.min(prev + increments[1], targets[1]));
-            setValue3((prev) => Math.min(prev + increments[2], targets[2]));
-            setValue4((prev) => Math.min(prev + increments[3], targets[3]));
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const triggerPosition = document.documentElement.scrollHeight / 2;
+            console.log(scrollPosition, triggerPosition);
 
 
-            if (value1 >= targets[0] && value2 >= targets[1] && value3 >= targets[2] && value4 >= targets[3]) {
-                clearInterval(interval);
+            if (scrollPosition >= 5200) {
+                const interval = setInterval(() => {
+                    setValue1(prev => Math.min(prev + increments[0], targets[0]));
+                    setValue2(prev => Math.min(prev + increments[1], targets[1]));
+                    setValue3(prev => Math.min(prev + increments[2], targets[2]));
+                    setValue4(prev => Math.min(prev + increments[3], targets[3]));
+
+                    if (
+                        value1 >= targets[0] &&
+                        value2 >= targets[1] &&
+                        value3 >= targets[2] &&
+                        value4 >= targets[3]
+                    ) {
+                        clearInterval(interval);
+                    }
+                }, incrementTime);
+                window.removeEventListener('scroll', handleScroll);
             }
-        }, incrementTime);
+        };
+        window.addEventListener('scroll', handleScroll);
 
-        return () => clearInterval(interval);
-    }, [targets]);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [targets, value1, value2, value3, value4]);
+
 
 
 
@@ -49,31 +61,31 @@ const Home = ({ endValue = 750 }) => {
         <div>
             <Header />
             <section className=" sm:max-w-full h-auto py-4 bg-[url('public/images/corporate-businessman-giving-presentation-large-audience.jpg')] bg-cover bg-center">
-                <div className="absolute inset-0 bg-black opacity-75"></div> 
-                <div className="sm:max-w-full h-[600px]  mx-auto text-center relative text-white">
-                    <h1 className='text-[54px] font-bold font-Helvetica sm:mt-40 '>
-                        5<sup className={`${colors[colorIndex]}`}>th</sup> International Conference
+                <div className="absolute inset-0 bg-black opacity-75"></div>
+                <div className="sm:max-w-full h-[600px]  mx-auto text-center relative text-white mt-40">
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol mb-3 '>
+                        5<sup className={`${colors[colorIndex]} font-Playwrite `}>th</sup> International Conference
                     </h1>
-                    <h2 className=" text-[20px] sm:text-[40px] h-20 text-[#C8F51E] font-medium font-Helvetica animate-fade-up">
+                    <h2 className=" text-[20px] sm:text-[40px] text-[#C8F51E] font-medium font-Playwrite animate-pulse mb-5 ">
                         on Veracity Research in Scientific Computing and Engineering Trends
                     </h2>
-                    <h2 className='text-[50px] font-medium font-Helvetica'>
-                        26<sup className={`${colors[colorIndex]}`}>th</sup> April, 2024
+                    <h2 className='text-[50px] font-medium font-Helvetica mb-3 '>
+                        26<sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup> April, 2024
                     </h2>
-                    <h1 className='text-[50px] mb-4 font-bold font-Helvetica'>ICVRSCET - 2024 (Hybrid)</h1>
+                    <h1 className='text-[50px] mb-10 font-bold font-Kaisei-Decol '>ICVRSCET - 2024 (Hybrid)</h1>
                     <button className='uppercase w-52 h-12 mb-60 mt-5 text-[#afcf38] bg-white text-[23px] font-semibold  rounded-full p-2 mr-4 pr-7 '>
                         Register
                     </button>
-                    <img src="/images/right-arrow_14625513.gif" alt="arrow" className='w-10 h-10 absolute  top-[58.9%] left-[52%]' />
+                    <img src="/images/right-arrow_14625513.gif" alt="arrow" className='w-10 h-10 absolute  top-[66.9%] left-[52%]' />
                 </div>
             </section>
 
             <section className='w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4 relative'>
                 <div className='my-20 max-w-[80rem] mx-auto'>
-                    <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E] '>About the Conference</h1>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] '>About the Conference</h1>
                 </div>
                 <div className=' flex justify-center items-center w-5/12  mb-20 '>
-                    <h1 className='text-white text-2xl font-thin text-justify'>
+                    <h1 className='text-white text-2xl font-Andika font-thin text-justify leading-relaxed tracking-wider hover:text-[#C8F51E]'>
                         The International Conference on Engineering Trends is a biennial conference which aims to provide high quality research by
                         bringing together researchers and practitioners from academia and industry. It is an international forum to communicate and
                         discuss various research findings, technological advancements and innovations in broad areas of research like Advanced Computer
@@ -82,47 +94,53 @@ const Home = ({ endValue = 750 }) => {
                         analysis, and modeling of the aforementioned key areas. This conference will be an ideal platform for researchers to exchange
                         and share innovative ideas, experience, challenges, and establish research relations worldwide.
                     </h1>
-                    <img src="/images/freepik__background__56115.png" alt="img" className='w-96 h-400 absolute left-[5%] top-[30%] ' />
-
                 </div>
-               
+
 
             </section>
 
             <section className="w-full h-[900px] py-4 ">
 
                 <div className='max-w-[80rem] mx-auto text-center '>
-                    <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E] mb-36 mt-20'>KEY DATES</h1>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-36 mt-20'>KEY DATES</h1>
                 </div>
                 <div className='flex justify-center gap-20'>
-                    <div className='w-60 h-80 bg-[#0B0A2A] border-2 border-b-white  p-4  rounded-tl-[60px] rounded-br-[60px] mt-32'>
+                    <div className='w-60 h-80 bg-[#0B0A2A] border-2 border-b-white  p-4  rounded-tl-[60px] rounded-br-[60px] mt-32 
+                     transition-all duration-300 ease-in-out hover:border-[#C8F51E] hover:rounded-none'>
                         <div className='mt-[38%]'>
-                            <h1 className=' font-roboto text-20 text-center font-bold'>Last Date for Full Paper Submission</h1>
+                            <h1 className=' font-Andika text-20 text-center font-bold'>Last Date for Full Paper Submission</h1>
                             <hr className='w-2/4 border-[#C8F51E] ml-14 my-5'></hr>
                             <h1 className=' font-roboto text-20 text-center font-bold'>17‐04‐2024</h1>
                         </div>
                     </div>
                     <div className='flex gap-10 '>
-                        <div className='w-60 h-80 bg-[#C8F51E99]  border-2 border-b-white  p-4  rounded-tr-[60px] rounded-bl-[60px] '>
+                        <div className='w-60 h-80 bg-[#C8F51E99]  border-2 border-b-white  p-4  rounded-tr-[60px] rounded-bl-[60px] 
+                         transition-all duration-300 ease-in-out hover:border-[#874ee2d7] hover:rounded-none'>
                             <div className='mt-[38%]'>
-                                <h1 className=' font-roboto text-20 text-center font-bold'>Last Date for Full Paper Submission</h1>
+                                <h1 className=' font-Andika  text-20 text-center font-bold'>Last Date for Full Paper Submission</h1>
                                 <hr className='w-2/4 border-[#0B0A2A] ml-14 my-5 border-1'></hr>
                                 <h1 className=' font-roboto text-20 text-center font-bold'>17‐04‐2024</h1>
                             </div>
                         </div>
-                        <div className='w-60 h-80 bg-[#C8F51E99]  border-2 border-b-white  p-4  rounded-tl-[60px] rounded-br-[60px]'>
+                        <div className='w-60 h-80 bg-[#C8F51E99]  border-2 border-b-white  p-4  rounded-tl-[60px] rounded-br-[60px]
+                             transition-all duration-300 ease-in-out hover:border-[#874ee2d7] hover:rounded-none'>
                             <div className='mt-[38%]'>
-                                <h1 className=' font-roboto text-20 text-center font-bold'>Last Date for Full Paper Submission</h1>
+                                <h1 className=' font-Andika  text-20 text-center font-bold'>Last Date for Full Paper Submission</h1>
                                 <hr className='w-2/4 border-[#0B0A2A] ml-14 my-5 border-1'></hr>
                                 <h1 className=' font-roboto text-20 text-center font-bold'>17‐04‐2024</h1>
                             </div>
                         </div>
                     </div>
-                    <div className='w-60 h-80 bg-[#0B0A2A] border-2 border-b-white p-4 rounded-tr-[60px] rounded-bl-[60px] mt-32 '>
-                        <div className='mt-[38%]'>
-                            <h1 className=' font-roboto text-20 text-center font-bold'>Last Date for Full Paper Submission</h1>
-                            <hr className='w-2/4 border-[#C8F51E] ml-14 my-5'></hr>
-                            <h1 className=' font-roboto text-20 text-center font-bold'>17‐04‐2024</h1>
+                    <div className="w-60 h-80 bg-[#0B0A2A] border-2 border-white p-4 rounded-tr-[60px] rounded-bl-[60px] mt-32 
+                                   transition-all duration-300 ease-in-out hover:border-[#C8F51E] hover:rounded-none">
+                        <div className="mt-[38%]">
+                            <h1 className="font-Andika text-20 text-center font-bold">
+                                Last Date for Full Paper Submission
+                            </h1>
+                            <hr className="w-2/4 border-[#C8F51E] mx-auto my-5" />
+                            <h1 className="font-roboto text-20 text-center font-bold">
+                                17‐04‐2024
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -131,7 +149,7 @@ const Home = ({ endValue = 750 }) => {
             <section className="w-full flex flex-col justify-center items-center py-4 bg-[url('/images/bg-img-2.png')] bg-cover bg-center relative">
                 <div className="absolute inset-0 bg-gray-400 opacity-25"></div>
                 <div className=' text-center relative'>
-                    <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E]  uppercase' >Key Invitees</h1>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E]  uppercase' >Key Invitees</h1>
                 </div>
                 <div className="flex justify-center items-center gap-4 mb-28 mt-10 border-3 border-[#C8F51E] rounded-lg group">
                     <div className="w-full min-h-80 flex flex-col justify-center items-center rounded-xl bg-white border shadow-sm p-10 relative">
@@ -149,17 +167,17 @@ const Home = ({ endValue = 750 }) => {
                             Software Test & Digital Transformation Consultant, Maargam IT, London, UK.
                         </h1>
                     </div>
-                </div>    
+                </div>
             </section>
 
             <section className='w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4'>
                 <div className=' text-center mb-20'>
-                    <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E] mt-20 uppercase'>Chief Patrons</h1>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mt-20 uppercase'>Chief Patrons</h1>
                 </div>
                 <div className=' max-w-[70%] flex flex-wrap gap-20 mb-20'>
                     <div className=' flex justify-center items-center gap-4 m-0    rounded-lg '>
                         <div class=" w-full min-h-100 flex flex-col justify-center items-center rounded-xl  border-2 border-[#C8F51E] shadow-sm  p-10 bg-black">
-                        {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
+                            {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
                             <img src="/images/download-1-2048x2048.png" className='w-60 relative ' />
                             <h1 className=' text-20 text-center font-bold text-white relative'>Mr. Thirumal Margabandu</h1>
                             <h1 className='text-center text-17 text-white relative'>Software Test & Digital Transformation Consultant, Maargam IT, London, UK.</h1>
@@ -194,13 +212,13 @@ const Home = ({ endValue = 750 }) => {
 
             <section className="w-full h-[700px]">
                 <div className='max-w-[80rem] mx-auto text-center'>
-                    <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E] mb-36 mt-20'>KEY DATES</h1>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-36 mt-20'>KEY DATES</h1>
                 </div>
                 <div className='flex  justify-center gap-10 '>
                     <div className='flex justify-center gap-20'>
                         <div className='w-64 h-380  bg-[#0B0A2A] border-2 border-b-white  p-8'>
                             <div className=''>
-                                <h1 className=' font-roboto text-20 text-center font-bold'>Academicians</h1>
+                                <h1 className=' font-Trebuchet text-20 text-center font-bold mb-3'>Academicians</h1>
                                 <h1 className='font-roboto text-29 text-center font-bold'>INR</h1>
                                 <hr className='w-2/4 border-[#C8F51E] ml-12 my-5'></hr>
                                 <h1 className='font-roboto text-85 text-center font-bold text-yellow-300'>{Math.floor(value1)}</h1>
@@ -211,7 +229,7 @@ const Home = ({ endValue = 750 }) => {
                     <div className='  flex  justify-center gap-20'>
                         <div className='w-64 h-380  bg-[#0B0A2A] border-2 border-b-white  p-8'>
                             <div className=''>
-                                <h1 className=' font-roboto text-20 text-center font-bold'>Academicians</h1>
+                                <h1 className=' font-Trebuchet text-20 text-center font-bold mb-3'>Academicians</h1>
                                 <h1 className='font-roboto text-29 text-center font-bold'>INR</h1>
                                 <hr className='w-2/4 border-[#C8F51E] ml-12 my-5'></hr>
                                 <h1 className='font-roboto text-85 text-center font-bold text-yellow-300'>{Math.floor(value2)}</h1>
@@ -222,7 +240,7 @@ const Home = ({ endValue = 750 }) => {
                     <div className='flex justify-center gap-20'>
                         <div className='w-64 h-380  bg-[#0B0A2A] border-2 border-b-white  p-8'>
                             <div className=''>
-                                <h1 className=' font-roboto text-20 text-center font-bold'>Academicians</h1>
+                                <h1 className=' font-Trebuchet text-20 text-center font-bold mb-3'>Academicians</h1>
                                 <h1 className='font-roboto text-29 text-center font-bold'>INR</h1>
                                 <hr className='w-2/4 border-[#C8F51E] ml-12 my-5'></hr>
                                 <h1 className='font-roboto text-85 text-center font-bold text-yellow-300'>{Math.floor(value3)}</h1>
@@ -233,7 +251,7 @@ const Home = ({ endValue = 750 }) => {
                     <div className='flex justify-center gap-20'>
                         <div className='w-64 h-380  bg-[#0B0A2A] border-2 border-b-white  p-8'>
                             <div className=''>
-                                <h1 className=' font-roboto text-20 text-center font-bold'>Academicians</h1>
+                                <h1 className=' font-Trebuchet text-20 text-center font-bold mb-3'>Academicians</h1>
                                 <h1 className='font-roboto text-29 text-center font-bold'>INR</h1>
                                 <hr className='w-2/4 border-[#C8F51E] ml-12 my-5'></hr>
                                 <h1 className='font-roboto text-85 text-center font-bold text-yellow-300'>{Math.floor(value4)}</h1>
@@ -246,17 +264,15 @@ const Home = ({ endValue = 750 }) => {
 
             <section className=' w-full h-[460px] text-center bg-[#0B0A2A] '>
                 <div className='flex flex-col'>
-                    <h1 className='text-[54px] font-bold font-Helvetica text-[#C8F51E] mb-10 mt-10'>Contact Us</h1>
-                    <h2 className='text-4xl text-white font-bold'>V.R.S. College of Engineering & Technology,</h2>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-10 mt-10'>Contact Us</h1>
+                    <h2 className='text-4xl text-white font-bold font-montserrat-subrayada'>V.R.S. College of Engineering & Technology,</h2>
                     <h3 className='text-2xl  my-6 text-yellow-300'>(Reaccredited by NAAC and An ISO 9001:2008 Recertified Institution)</h3>
-                    <h1 className='text-2xl text-white mb-14 font-roboto'>Arasur - 607 107,
-                        <br />
-                        Villupuram District
-                        <br />
-                        Mobile : +91 8870301652
-                        <br />
-                        Email ID : icvrscet@gmail.com
-                    </h1>
+                    <span className='text-2xl text-white mb-14 font-Playwrite '>
+                        <p className='my-2'>Arasur - 607 107,</p>
+                        <p className='my-2'> Villupuram District</p>
+                        <p className='my-2'>Mobile : +91 8870301652</p>
+                        <p className='my-2'>Email ID : icvrscet@gmail.com</p>
+                    </span>
 
                 </div>
 
