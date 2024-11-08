@@ -47,3 +47,8 @@ function AppRouter() {
 }
 
 export default AppRouter;
+
+{/* <option value="Academicians">Academicians</option>
+                <option value="Students & PG/Ph.D Scholar">Students & PG/Ph.D Scholar</option>
+                <option value="Industry Delegates">Industry Delegates</option>
+                <option value="Overseas DElegates">Overseas DElegates</option> */}

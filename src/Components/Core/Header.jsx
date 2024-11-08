@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 export default function Header() {
     const [isSticky, setIsSticky] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleMouseEnter = (dropdown) => {
         setOpenDropdown(dropdown);
@@ -10,6 +11,10 @@ export default function Header() {
 
     const handleMouseLeave = () => {
         setOpenDropdown(null);
+    };
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     // Toggle sticky class based on scroll position
@@ -27,60 +32,123 @@ export default function Header() {
 
     return (
         <div className="bg-transparent bg-cover bg-fixed bg-center relative">
-            {/* <div className="absolute inset-0 bg-black opacity-75"></div> */}
             <nav
-                className={`${isSticky ? 'fixed top-0 left-0 right-0 bg-[#0B0A2A] shadow-lg' : 'bg-transparent relative '
-                    } flex justify-around  max-w-full mx-auto py-4 transition-all duration-300 z-10 `}
+                className={`${isSticky ? 'fixed top-0 left-0 right-0 bg-[#0B0A2A] shadow-lg' : 'bg-transparent relative'
+                    } flex lg:justify-around justify-between items-center max-w-full mx-auto px-4 py-4 transition-all duration-300 z-10`}
             >
-                <div className='w-60 h-16 hover:opacity-50 relative'>
-                    <img src="/images/cropped-ICVRSCET-1.png" alt="logo" />
+                <div className='w-40 h-12'>
+                    <img src="/images/cropped-ICVRSCET-1.png" alt="logo" className="h-full object-contain" />
                 </div>
-                <div className='content-center hidden sm:flex'>
-                    <ul className='text-[#C8F51E] text-xl font-bold flex gap-10 items-center relative '>
+
+                {/* Desktop Menu */}
+                <div className='hidden lg:flex items-center'>
+                    <ul className='text-[#C8F51E] text-lg font-bold flex gap-8 items-center'>
                         <li>
-                            <a href="/" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19'>HOME</a>
+                            <a href="/" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition'>HOME</a>
                         </li>
-                        <li>
-                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19' onMouseEnter={() => handleMouseEnter('about')}>ABOUT US</a>
+                        <li className='relative'>
+                            <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('about')}>ABOUT US</a>
                             {openDropdown === 'about' && (
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
-                                    <ul onMouseLeave={handleMouseLeave} className='text-left '>
-                                        <li><a href='/about/conference_tracks' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>earlier conferences</a></li>
-                                        <li><a href='/about/about_conference' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>about the conference</a></li>
-                                        <li><a href='/about/scope_conference' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>scope of conference</a></li>
-                                        <li><a href='/about/about_vrscet' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>about vrscet</a></li>
-                                        <li><a href='/about/organizing_committee' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>organizing committee</a></li>
-                                        <li><a href='/about/editorial_board' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>editorial board</a></li>
+                                    <ul onMouseLeave={handleMouseLeave} className='text-left'>
+                                        <li><a href='/about/conference_tracks' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>earlier conferences</a></li>
+                                        <li><a href='/about/about_conference' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>about the conference</a></li>
+                                        <li><a href='/about/scope_conference' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>scope of conference</a></li>
+                                        <li><a href='/about/about_vrscet' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>about vrscet</a></li>
+                                        <li><a href='/about/organizing_committee' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>organizing committee</a></li>
+                                        <li><a href='/about/editorial_board' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>editorial board</a></li>
                                     </ul>
                                 </div>
                             )}
                         </li>
                         <li>
-                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19' onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'DESK</a>
+                            <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'S DESK</a>
                             {openDropdown === 'authors' && (
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
                                     <ul onMouseLeave={handleMouseLeave} className='text-left'>
-                                        <li><a href='/author/conference_tracks' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>conference tracks</a></li>
-                                        <li><a href="/author/journal_publication" className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>journal publication</a></li>
-                                        <li><a href="/author/key_dates" className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>key dates</a></li>
-                                        <li><a href="/author/new_paper_submission" className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>registation datails</a></li>
-                                        <li><a href="/author/registration_details" className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>new paper submission</a></li>
+                                        <li><a href='/author/conference_tracks' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>conference tracks</a></li>
+                                        <li><a href='/author/journal_publication' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>journal publication</a></li>
+                                        <li><a href='/author/key_dates' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>key dates</a></li>
+                                        <li><a href='/author/registration_details' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>registration details</a></li>
+                                        <li><a href='/author/new_paper_submission' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>new paper submission</a></li>
                                     </ul>
                                 </div>
                             )}
                         </li>
-                        <li> 
-                            <a href="" className='w-32 h-16 rounded-lg p-2 hover:text-white hover:bg-blue-900 font-Kaisei-Decol text-19' onMouseEnter={() => handleMouseEnter('reach')}>REACH US</a>
+                        <li>
+                            <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('reach')}>REACH US</a>
                             {openDropdown === 'reach' && (
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
                                     <ul onMouseLeave={handleMouseLeave} className='text-left'>
-                                        <li><a href='/contact_us' className='block py-1 uppercase hover:bg-green-100 border-b-1 border-b-[#C8F51E] text-sm'>contact us</a></li>
+                                        <li><a href='/contact_us' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>contact us</a></li>
                                     </ul>
                                 </div>
                             )}
                         </li>
                     </ul>
                 </div>
+
+                {/* Mobile Menu Button */}
+                <div className='lg:hidden flex items-center'>
+                    <button onClick={toggleMobileMenu} className="text-[#C8F51E] focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Mobile Dropdown Menu */}
+                {isMobileMenuOpen && (
+                    <div className="absolute top-full right-0 w-[50%] bg-[#0B0A2A] text-[#C8F51E] lg:hidden">
+                        <ul className="flex flex-col  items-center py-4 space-y-2 text-lg font-bold">
+                            <li>
+                                <a href="/" className="block px-3 py-2 hover:text-white hover:bg-blue-900 rounded-md transition">HOME</a>
+                            </li>
+                            <li>
+                                <a href="#" className="block px-3 py-2 hover:text-white hover:bg-blue-900 rounded-md transition" onClick={() => setOpenDropdown(openDropdown === 'about' ? null : 'about')}>
+                                    ABOUT US
+                                </a>
+                                {openDropdown === 'about' && (
+                                    <div className="bg-white text-black mt-2 p-4 w-full text-base border-t-4 border-[#C8F51E]">
+                                        <ul className="text-left space-y-1">
+                                            <li><a href='/about/conference_tracks' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>earlier conferences</a></li>
+                                            <li><a href='/about/about_conference' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>about the conference</a></li>
+                                            <li><a href='/about/scope_conference' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>scope of conference</a></li>
+                                            <li><a href='/about/about_vrscet' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>about vrscet</a></li>
+                                            <li><a href='/about/organizing_committee' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>organizing committee</a></li>
+                                            <li><a href='/about/editorial_board' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>editorial board</a></li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </li>
+                            {/* Add other sections similarly */}
+                            <li>
+                            <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'S DESK</a>
+                            {openDropdown === 'authors' && (
+                                <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
+                                    <ul onMouseLeave={handleMouseLeave} className='text-left'>
+                                        <li><a href='/author/conference_tracks' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>conference tracks</a></li>
+                                        <li><a href='/author/journal_publication' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>journal publication</a></li>
+                                        <li><a href='/author/key_dates' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>key dates</a></li>
+                                        <li><a href='/author/registration_details' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>registration details</a></li>
+                                        <li><a href='/author/new_paper_submission' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>new paper submission</a></li>
+                                    </ul>
+                                </div>
+                            )}
+                        </li>
+                        <li>
+                            <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('reach')}>REACH US</a>
+                            {openDropdown === 'reach' && (
+                                <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
+                                    <ul onMouseLeave={handleMouseLeave} className='text-left'>
+                                        <li><a href='/contact_us' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>contact us</a></li>
+                                    </ul>
+                                </div>
+                            )}
+                        </li>
+                        </ul>
+                    </div>
+                )}
             </nav>
         </div>
     );

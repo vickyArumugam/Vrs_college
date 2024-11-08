@@ -104,7 +104,7 @@ const Organizing_Committee = () => {
                     <div className="border-blue-600 rounded-b p-4  max-w-[40rem]">
                         <div className="font-Trebuchet text-19 font-semibold text-blue-700  ">
                             <div className="text-box-editiorial border-2 font-semibold border-box-editiorial  p-4  min-w-[360px] max-w-[20rem] w-full mx-auto">
-                                <p className="font-semibold">Dr.N.Anbazhaghan, M.E., Ph.D.</p>
+                                <p className="font-semibold ">Dr.N.Anbazhaghan, M.E., Ph.D.</p>
                                 <p>Principal</p>
                             </div>
                         </div>
@@ -125,7 +125,7 @@ const Organizing_Committee = () => {
                                         key={idx}
                                         className="text-box-editiorial border-2 font-semibold border-box-editiorial  p-4  min-w-[600px] max-w-[20rem] w-full mx-auto"
                                     >
-                                        <p className="font-semibold">{member.name}</p>
+                                        <p className="font-semibold ">{member.name}</p>
                                         <p>{member.position}</p>
                                     </div>
                                 ))}
