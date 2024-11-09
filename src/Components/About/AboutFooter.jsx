@@ -3,7 +3,7 @@ import React from 'react'
 const AboutFooter = () => {
     return (
         <div>
-           <section className="w-full h-[400px] flex flex-col text-center justify-center bg-[url('/images/footer-img-2.jpg')] bg-cover bg-center relative">
+           <section className="w-full h-[300px] lg:h-[400px] flex flex-col text-center justify-center bg-[url('/images/footer-img-2.jpg')] bg-cover bg-center relative">
     <div className="absolute inset-0 bg-black opacity-25"></div>
     <div className="relative px-4">
         <h1 className="text-[#0B0A2A] font-Kaisei-Decol text-4xl sm:text-5xl md:text-6xl font-extrabold my-5">
@@ -22,7 +22,7 @@ const AboutFooter = () => {
             </h1>
         </div>
         
-        <div className="w-full h-20 flex justify-center items-center gap-6 sm:gap-10 mt-10">
+        <div className="w-full h-20 flex justify-center items-center gap-6 sm:gap-10 mt-0 lg:mt-10">
             <img
                 src="/images/facebook_5968764 (1).png"
                 alt="facebook-icon"
@@ -47,7 +47,7 @@ const AboutFooter = () => {
     </div>
 </section>
 
-            <div className='bg-footer-bg p-2 text-[#C8F51E]  text-center mt-10 z-10'>
+            <div className='bg-footer-bg p-2 text-[#C8F51E]  text-center   z-10'>
                 Copyright 2024 - V.R.S. College of Engineering and Technology
             </div>
         </div>

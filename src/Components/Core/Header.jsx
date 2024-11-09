@@ -100,7 +100,7 @@ export default function Header() {
                 {/* Mobile Dropdown Menu */}
                 {isMobileMenuOpen && (
                     <div className="absolute top-full right-0 w-[50%] bg-[#0B0A2A] text-[#C8F51E] lg:hidden">
-                        <ul className="flex flex-col  items-center py-4 space-y-2 text-lg font-bold">
+                        <ul className="flex flex-col  items-center py-4 space-y-2 text-lg font-bold text-center">
                             <li>
                                 <a href="/" className="block px-3 py-2 hover:text-white hover:bg-blue-900 rounded-md transition">HOME</a>
                             </li>

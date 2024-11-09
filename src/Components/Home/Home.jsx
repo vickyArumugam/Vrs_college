@@ -186,18 +186,21 @@ const Home = () => {
                                 <div className="absolute top-0 left-0 w-full h-full bg-[#7CB342] clip-curved"></div>
 
                                 {/* Circle Placeholder */}
-                                <div className="absolute top-5 w-20 sm:w-24 md:w-28 lg:w-36 h-20 sm:h-24 md:h-28 lg:h-36 bg-gray-300 rounded-full border-3 border-[#C8F51E]"></div>
+                                <div className="absolute top-5 w-[7rem] sm:w-24 md:w-28 lg:w-36 h-[7rem] sm:h-24 md:h-28 lg:h-36 bg-gray-300 rounded-full border-3 border-[#C8F51E]"></div>
 
                                 {/* Text Content */}
-                                <div className="relative z-10 text-center mb-4 sm:mb-6 md:mb-8 px-4 space-y-2 sm:space-y-3">
-                                    <img src="/images/download-1-2048x2048.png" className="w-24 sm:w-36 md:w-44 lg:w-48 z-10 lg:mb-6  lg:ml-[57px] mb-[131px] ml-[61px] " alt="Profile" />
-                                    <h1 className="text-white text-lg sm:text-xl md:text-25 font-bold">
+                                <div className="relative  z-10 text-center mb-10 sm:mb-8 md:mb-8 px-4 space-y-2 sm:space-y-3">
+                                    <img src="/images/download-1-2048x2048.png" className="w-[9rem] sm:w-36 md:w-44 lg:w-48 z-10 lg:mb-5  lg:ml-[57px] mb-[67px] ml-[38px] " alt="Profile" />
+
+                               
+                                 <h1 className="text-white text-lg  sm:text-2xl md:text-25 font-bold">
                                         Er.Ln. M. Saravanan, M.E.,
                                     </h1>
                                     <div className="w-8 sm:w-12 md:w-16 h-1 bg-[#C8F51E] mx-auto mt-1"></div>
-                                    <p className="text-white text-xs sm:text-sm md:text-19">
+                                    <p className="text-white text-xs sm:text-sm md:text-19 ">
                                         Former Chairperson
                                     </p>
+                                 
                                 </div>
                             </div>
                         </div>

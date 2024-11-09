@@ -10,28 +10,28 @@ const Key_Dates = () => {
         { description: "Camera Ready Paper Submission", date: "20-04-2024", bgColor: "bg-[#00003F]" },
         { description: "Last Date for Registration / Payment", date: "22-04-2024", bgColor: "bg-[#8eaf12]" },
     ];
-  return (
-    <div>
-        <AboutHeader/>
-        <div className='w-full my-24'>
-            {dates.map((item, index) => (
-                <div key={index} className={`${item.bgColor} flex justify-center py-6 `}>
-                    <div className="flex items-center space-x-4">
-                        <span className="text-white border border-white px-4 py-4 font-bold">
-                            {item.description}
-                        </span>
-                        <span className="text-white border border-white px-4 py-4 font-bold">
-                            {item.date}
-                        </span>
+    return (
+        <div>
+            <AboutHeader />
+            <div className="w-full my-12 md:my-24">
+                {dates.map((item, index) => (
+                    <div key={index} className={`${item.bgColor} flex justify-center py-4 md:py-6`}>
+                        <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4">
+                            <span className="text-white border border-white px-3 md:px-4 py-3 md:py-4 font-bold text-sm md:text-base lg:text-lg text-center">
+                                {item.description}
+                            </span>
+                            <span className="text-white border border-white px-3 md:px-4 py-3 md:py-4 font-bold text-sm md:text-base lg:text-lg text-center">
+                                {item.date}
+                            </span>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+            <AboutLocation />
+            <AboutFooter />
+
         </div>
-        <AboutLocation/>
-        <AboutFooter/>
-      
-    </div>
-  )
+    )
 }
 
 export default Key_Dates

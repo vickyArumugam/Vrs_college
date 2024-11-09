@@ -5,7 +5,7 @@ import AboutLocation from './AboutLocation'
 
 const Organizing_Committee = () => {
     const sections = [
-       
+
         {
             title: "Convenors",
             members: [
@@ -92,19 +92,19 @@ const Organizing_Committee = () => {
             ]
         }
     ];
-  return (
-    <div>
-        <AboutHeader/>
-        <AboutLocation/>
-        <div className="flex flex-col items-center justify-center p-8 gap-6 ">
+    return (
+        <div>
+            <AboutHeader />
+            <AboutLocation />
+            <div className="flex flex-col items-center justify-center p-6 md:p-8 gap-6">
                 <div className="w-full flex flex-col items-center text-center">
-                    <div className="w-full max-w-[360px] bg-box-editiorial text-white font-bold py-2 rounded-t">
+                    <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t">
                         Chairman
                     </div>
-                    <div className="border-blue-600 rounded-b p-4  max-w-[40rem]">
-                        <div className="font-Trebuchet text-19 font-semibold text-blue-700  ">
-                            <div className="text-box-editiorial border-2 font-semibold border-box-editiorial  p-4  min-w-[360px] max-w-[20rem] w-full mx-auto">
-                                <p className="font-semibold ">Dr.N.Anbazhaghan, M.E., Ph.D.</p>
+                    <div className="border-blue-600 rounded-b p-4 w-full max-w-lg">
+                        <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700">
+                            <div className="text-box-editiorial border-2 font-semibold border-box-editiorial p-4 w-full max-w-sm md:max-w-xs mx-auto">
+                                <p className="font-semibold">Dr.N.Anbazhaghan, M.E., Ph.D.</p>
                                 <p>Principal</p>
                             </div>
                         </div>
@@ -113,19 +113,18 @@ const Organizing_Committee = () => {
 
                 {sections.map((section, index) => (
                     <div key={index} className="w-full flex flex-col items-center text-center relative">
-                     
-                        <div className="w-full max-w-[360px] bg-box-editiorial text-white font-bold py-2 rounded-t">
+                        <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t">
                             {section.title}
                         </div>
-                    
+
                         <div className="border-blue-600 rounded-b p-4 w-full max-w-7xl">
-                            <div className="font-Trebuchet text-19 font-semibold text-blue-700 grid grid-cols-1 md:grid-cols-2  gap-y-4 ">
+                            <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-6">
                                 {section.members.map((member, idx) => (
                                     <div
                                         key={idx}
-                                        className="text-box-editiorial border-2 font-semibold border-box-editiorial  p-4  min-w-[600px] max-w-[20rem] w-full mx-auto"
+                                        className="text-box-editiorial border-2 font-semibold border-box-editiorial p-4 w-full max-w-xs mx-auto"
                                     >
-                                        <p className="font-semibold ">{member.name}</p>
+                                        <p className="font-semibold">{member.name}</p>
                                         <p>{member.position}</p>
                                     </div>
                                 ))}
@@ -135,10 +134,10 @@ const Organizing_Committee = () => {
                 ))}
             </div>
 
-        <AboutFooter/>
-      
-    </div>
-  )
+            <AboutFooter />
+
+        </div>
+    )
 }
 
 export default Organizing_Committee

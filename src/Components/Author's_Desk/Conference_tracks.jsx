@@ -18,7 +18,6 @@ const Conference_tracks = () => {
                 <hr className="border-orange-500 border-t-2 mt-4 text-center" />
                 <h1 className='font-bold text-25 '> Management, Commerce, Bio-Technology Bio-informatics, etc.. </h1>
                 <hr className="border-orange-500 border-t-2 mt-4 text-center" />
-            
         </div>
             <AboutLocation/>
          <AboutFooter/>

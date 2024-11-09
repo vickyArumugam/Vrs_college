@@ -40,7 +40,7 @@ const Editorial_Board = () => {
   return (
     <div>
          <AboutHeader />
-            <div className=" w-auto h-460 flex flex-wrap justify-center my-20 gap-4 p-8">
+            <div className=" w-auto  h-[750px] lg:h-460 flex flex-wrap justify-center my-20 gap-4 p-8">
                 {members.map((member, index) => (
                     <div
                         key={index}
