@@ -46,7 +46,7 @@ export default function Header() {
                         <li>
                             <a href="/" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition'>HOME</a>
                         </li>
-                        <li className='relative'>
+                        <li>
                             <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('about')}>ABOUT US</a>
                             {openDropdown === 'about' && (
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
@@ -100,7 +100,7 @@ export default function Header() {
                 {/* Mobile Dropdown Menu */}
                 {isMobileMenuOpen && (
                     <div className="absolute top-full right-0 w-[50%] bg-[#0B0A2A] text-[#C8F51E] lg:hidden">
-                        <ul className="flex flex-col  items-center py-4 space-y-2 text-lg font-bold text-center">
+                        <ul className="flex flex-col  items-center py-4  text-lg font-bold text-center">
                             <li>
                                 <a href="/" className="block px-3 py-2 hover:text-white hover:bg-blue-900 rounded-md transition">HOME</a>
                             </li>
@@ -109,8 +109,8 @@ export default function Header() {
                                     ABOUT US
                                 </a>
                                 {openDropdown === 'about' && (
-                                    <div className="bg-white text-black mt-2 p-4 w-full text-base border-t-4 border-[#C8F51E]">
-                                        <ul className="text-left space-y-1">
+                                    <div className="bg-white text-black  p-2 w-full text-base border-t-4 border-[#C8F51E] absolute right-40">
+                                        <ul className="text-left space-y-1 font-roboto">
                                             <li><a href='/about/conference_tracks' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>earlier conferences</a></li>
                                             <li><a href='/about/about_conference' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>about the conference</a></li>
                                             <li><a href='/about/scope_conference' className='block uppercase hover:bg-green-100 px-2 py-1 border-b border-[#C8F51E] text-sm'>scope of conference</a></li>
@@ -123,29 +123,29 @@ export default function Header() {
                             </li>
                             {/* Add other sections similarly */}
                             <li>
-                            <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'S DESK</a>
-                            {openDropdown === 'authors' && (
-                                <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
-                                    <ul onMouseLeave={handleMouseLeave} className='text-left'>
-                                        <li><a href='/author/conference_tracks' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>conference tracks</a></li>
-                                        <li><a href='/author/journal_publication' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>journal publication</a></li>
-                                        <li><a href='/author/key_dates' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>key dates</a></li>
-                                        <li><a href='/author/registration_details' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>registration details</a></li>
-                                        <li><a href='/author/new_paper_submission' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>new paper submission</a></li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li>
-                            <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('reach')}>REACH US</a>
-                            {openDropdown === 'reach' && (
-                                <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
-                                    <ul onMouseLeave={handleMouseLeave} className='text-left'>
-                                        <li><a href='/contact_us' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>contact us</a></li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
+                                <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'S DESK</a>
+                                {openDropdown === 'authors' && (
+                                    <div className='absolute bg-white text-black  p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10  right-40'>
+                                        <ul onMouseLeave={handleMouseLeave} className='text-left font-roboto'>
+                                            <li><a href='/author/conference_tracks' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>conference tracks</a></li>
+                                            <li><a href='/author/journal_publication' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>journal publication</a></li>
+                                            <li><a href='/author/key_dates' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>key dates</a></li>
+                                            <li><a href='/author/registration_details' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>registration details</a></li>
+                                            <li><a href='/author/new_paper_submission' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>new paper submission</a></li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </li>
+                            <li>
+                                <a href="#" className='hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition' onMouseEnter={() => handleMouseEnter('reach')}>REACH US</a>
+                                {openDropdown === 'reach' && (
+                                    <div className='absolute bg-white text-black  p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10  right-40'>
+                                        <ul onMouseLeave={handleMouseLeave} className='text-left font-roboto'>
+                                            <li><a href='/contact_us' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>contact us</a></li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </li>
                         </ul>
                     </div>
                 )}

@@ -54,9 +54,6 @@ const Home = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [targets, value1, value2, value3, value4]);
 
-
-
-
     return (
         <div>
             <Header />
