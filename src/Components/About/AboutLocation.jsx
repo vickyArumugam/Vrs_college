@@ -6,7 +6,7 @@ const AboutLocation = () => {
       <section className="flex flex-col items-center justify-center w-full h-[680px] lg:h-[480px] bg-green-200 relative">
   <div className="absolute inset-0 bg-black opacity-50"></div>
   <div className="relative flex flex-col items-center text-white px-4 md:px-8 lg:px-16">
-    <div className="flex flex-col md:flex-row lg:gap-96 gap-10 text-center mt-8 md:mt-0">
+    <div className="flex flex-col md:flex-col lg:flex-row lg:gap-96 gap-10 text-center mt-8 md:mt-0">
       <div className="flex flex-col items-center">
         <FaMapMarkerAlt className="text-4xl mb-1 w-14 h-14 lg:m-0 mt-16" color="#C8F51E" size={60} />
         <h1 className="uppercase font-semibold font-Playwrite text-lg md:text-xl my-4">Where</h1>

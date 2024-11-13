@@ -98,7 +98,7 @@ const Organizing_Committee = () => {
             <AboutLocation />
             <div className="flex flex-col items-center justify-center p-6 md:p-8 gap-6">
                 <div className="w-full flex flex-col items-center text-center">
-                    <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t">
+                    <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t mb-5 mt-10">
                         Chairman
                     </div>
                     <div className="border-blue-600 rounded-b p-4 w-full max-w-lg">
@@ -113,12 +113,12 @@ const Organizing_Committee = () => {
 
                 {sections.map((section, index) => (
                     <div key={index} className="w-full flex flex-col items-center text-center relative">
-                        <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t">
+                        <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t mb-5">
                             {section.title}
                         </div>
 
                         <div className="border-blue-600 rounded-b p-4 w-full max-w-7xl">
-                            <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-6">
+                            <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-y-4 gap-x-6">
                                 {section.members.map((member, idx) => (
                                     <div
                                         key={idx}

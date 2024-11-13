@@ -100,7 +100,6 @@ const Home = () => {
                 </div>
             </section>
 
-
             <section className="w-full py-4">
                 <div className="max-w-5xl mx-auto text-center">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-20 mt-10">
@@ -184,11 +183,7 @@ const Home = () => {
                         <div key={i} className="flex justify-center items-center p-2 sm:p-4">
                             <div className="relative w-full max-w-[18rem] sm:max-w-[20rem] md:max-w-[25rem] lg:max-w-[30rem] h-80 bg-[#0A0A23] border-2 border-gray-300 rounded-lg flex flex-col justify-end items-center transform transition-transform duration-500 hover:scale-105">
                                 <div className="absolute top-0 left-0 w-full h-full bg-[#7CB342] clip-curved"></div>
-
-                                {/* Circle Placeholder */}
                                 <div className="absolute top-5 w-[7rem] sm:w-24 md:w-28 lg:w-36 h-[7rem] sm:h-24 md:h-28 lg:h-36 bg-gray-300 rounded-full border-3 border-[#C8F51E]"></div>
-
-                                {/* Text Content */}
                                 <div className="relative  z-10 text-center mb-10 sm:mb-8 md:mb-8 px-4 space-y-2 sm:space-y-3">
                                     <img src="/images/download-1-2048x2048.png" className="w-[9rem] sm:w-36 md:w-44 lg:w-48 z-10 lg:mb-5  lg:ml-[57px] mb-[67px] ml-[38px] " alt="Profile" />
 
@@ -274,7 +269,6 @@ const Home = () => {
                     </p>
                 </div>
             </section>
-
         </div>
     );
 }

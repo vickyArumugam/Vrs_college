@@ -2,20 +2,68 @@ import React, { useState } from 'react'
 import AboutHeader from '../About/AboutHeader'
 import AboutLocation from '../About/AboutLocation'
 import AboutFooter from '../About/AboutFooter'
+import axios from 'axios';
 
 const New_Paper_Submission = () => {
 
   const [fileName, setFileName] = useState(null);
-
- 
-
-
+  const [paper_title,setPaper_title] =useState();
+  const [author_name,setAuthor_name] =useState();
+  const [mobile_no,setMobile_no] = useState();
+  const [email,setEmail]=useState();
+  const [institution,setInstitution] = useState();
+  const [category, setCategory] = useState('');
+  
+  
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setFileName(file.name);
     }
   }
+   const handleSubmit = (e) => {
+    e.preventDefault();
+     const formData = new FormData();
+    formData.append('paper_title', paper_title);
+    formData.append('author_name', author_name);
+    formData.append('mobile_no', mobile_no);
+    formData.append('email', email);
+    formData.append('institution', institution);
+    formData.append('category', category);
+
+    // If a file is selected, append it to the form data
+    if (fileName) {
+      const fileInput = document.getElementById('fileInput');
+      formData.append('file', fileInput.files[0]);
+    }
+
+    // You can now send the formData to the backend API
+    // Example using fetch:
+    /*
+    fetch('your-api-endpoint', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    */
+
+    // For testing, log the form data:
+    console.log('Form submitted:', {
+      paper_title,
+      author_name,
+      mobile_no,
+      email,
+      institution,
+      category,
+      fileName,
+   });
+   }
   return (
     <div>
       <AboutHeader />
@@ -26,7 +74,7 @@ const New_Paper_Submission = () => {
           <div>
             <label className='block text-green-600 font-medium'>Enter Paper Title</label>
             <input
-              type='text' required
+              type='text' required name='paper_title' id='paper_title' value={paper_title} onChange={(e)=>setPaper_title(e.target.value)}
               className='mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
@@ -34,7 +82,7 @@ const New_Paper_Submission = () => {
           <div>
             <label className='block text-green-600 font-medium'>Enter First Author Full Name</label>
             <input
-              type='text' required
+              type='text' required name='author_name' id='author_name' value={author_name} onChange={(e)=>setAuthor_name(e.target.value)}
               className='mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
@@ -42,7 +90,7 @@ const New_Paper_Submission = () => {
           <div>
             <label className='block text-green-600 font-medium'>Enter First Author Mobile Number</label>
             <input
-              type='text' required
+              type='text' required name='mobile_no' id='mobile_no' value={mobile_no} onChange={(e)=>setMobile_no(e.target.value)}
               className='mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
@@ -50,7 +98,7 @@ const New_Paper_Submission = () => {
           <div>
             <label className='block text-green-600 font-medium'>Enter First Author Email Address</label>
             <input
-              type='email' required
+              type='email' required name='email' id='email' value={email} onChange={(e)=>setEmail(e.target.value)}
               className='mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
@@ -58,7 +106,7 @@ const New_Paper_Submission = () => {
           <div>
             <label className='block text-green-600 font-medium'>Enter First Author Institution Name</label>
             <input
-              type='text' required
+              type='text' required name='institution' id='institution' value={institution} onChange={(e)=>setInstitution(e.target.value)}
               className='mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
@@ -68,6 +116,7 @@ const New_Paper_Submission = () => {
             <div className='relative'>
               <select
                 className='appearance-none mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700'
+                name='category' id='category' value={category} onChange={(e)=>setCategory(e.target.value)}
               >
                 <option value='Academicians'>Academicians</option>
                 <option value='Students & PG/Ph.D Scholar'>Students & PG/Ph.D Scholar</option>
@@ -107,7 +156,7 @@ const New_Paper_Submission = () => {
               />
               <label
                 htmlFor='fileInput'
-                className='ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600'
+                className='ml-4 px-4 py-2 bg-green-400 text-white rounded-lg cursor-pointer hover:bg-green-500'
               >
                 Choose File
               </label>
@@ -118,16 +167,12 @@ const New_Paper_Submission = () => {
           <button
             type='submit'
             className='w-full bg-green-400 text-white py-2 rounded-lg hover:bg-green-500 transition duration-200'
-            // onClick={}
+            onClick={handleSubmit}
           >
             Submit Paper
           </button>
         </form>
       </div>
-
-
-
-
 
       <AboutLocation />
       <AboutFooter />
@@ -141,189 +186,4 @@ export default New_Paper_Submission
 
 
 
-
-// import React, { useState } from 'react';
-
-// const SubmitPaperForm = () => {
-//   const [formData, setFormData] = useState({
-//     title: '',
-//     authorName: '',
-//     mobile: '',
-//     email: '',
-//     institution: '',
-//     category: '',
-//     file: null,
-//   });
-//   const [fileName, setFileName] = useState(''); // For displaying file name
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
-
-//   const handleFileChange = (e) => {
-//     const file = e.target.files[0];
-//     setFormData({
-//       ...formData,
-//       file: file,
-//     });
-//     setFileName(file ? file.name : '');
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const data = new FormData();
-
-//     // Append form data to FormData object
-//     data.append('title', formData.title);
-//     data.append('authorName', formData.authorName);
-//     data.append('mobile', formData.mobile);
-//     data.append('email', formData.email);
-//     data.append('institution', formData.institution);
-//     data.append('category', formData.category);
-//     data.append('file', formData.file);
-
-//     try {
-//       const response = await fetch('https://your-backend-url.com/api/submit-paper', {
-//         method: 'POST',
-//         body: data,
-//       });
-
-//       if (response.ok) {
-//         console.log('Form submitted successfully!');
-//       } else {
-//         console.error('Failed to submit form');
-//       }
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   };
-
-//   return (
-//     <div className="flex items-center justify-center bg-gray-100 p-4 md:p-8">
-//       <form
-//         onSubmit={handleSubmit}
-//         className="bg-white shadow-lg rounded-lg p-6 md:p-8 max-w-lg md:max-w-2xl w-full space-y-6 my-10 md:my-20"
-//       >
-//         <h2 className="text-xl md:text-2xl font-semibold text-center text-gray-800">
-//           Submit Your Paper
-//         </h2>
-
-//         <div>
-//           <label className="block text-gray-700 font-medium">Enter Paper Title</label>
-//           <input
-//             type="text"
-//             name="title"
-//             value={formData.title}
-//             onChange={handleChange}
-//             required
-//             className="mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block text-gray-700 font-medium">Enter First Author Full Name</label>
-//           <input
-//             type="text"
-//             name="authorName"
-//             value={formData.authorName}
-//             onChange={handleChange}
-//             required
-//             className="mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block text-gray-700 font-medium">Enter First Author Mobile Number</label>
-//           <input
-//             type="text"
-//             name="mobile"
-//             value={formData.mobile}
-//             onChange={handleChange}
-//             required
-//             className="mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block text-gray-700 font-medium">Enter First Author Email Address</label>
-//           <input
-//             type="email"
-//             name="email"
-//             value={formData.email}
-//             onChange={handleChange}
-//             required
-//             className="mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block text-gray-700 font-medium">Enter First Author Institution Name</label>
-//           <input
-//             type="text"
-//             name="institution"
-//             value={formData.institution}
-//             onChange={handleChange}
-//             required
-//             className="mt-1 w-full px-3 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block text-gray-700 font-medium">Select First Author Category</label>
-//           <select
-//             name="category"
-//             value={formData.category}
-//             onChange={handleChange}
-//             className="appearance-none mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
-//           >
-//             <option value="Academicians">Academicians</option>
-//             <option value="Students & PG/Ph.D Scholar">Students & PG/Ph.D Scholar</option>
-//             <option value="Industry Delegates">Industry Delegates</option>
-//             <option value="Overseas Delegates">Overseas Delegates</option>
-//           </select>
-//         </div>
-
-//         <div>
-//           <label className="block text-green-600 font-medium">Upload Paper</label>
-//           <div className="flex items-center mt-1">
-//             <label
-//               className={`flex-grow px-4 py-2 border border-gray-300 rounded-lg ${
-//                 fileName ? 'text-green-600' : 'text-red-500'
-//               }`}
-//             >
-//               {fileName || 'No file chosen'}
-//             </label>
-//             <input
-//               type="file"
-//               name="file"
-//               required
-//               className="hidden"
-//               id="fileInput"
-//               onChange={handleFileChange}
-//             />
-//             <label
-//               htmlFor="fileInput"
-//               className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600"
-//             >
-//               Choose File
-//             </label>
-//           </div>
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-200"
-//         >
-//           Submit Paper
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default SubmitPaperForm;
 
