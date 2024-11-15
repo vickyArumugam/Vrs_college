@@ -1,4 +1,6 @@
+import { div } from 'framer-motion/client';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Update() {
   const [conferenceData, setConferenceData] = useState({
@@ -7,6 +9,7 @@ function Update() {
     conferenceDate: '',
     conferenceType: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setConferenceData({ ...conferenceData, [e.target.name]: e.target.value });
@@ -28,9 +31,12 @@ function Update() {
     } catch (error) {
       console.error('Error submitting form:', error);
     }
+    navigate('/');
   };
 
   return (
+    <div>
+
     <div className="flex items-center justify-center min-h-screen bg-gray-100 py-4">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Update Conference Details</h2>
@@ -95,6 +101,7 @@ function Update() {
         </form>
       </div>
     </div>
+  </div> 
   );
 }
 
