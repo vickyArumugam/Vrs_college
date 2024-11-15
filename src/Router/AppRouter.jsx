@@ -13,6 +13,8 @@ import Key_Dates from '../Components/Author\'s_Desk/Key_Dates';
 import New_Paper_Submission from '../Components/Author\'s_Desk/New_Paper_Submission';
 import Registration_details from '../Components/Author\'s_Desk/Registration_details';
 import Contact_us from '../Components/Contact_us/Contact_us';
+import LoginPage from '../Components/Admin/LoginPage';
+import Update from '../Components/Admin/Update';
 
 
 
@@ -40,6 +42,8 @@ function AppRouter() {
         <Route path='registration_details' element={<Registration_details/>}/>
         </Route>
         <Route path='/contact_us' element={<Contact_us/>}/>
+        <Route path='/admin' element={<LoginPage/>}/>
+        <Route path='/update' element={<Update/>}/>
       </Routes>
       </BrowserRouter>
     </div>

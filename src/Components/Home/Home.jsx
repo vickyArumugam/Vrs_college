@@ -4,6 +4,8 @@ import Header from '../Core/Header';
 const Home = () => {
     const colors = ['text-red-500', 'text-[#C8F51E]', 'text-yellow-300'];
     const [colorIndex, setColorIndex] = useState(0);
+    const [eventData, setEventData] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -54,6 +56,19 @@ const Home = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [targets, value1, value2, value3, value4]);
 
+    // Fetch data from backend
+    useEffect(() => {
+        fetch('http://localhost/mailapp/updateConference.php') // Replace with your backend endpoint
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to fetch event data');
+                return response.json();
+            })
+            .then(data => setEventData(data))
+            .catch(error => setError(error.message));
+    }, []);
+    if (error) return <p className="text-red-500 text-center">{error}</p>;
+    if (!eventData) return <p className="text-center text-white">Loading...</p>;
+
     return (
         <div>
             <Header />
@@ -61,23 +76,24 @@ const Home = () => {
                 <div className="absolute inset-0 bg-black opacity-75"></div>
                 <div className="sm:max-w-full h-auto mx-auto text-center relative text-white mt-20 sm:mt-40 px-4">
                     <h1 className="text-[36px] sm:text-[54px] font-bold font-Kaisei-Decol mb-3">
-                        5<sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup> International Conference
+                        {eventData.title}
+                        <sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup>
                     </h1>
                     <h2 className="text-[20px] sm:text-[40px] text-[#C8F51E] font-medium font-Playwrite animate-float animate-once animate-duration-1000 animate-ease-in-out mb-5">
-                        on Veracity Research in Scientific Computing and Engineering Trends
+                        {eventData.subtitle}
                     </h2>
                     <h2 className="text-[30px] sm:text-[50px] font-medium font-Helvetica mb-3">
-                        26<sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup> April, 2024
+                        {eventData.eventDate}
                     </h2>
                     <h1 className="text-[30px] sm:text-[50px] mb-6 font-bold font-Kaisei-Decol">
-                        ICVRSCET - 2024 (Hybrid)
+                        {eventData.shortTitle}
                     </h1>
                     <button className="uppercase w-52 sm:w-64 h-12 mb-10 sm:mb-20 mt-5 text-[#afcf38] bg-white text-[20px] sm:text-[23px] font-semibold rounded-full p-2 mr-4 pr-7">
-                        Register
+                        {eventData.registerButtonText}
                     </button>
-                    {/* <img src="/images/right-arrow_14625513.gif" alt="arrow" className="w-8 sm:w-10 h-8 sm:h-10 absolute top-[66.9%] left-[50%] transform -translate-x-1/2" /> */}
                 </div>
             </section>
+
 
             <section className='w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4 relative'>
                 <div className='my-10 lg:my-20 max-w-5xl px-4 mx-auto text-center'>
@@ -184,15 +200,15 @@ const Home = () => {
                                 <div className="relative  z-10 text-center mb-10 sm:mb-8 md:mb-8 px-4 space-y-2 sm:space-y-3">
                                     <img src="/images/download-1-2048x2048.png" className="w-[9rem] sm:w-36 md:w-44 lg:w-48 z-10 lg:mb-5  lg:ml-[57px] mb-[67px] ml-[38px] " alt="Profile" />
 
-                               
-                                 <h1 className="text-white text-lg  sm:text-2xl md:text-25 font-bold">
+
+                                    <h1 className="text-white text-lg  sm:text-2xl md:text-25 font-bold">
                                         Er.Ln. M. Saravanan, M.E.,
                                     </h1>
                                     <div className="w-8 sm:w-12 md:w-16 h-1 bg-[#C8F51E] mx-auto mt-1"></div>
                                     <p className="text-white text-xs sm:text-sm md:text-19 ">
                                         Former Chairperson
                                     </p>
-                                 
+
                                 </div>
                             </div>
                         </div>
@@ -272,10 +288,3 @@ const Home = () => {
 
 
 export default Home;
-
-
-
-
-
-
-
