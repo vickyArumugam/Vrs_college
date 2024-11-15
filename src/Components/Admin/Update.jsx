@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 function Update() {
   const [conferenceData, setConferenceData] = useState({
-    title: '',
-    date: '',
-    description: '',
-    location: '',
+    conferenceTitle: '',
+    conferenceSubtitle: '',
+    conferenceDate: '',
+    conferenceType: '',
   });
 
   const handleChange = (e) => {
@@ -14,16 +14,20 @@ function Update() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost/mailapp/updateConference.php', {
+    try {
+      const response = await fetch('http://localhost/mailapp/updateConference.php', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(conferenceData)
+        body: JSON.stringify(conferenceData),
       });
-    
+
       const result = await response.json();
       console.log(result);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   return (
@@ -35,8 +39,8 @@ function Update() {
             <label className="block text-gray-600 text-sm font-semibold mb-2">Conference Title</label>
             <input
               type="text"
-              name="title"
-              value={conferenceData.title}
+              name="conferenceTitle"
+              value={conferenceData.conferenceTitle}
               onChange={handleChange}
               placeholder="Enter conference title"
               required
@@ -45,41 +49,40 @@ function Update() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-semibold mb-2">Conference Date</label>
+            <label className="block text-gray-600 text-sm font-semibold mb-2">Conference Subtitle</label>
             <input
               type="text"
-              name="date"
-              value={conferenceData.date}
+              name="conferenceSubtitle"
+              value={conferenceData.conferenceSubtitle}
               onChange={handleChange}
-              placeholder="Enter conference date"
+              placeholder="Enter conference subtitle"
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-semibold mb-2">Conference Description</label>
+            <label className="block text-gray-600 text-sm font-semibold mb-2">Conference Date</label>
             <input
-              type="text"
-              name="description"
-              value={conferenceData.description}
+              type="date"
+              name="conferenceDate"
+              value={conferenceData.conferenceDate}
               onChange={handleChange}
-              placeholder="Enter conference description"
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             />
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-600 text-sm font-semibold mb-2">Location</label>
+            <label className="block text-gray-600 text-sm font-semibold mb-2">Conference Type</label>
             <input
               type="text"
-              name="location"
-              value={conferenceData.location}
+              name="conferenceType"
+              value={conferenceData.conferenceType}
               onChange={handleChange}
-              placeholder="Enter location"
+              placeholder="Enter conference type"
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             />
           </div>
 

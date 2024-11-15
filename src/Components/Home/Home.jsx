@@ -7,6 +7,7 @@ const Home = () => {
     const [eventData, setEventData] = useState(null);
     const [error, setError] = useState(null);
 
+    // Change color every second
     useEffect(() => {
         const intervalId = setInterval(() => {
             setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
@@ -15,6 +16,7 @@ const Home = () => {
         return () => clearInterval(intervalId);
     }, []);
 
+    // Dynamically updating values
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(0);
     const [value3, setValue3] = useState(0);
@@ -29,10 +31,8 @@ const Home = () => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY + window.innerHeight;
             const triggerPosition = document.documentElement.scrollHeight / 2;
-            console.log(scrollPosition, triggerPosition);
 
-
-            if (scrollPosition >= 4600) {
+            if (scrollPosition >= triggerPosition) {
                 const interval = setInterval(() => {
                     setValue1(prev => Math.min(prev + increments[0], targets[0]));
                     setValue2(prev => Math.min(prev + increments[1], targets[1]));
@@ -56,18 +56,30 @@ const Home = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [targets, value1, value2, value3, value4]);
 
-    // Fetch data from backend
+    // Fetch event data from backend
     useEffect(() => {
         fetch('http://localhost/mailapp/updateConference.php') // Replace with your backend endpoint
             .then(response => {
-                if (!response.ok) throw new Error('Failed to fetch event data');
+                if (!response.ok) {
+                    throw new Error(`Error fetching event data: ${response.statusText}`);
+                }
                 return response.json();
             })
-            .then(data => setEventData(data))
-            .catch(error => setError(error.message));
+            .then(data => {
+                console.log('Fetched data:', data); // Log the data for debugging
+                setEventData(data);
+                //console.log(eventData);
+                
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error); // More detailed error logging
+                setError(error.message);
+            });
     }, []);
+
     if (error) return <p className="text-red-500 text-center">{error}</p>;
     if (!eventData) return <p className="text-center text-white">Loading...</p>;
+    
 
     return (
         <div>
@@ -76,20 +88,20 @@ const Home = () => {
                 <div className="absolute inset-0 bg-black opacity-75"></div>
                 <div className="sm:max-w-full h-auto mx-auto text-center relative text-white mt-20 sm:mt-40 px-4">
                     <h1 className="text-[36px] sm:text-[54px] font-bold font-Kaisei-Decol mb-3">
-                        {eventData.title}
+                        {eventData[0].conferenceTitle}
                         <sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup>
                     </h1>
                     <h2 className="text-[20px] sm:text-[40px] text-[#C8F51E] font-medium font-Playwrite animate-float animate-once animate-duration-1000 animate-ease-in-out mb-5">
-                        {eventData.subtitle}
+                        {eventData[0].conferenceSubtitle}
                     </h2>
                     <h2 className="text-[30px] sm:text-[50px] font-medium font-Helvetica mb-3">
-                        {eventData.eventDate}
+                        {eventData[0].conferenceTitle}
                     </h2>
                     <h1 className="text-[30px] sm:text-[50px] mb-6 font-bold font-Kaisei-Decol">
-                        {eventData.shortTitle}
+                        {eventData[0].conferenceType}                       
                     </h1>
                     <button className="uppercase w-52 sm:w-64 h-12 mb-10 sm:mb-20 mt-5 text-[#afcf38] bg-white text-[20px] sm:text-[23px] font-semibold rounded-full p-2 mr-4 pr-7">
-                        {eventData.registerButtonText}
+                       Regester
                     </button>
                 </div>
             </section>
@@ -288,3 +300,106 @@ const Home = () => {
 
 
 export default Home;
+
+
+/*
+ const colors = ['text-red-500', 'text-[#C8F51E]', 'text-yellow-300'];
+    const [colorIndex, setColorIndex] = useState(0);
+    const [eventData, setEventData] = useState(null);
+    const [error, setError] = useState(null);
+
+    // Change color every second
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    // Dynamically updating values
+    const [value1, setValue1] = useState(0);
+    const [value2, setValue2] = useState(0);
+    const [value3, setValue3] = useState(0);
+    const [value4, setValue4] = useState(0);
+    const targets = [750, 750, 1500, 2500];
+
+    useEffect(() => {
+        const incrementTime = 40;
+        const totalIncrements = 100;
+        const increments = targets.map(target => target / totalIncrements);
+
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const triggerPosition = document.documentElement.scrollHeight / 2;
+
+            if (scrollPosition >= triggerPosition) {
+                const interval = setInterval(() => {
+                    setValue1(prev => Math.min(prev + increments[0], targets[0]));
+                    setValue2(prev => Math.min(prev + increments[1], targets[1]));
+                    setValue3(prev => Math.min(prev + increments[2], targets[2]));
+                    setValue4(prev => Math.min(prev + increments[3], targets[3]));
+
+                    if (
+                        value1 >= targets[0] &&
+                        value2 >= targets[1] &&
+                        value3 >= targets[2] &&
+                        value4 >= targets[3]
+                    ) {
+                        clearInterval(interval);
+                    }
+                }, incrementTime);
+                window.removeEventListener('scroll', handleScroll);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [targets, value1, value2, value3, value4]);
+
+    // Fetch event data from backend
+    useEffect(() => {
+        fetch('http://localhost/mailapp/updateConference.php') // Replace with your backend endpoint
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error fetching event data: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Fetched data:', data); // Log the data for debugging
+                setEventData(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error); // More detailed error logging
+                setError(error.message);
+            });
+    }, []);
+
+    if (error) return <p className="text-red-500 text-center">{error}</p>;
+    if (!eventData) return <p className="text-center text-white">Loading...</p>;
+
+
+
+     <section className="relative sm:max-w-full h-auto py-4 bg-[url('/images/corporate-businessman-giving-presentation-large-audience.jpg')] bg-cover bg-center">
+                <div className="absolute inset-0 bg-black opacity-75"></div>
+                <div className="sm:max-w-full h-auto mx-auto text-center relative text-white mt-20 sm:mt-40 px-4">
+                    <h1 className="text-[36px] sm:text-[54px] font-bold font-Kaisei-Decol mb-3">
+                        {eventData.title}
+                        <sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup>
+                    </h1>
+                    <h2 className="text-[20px] sm:text-[40px] text-[#C8F51E] font-medium font-Playwrite animate-float animate-once animate-duration-1000 animate-ease-in-out mb-5">
+                        {eventData.subtitle}
+                    </h2>
+                    <h2 className="text-[30px] sm:text-[50px] font-medium font-Helvetica mb-3">
+                        {eventData.eventDate}
+                    </h2>
+                    <h1 className="text-[30px] sm:text-[50px] mb-6 font-bold font-Kaisei-Decol">
+                        {eventData.shortTitle}
+                    </h1>
+                    <button className="uppercase w-52 sm:w-64 h-12 mb-10 sm:mb-20 mt-5 text-[#afcf38] bg-white text-[20px] sm:text-[23px] font-semibold rounded-full p-2 mr-4 pr-7">
+                        {eventData.registerButtonText}
+                    </button>
+                </div>
+            </section>
+            */

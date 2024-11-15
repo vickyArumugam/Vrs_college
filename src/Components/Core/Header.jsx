@@ -81,7 +81,7 @@ export default function Header() {
                                 <div className='absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10'>
                                     <ul onMouseLeave={handleMouseLeave} className='text-left font-roboto'>
                                         <li><a href='/contact_us' className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'>contact us</a></li>
-                                        <li className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'><a href='/admin' >Login page</a></li>
+                                        <li className='block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm'><a href='/admin' >Admin page</a></li>
                                     </ul>
                                 </div>
                             )}
