@@ -8,13 +8,13 @@ const Home = () => {
     const [eventData, setEventData] = useState(null);
     const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //         setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
-    //     }, 1000);
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
+        }, 1000);
 
-    //     return () => clearInterval(intervalId);
-    // }, []);
+        return () => clearInterval(intervalId);
+    }, []);
 
     // Dynamically updating values
     const [value1, setValue1] = useState(0);
@@ -228,11 +228,8 @@ const Home = () => {
             </section>
 
             <section className="w-full py-10 sm:py-20 bg-black">
-                <div className="max-w-[80rem] mx-auto text-center px-4">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-10 sm:mb-20">
-                        KEY DATES
-                    </h1>
-                </div>
+             
+             
                 <div className="flex flex-wrap justify-center gap-6 sm:gap-10 lg:gap-20 px-4">
                     {[value1, value2, value3, value4].map((value, index) => (
                         <div key={index} className=" sm:w-52 h-64 md:w-64 lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
