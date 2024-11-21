@@ -6,7 +6,7 @@ export default function Register_Card() {
         category: "",
         currency: "",
         value: "",
-        buttonLabel: "",
+       
     });
 
     const handleChange = (e) => {
@@ -14,16 +14,32 @@ export default function Register_Card() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        if (
-            formData.category &&
-            formData.currency &&
-            formData.value &&
-            formData.buttonLabel
-        ) {
+        if (formData.category && formData.currency && formData.value) {
             setCards([...cards, formData]); // Add new card
-            setFormData({ category: "", currency: "", value: "", buttonLabel: "" }); // Reset form
+            setFormData({ category: "", currency: "", value: ""}); // Reset form
+            try {
+                const response = await fetch("http://localhost/mailapp/register_card.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    setMessage("Chief Patron added successfully!");
+                    setCards([...cards, formData]); // Update the local state
+                } else {
+                    setMessage(data.message || "Failed to add Chief Patron.");
+                }
+            } catch (error) {
+                setMessage("An error occurred while adding the Chief Patron.");
+            }
+
+            s
         }
     };
 
@@ -52,7 +68,7 @@ export default function Register_Card() {
                         onChange={handleChange}
                         placeholder="Enter category (e.g., Academicians)"
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
                     />
                 </div>
                 <div className="mb-4">
@@ -64,33 +80,22 @@ export default function Register_Card() {
                         onChange={handleChange}
                         placeholder="Enter currency (e.g., INR)"
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
                     />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 font-medium mb-2">Value</label>
                     <input
-                        type="number"
+                        type="text"
                         name="value"
                         value={formData.value}
                         onChange={handleChange}
                         placeholder="Enter value (e.g., 1000)"
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
                     />
                 </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Button Label</label>
-                    <input
-                        type="text"
-                        name="buttonLabel"
-                        value={formData.buttonLabel}
-                        onChange={handleChange}
-                        placeholder="Enter button text (e.g., Register here)"
-                        required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                </div>
+               
                 <button
                     type="submit"
                     className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-500"
@@ -117,7 +122,7 @@ export default function Register_Card() {
                             {Math.floor(card.value)}
                         </h1>
                         <button className="uppercase w-32 sm:w-40 mt-4 h-10 text-white bg-red-600 font-medium rounded-lg">
-                            {card.buttonLabel}
+                            Register Here
                         </button>
                         <button
                             onClick={() => handleDeleteCard(index)}

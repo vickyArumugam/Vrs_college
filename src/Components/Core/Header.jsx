@@ -34,7 +34,7 @@ export default function Header() {
         <div className="bg-transparent bg-cover bg-fixed bg-center relative">
             <nav
                 className={`${isSticky ? 'fixed top-0 left-0 right-0 bg-[#0B0A2A] shadow-lg' : 'bg-transparent relative'
-                    } flex lg:justify-around justify-between items-center max-w-full mx-auto px-4 py-4 transition-all duration-300 z-10`}
+                    } flex lg:justify-around justify-between items-center max-w-full mx-auto px-4 py-4 transition-all duration-300 z-40`}
             >
                 <div className='w-40 h-12'>
                     <img src="/images/cropped-ICVRSCET-1.png" alt="logo" className="h-full object-contain" />

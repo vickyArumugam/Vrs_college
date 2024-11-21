@@ -8,16 +8,39 @@ export default function Chief_Patrons() {
         imageUrl: "",
     });
 
+    const [message, setMessage] = useState(""); // To display success/error messages
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (formData.name && formData.role && formData.imageUrl) {
-            setCards([...cards, formData]); // Add a new card
+            try {
+                const response = await fetch("http://localhost/mailapp/chief_patrons.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    setMessage("Chief Patron added successfully!");
+                    setCards([...cards, formData]); // Update the local state
+                } else {
+                    setMessage(data.message || "Failed to add Chief Patron.");
+                }
+            } catch (error) {
+                setMessage("An error occurred while adding the Chief Patron.");
+            }
+
             setFormData({ name: "", role: "", imageUrl: "" }); // Reset the form
+        } else {
+            setMessage("Please fill out all fields.");
         }
     };
 
@@ -29,8 +52,9 @@ export default function Chief_Patrons() {
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-10">
             <div className="mb-10 text-center">
                 <h1 className="text-3xl font-bold text-gray-800">
-                    Add ChiefPatrons Details
+                    Add Chief Patrons Details
                 </h1>
+                {message && <p className="text-green-600 mt-2">{message}</p>}
             </div>
 
             {/* Form */}
@@ -51,7 +75,7 @@ export default function Chief_Patrons() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-[#000] font-medium mb-2">Role</label>
+                    <label className="block text-gray-700 font-medium mb-2">Role</label>
                     <input
                         type="text"
                         name="role"
@@ -59,7 +83,7 @@ export default function Chief_Patrons() {
                         onChange={handleChange}
                         placeholder="Enter role or designation"
                         required
-                        className="w-full text-[#000] px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                 </div>
                 <div className="mb-4">
@@ -71,14 +95,14 @@ export default function Chief_Patrons() {
                         onChange={handleChange}
                         placeholder="Enter image URL"
                         required
-                        className="w-full text-[#000] px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                 </div>
                 <button
                     type="submit"
                     className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-500"
                 >
-                    Add Speaker
+                    Add Chief Patron
                 </button>
             </form>
 
@@ -92,7 +116,7 @@ export default function Chief_Patrons() {
                             <div className="relative z-10 text-center mb-10 sm:mb-8 md:mb-8 px-4 space-y-2 sm:space-y-3">
                                 <img
                                     src={card.imageUrl}
-                                    className="w-[9rem] sm:w-36 md:w-44 lg:w-48 z-10 lg:mb-5 lg:ml-[57px] mb-[67px] ml-[38px]"
+                                    className="w-[5rem] sm:w-36 md:w-44 lg:w-48 z-10 lg:mb-5 lg:ml-[57px] mb-[67px] ml-[38px]"
                                     alt="Profile"
                                 />
                                 <h1 className="text-white text-lg sm:text-2xl md:text-25 font-bold">

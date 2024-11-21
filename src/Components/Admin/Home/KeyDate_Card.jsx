@@ -3,7 +3,6 @@ import React, { useState } from "react";
 export default function KeyDate_Card() {
     const [cards, setCards] = useState([]); // To store all card data
     const [formData, setFormData] = useState({
-        title: "",
         description: "",
         date: "",
     });
@@ -15,21 +14,44 @@ export default function KeyDate_Card() {
 
     const handleSubmitCard = (e) => {
         e.preventDefault();
-        if (formData.title && formData.description && formData.date) {
-            setCards([...cards, formData]); // Add the new card to the array
-            setFormData({ title: "", description: "", date: "" }); // Reset the form
+        if ( formData.description && formData.date) {
+            setCards([...cards, formData]);
+            setFormData({  description: "", date: "" });
         }
     };
 
     const handleDeleteCard = (index) => {
-        setCards(cards.filter((_, i) => i !== index)); // Remove the card by index
+        setCards(cards.filter((_, i) => i !== index));
     };
 
-    const handleSubmitAll = () => {
-        console.log("Submitting all cards:", cards);
-        // Add your API call or logic here to submit all cards
-        alert("All cards submitted successfully!");
+    const handleSubmitAll = async () => {
+        if (cards.length === 0) return;
+    
+        try {
+            const response = await fetch('http://localhost/mailapp/keyDates.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cards), // Send all cards as JSON
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+    
+            const result = await response.json(); // Parse response
+            console.log('API Response:', result);
+            alert('All cards submitted successfully!');
+    
+            // Optionally clear cards after successful submission
+            setCards([]);
+        } catch (error) {
+            console.error('Error submitting cards:', error);
+            alert('Failed to submit cards.');
+        }
     };
+    
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-[#fff]">
@@ -44,7 +66,7 @@ export default function KeyDate_Card() {
                 onSubmit={handleSubmitCard}
                 className="w-11/12 max-w-md bg-[#0B0A2A] border-2 border-b-white p-6 rounded-lg lg:mt-1 transition-all duration-300 ease-in-out"
             >
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <label className="block text-sm font-semibold text-white mb-2">
                         Title
                     </label>
@@ -57,7 +79,7 @@ export default function KeyDate_Card() {
                         required
                         className="w-full px-4 py-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8F51E]"
                     />
-                </div>
+                </div> */}
                 <div className="mb-4">
                     <label className="block text-sm font-semibold text-white mb-2">
                         Description

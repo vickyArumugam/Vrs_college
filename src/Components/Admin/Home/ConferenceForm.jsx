@@ -57,7 +57,7 @@ export default function ConferenceForm() {
                         placeholder="Enter conference description"
                         required
                         rows="5"
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     ></textarea>
                 </div>
 

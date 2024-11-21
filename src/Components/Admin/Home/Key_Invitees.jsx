@@ -6,7 +6,7 @@ export default function SpeakerCardForm() {
         name: "",
         imageUrl: "",
         title: "",
-        description: "",
+        
     });
 
     const handleChange = (e) => {
@@ -16,9 +16,9 @@ export default function SpeakerCardForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formData.name && formData.imageUrl && formData.title && formData.description) {
+        if (formData.name && formData.imageUrl && formData.title) {
             setCards([...cards, formData]); // Add the new card to the array
-            setFormData({ name: "", imageUrl: "", title: "", description: "" }); // Reset the form
+            setFormData({ name: "", imageUrl: "", title: "" }); // Reset the form
         }
     };
 
@@ -26,25 +26,47 @@ export default function SpeakerCardForm() {
         setCards(cards.filter((_, i) => i !== index)); // Remove the card by index
     };
 
-    const handleFinalSubmit = () => {
-        // Submit all cards (e.g., to an API or console log)
-        console.log("All Speaker Data:", cards);
-        alert("All speaker details submitted successfully!");
-        // Add API integration here if needed
+    const handleFinalSubmit = async() => {
+        if (cards.length === 0) return;
+    
+        try {
+            const response = await fetch('http://localhost/mailapp/key_invitees.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cards), // Send all cards as JSON
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+    
+            const result = await response.json(); // Parse response
+            console.log('API Response:', result);
+            alert('All cards submitted successfully!');
+    
+            // Optionally clear cards after successful submission
+            setCards([]);
+        } catch (error) {
+            console.error('Error submitting cards:', error);
+            alert('Failed to submit cards.');
+        }
+       
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-[#fff] py-10">
-            <div className="my-10 lg:my-20 max-w-5xl px-4 mx-auto text-center">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-[#fff] ">
+            <div className="lg:my-20 max-w-5xl px-4 mx-auto text-center">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold text-[#000]">
-                    Add Speaker Details
+                    KeyInvitees
                 </h1>
             </div>
 
             {/* Form to add a new card */}
             <form
                 onSubmit={handleSubmit}
-                className="w-11/12 max-w-md bg-[#0B0A2A] border-2 border-b-white p-6 rounded-lg lg:mt-16 transition-all duration-300 ease-in-out"
+                className="w-11/12 max-w-md bg-[#0B0A2A] border-2 border-b-white p-6 rounded-lg lg:mt-4 transition-all duration-300 ease-in-out"
             >
                 <div className="mb-4">
                     <label className="block text-sm font-semibold text-white mb-2">Name</label>
@@ -77,23 +99,12 @@ export default function SpeakerCardForm() {
                         name="title"
                         value={formData.title}
                         onChange={handleChange}
-                        placeholder="Enter title"
+                        placeholder="Role & Address"
                         required
                         className="w-full px-4 py-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8F51E]"
                     />
                 </div>
-                <div className="mb-6">
-                    <label className="block text-sm font-semibold text-white mb-2">Description</label>
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        placeholder="Enter description"
-                        required
-                        rows="3"
-                        className="w-full px-4 py-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8F51E]"
-                    ></textarea>
-                </div>
+             
                 <button
                     type="submit"
                     className="w-full py-2 font-semibold text-white bg-[#C8F51E] rounded-lg hover:bg-[#a6d118] focus:ring-4 focus:ring-[#C8F51E]"
@@ -121,9 +132,9 @@ export default function SpeakerCardForm() {
                             <p className="text-center text-sm sm:text-base md:text-lg text-black mt-2">
                                 {card.title}
                             </p>
-                            <p className="text-center text-sm sm:text-base md:text-lg text-black mt-2">
+                            {/* <p className="text-center text-sm sm:text-base md:text-lg text-black mt-2">
                                 {card.description}
-                            </p>
+                            </p> */}
                             <button
                                 onClick={() => handleDeleteCard(index)}
                                 className="absolute top-2 right-2 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded hover:bg-red-700"
