@@ -12,7 +12,7 @@ const Key_Dates = () => {
     ];
     return (
         <div>
-            <AboutHeader />
+            <AboutHeader title={"KEY DATES"} />
             <div className="w-full lg:h-[600px] bg-[#0B0A2A] flex flex-col items-center justify-center">
                 {dates.map((item, index) => (
                     <div key={index} className={`${item.bgColor} flex justify-center py-4 md:py-6`}>

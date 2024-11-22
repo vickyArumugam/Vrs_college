@@ -52,7 +52,7 @@ const New_Paper_Submission = () => {
 
   return (
     <div>
-      <AboutHeader />
+      <AboutHeader  title={"NEW PAPER SUBMISSION"}/>
       <div className='w-full  flex items-center justify-center bg-gray-100 p-4 md:p-8'>
         <form
           className='bg-white shadow-lg rounded-lg p-6 md:p-8 max-w-lg md:max-w-2xl w-full space-y-6 my-10 md:my-20'

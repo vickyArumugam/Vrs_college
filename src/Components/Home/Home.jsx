@@ -8,13 +8,14 @@ const Home = () => {
     const [keyInviees, setkeyInviees] = useState([]);
     const [patrons, setPatrons] = useState([]);
     const [rcards, setRcards] = useState([]);
+    const [contact, setContact] = useState([]);
     const [error, setError] = useState(null);
     const [isLoadingEvent, setIsLoadingEvent] = useState(true);
     const [isLoadingAbout, setIsLoadingAbout] = useState(true);
     const [isLoadingKey, setIsLoadingKey] = useState(true);
     const [isLoadingKeyInvitees, setIsLoadingKeyInvitees] = useState(true)
     const [isLoadingRegisterCard, setIsLoadingRegisterCard] = useState(true)
-    // const [isLoading, setIsLoading] = useState(true)
+    const [isLoadingContact, setIsLoadingContact] = useState(true)
 
     // useEffect(() => {
     //     const intervalId = setInterval(() => {
@@ -86,14 +87,13 @@ const Home = () => {
         fetchData('http://localhost/mailapp/KeyDates.php', setkeydates, setIsLoadingKey);
         fetchData('http://localhost/mailapp/Key_invitees.php', setkeyInviees, setIsLoadingKeyInvitees);
         fetchData('http://localhost/mailapp/chief_patrons.php', setPatrons, setIsLoadingKeyInvitees);
-        // fetchData('http://localhost/mailapp/register_card.php', rcards, setIsLoadingKeyInvitees );
+        fetchData('http://localhost/mailapp/register_card.php', setRcards, setIsLoadingRegisterCard );
+        fetchData('http://localhost/mailapp/contact.php', setContact,setIsLoadingContact);
     }, []);
-    console.log(rcards);
-
 
     if (error) return <p className="text-red-500 text-center">{error}</p>;
 
-    if (isLoadingEvent || isLoadingAbout) {
+    if (isLoadingEvent || isLoadingAbout || isLoadingKey || isLoadingKeyInvitees || isLoadingRegisterCard || isLoadingContact ) {
         return <p className="text-center text-white">Loading...</p>;
     }
     return (
@@ -233,24 +233,22 @@ const Home = () => {
             </section>
 
             <section className="w-full py-10 sm:py-20 bg-black">
-
-
                 <div className="flex flex-wrap justify-center gap-6 sm:gap-10 lg:gap-20 px-4">
                     
-                         {rcards.map((value, index) => (
+                         {rcards.map((item, index) => (
                             <div
                                 key={index}
                                 className="sm:w-52 h-64 md:w-64 lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
                             >
                                 <h1 className="font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
-                                 
+                                 {item.category}
                                 </h1>
                                 <h1 className="font-roboto text-2xl text-center font-bold text-white">
-                                    INR
+                                  {item.currency}
                                 </h1>
                                 <hr className="w-2/4 border-[#C8F51E] my-5" />
                                 <h1 className="font-roboto text-4xl sm:text-5xl text-center font-bold text-yellow-300">
-                                    {Math.floor(value)}
+                                    {Math.floor(item.value)}
                                 </h1>
                                 <button className="uppercase w-32 sm:w-40 mt-4 h-10 text-white bg-red-600 font-medium rounded-lg">
                                     Register here
@@ -263,13 +261,13 @@ const Home = () => {
             <section className=' w-full h-[580px] text-center bg-[#0B0A2A] '>
                 <div className='flex flex-col'>
                     <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-10 mt-10'>Contact Us</h1>
-                    <h2 className=' text-2xl  lg:text-4xl text-white font-bold font-montserrat-subrayada'>V.R.S. College of Engineering & Technology,</h2>
-                    <h3 className='  text-xl  lg:text-2xl  my-6 text-yellow-300'>(Reaccredited by NAAC and An ISO 9001:2008 Recertified Institution)</h3>
+                    <h2 className=' text-2xl  lg:text-4xl text-white font-bold font-montserrat-subrayada'>{contact[0].college_name}</h2>
+                    <h3 className='  text-xl  lg:text-2xl  my-6 text-yellow-300'>({contact[0].iso_number})</h3>
                     <span className=' text-xl lg:text-2xl text-white mb-14 font-Playwrite '>
-                        <p className='my-2'>Arasur - 607 107,</p>
-                        <p className='my-2'> Villupuram District</p>
-                        <p className='my-2'>Mobile : +91 8870301652</p>
-                        <p className='my-2 '>Email ID : icvrscet@gmail.com</p>
+                        <p className='my-2'>{contact[0].village},</p>
+                        <p className='my-2'>{contact[0].district}</p>
+                        <p className='my-2'>Mobile : +91 {contact[0].mobile}</p>
+                        <p className='my-2 '>Email ID : {contact[0].email}</p>
                     </span>
                 </div>
             </section>

@@ -39,7 +39,7 @@ const Editorial_Board = () => {
     ];
   return (
     <div>
-         <AboutHeader />
+         <AboutHeader title={"EDITORIAL BOARD"}/>
             <div className=" w-auto  h-[750px] lg:h-460 flex flex-wrap justify-center my-20 gap-4 p-8">
                 {members.map((member, index) => (
                     <div

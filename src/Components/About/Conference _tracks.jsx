@@ -7,7 +7,7 @@ import AboutFooter from './AboutFooter';
 const ConferenceTracks = () => {
   return (
     <div>
-    <AboutHeader/>
+    <AboutHeader  title={"EARLIER CONFERENCES"}/>
     <section className="bg-[#0B0A2A]">
     <div className="mt-20 bg-black">
         <h1 className="text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-Kaisei-Decol text-[#C8F51E] p-1 lg:p-0">

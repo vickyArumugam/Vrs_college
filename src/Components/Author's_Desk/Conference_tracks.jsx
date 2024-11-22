@@ -8,7 +8,7 @@ const Conference_tracks = () => {
   
   return (
     <div>
-           <AboutHeader/>
+           <AboutHeader title={"CONFERENCE TRACKS"}/>
            <div className="text-center py-10 text-[#0B0A2A] font-bold text-lg space-y-10 bg-white ">
                 <h1 className='font-bold text-25 font-Andika hover:text-[#C8F51E]'> All Branches and subfields of Engineering </h1>
                 <hr className="border-[#0B0A2A] border-t-2 mt-4 text-center" />

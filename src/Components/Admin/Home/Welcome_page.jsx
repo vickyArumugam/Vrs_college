@@ -2,6 +2,7 @@ import { div } from 'framer-motion/client';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideNavbar from '../../SideBar/SideNavbar';
+import TopNavBar from '../../SideBar/TopNavBar';
 
 function Welcome_page() {
   const [conferenceData, setConferenceData] = useState({
@@ -34,13 +35,9 @@ function Welcome_page() {
     }
     navigate('/');
   };
-  // date 
-
-
-
   return (
     <div>
-      <div className=" flex flex-col items-center justify-center min-h-screen bg-gray-100 py-4">
+      <div className=" flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <div className="my-10 lg:my-20 max-w-5xl px-4 mx-auto text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#000]">
             Welcome page Update
@@ -110,6 +107,7 @@ function Welcome_page() {
         </div>
       </div>
     </div>
+    
   );
 }
 

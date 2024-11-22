@@ -6,7 +6,7 @@ import AboutFooter from '../About/AboutFooter'
 const Journal_Publication = () => {
   return (
     <div>
-      <AboutHeader />
+      <AboutHeader  title={"JOURNAL PUBLICATION"}/>
       <div className="text-center h-[600px] py-8 md:py-10 text-orange-500 font-bold text-lg space-y-6 md:space-y-8 bg-white flex flex-col justify-center items-center">
         <h3 className="text-base font-Helvetica md:text-lg lg:text-4xl font-bold text-[#0B0A2A] px-4 mb-10">
           Selected, peer-reviewed, and plagiarism-free high-quality articles will

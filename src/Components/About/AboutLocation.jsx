@@ -1,7 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
 const AboutLocation = () => {
+  const [isLoadingContact, setIsLoadingContact] = useState(true);
+    const [contact, setContact] = useState([]);
+    const [error, setError] = useState(null);  // Add error state
+    const [isLoadingEvent, setIsLoadingEvent] = useState(true);
+ 
+   
+    const [eventData, setEventData] = useState(null);
+   // const [isLoadingAbout, setIsLoadingAbout] = useState(true);
+
+
+    const fetchData = async (url, setDataCallback, setLoadingCallback) => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Error fetching data: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setDataCallback(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError(error.message); // Set the error message if fetch fails
+      } finally {
+        setLoadingCallback(false);
+      }
+    };
+  
+    useEffect(() => {
+      fetchData('http://localhost/mailapp/updateConference.php', setEventData, setIsLoadingEvent);
+      fetchData('http://localhost/mailapp/contact.php', setContact, setIsLoadingContact);
+    }, []);
+
+    if (error) return <p className="text-red-500 text-center">{error}</p>;
+
+    if (isLoadingEvent || isLoadingContact ) {
+        return <p className="text-center text-white">Loading...</p>;
+    }
+    
+    const getDayName = (date) => {
+      const options = { weekday: 'long' };
+      return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
+    };
+
     return (
       <section className="flex flex-col items-center justify-center w-full h-[680px] lg:h-[480px] bg-green-200 relative">
   <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -11,17 +53,17 @@ const AboutLocation = () => {
         <FaMapMarkerAlt className="text-4xl mb-1 w-14 h-14 lg:m-0 mt-16" color="#C8F51E" size={60} />
         <h1 className="uppercase font-semibold font-Playwrite text-lg md:text-xl my-4">Where</h1>
         <span className="font-semibold font-Playwrite text-sm md:text-base">
-          <p className="my-2">V.R.S. College of Engineering and Technology</p>
-          <p className="my-2">Arasur - 607 107</p>
-          <p className="my-2">Villupuram District</p>
+          <p className="my-2">{contact[0].college_name}</p>
+          <p className="my-2">{contact[0].village}</p>
+          <p className="my-2">{contact[0].district}</p>
         </span>
       </div>
       <div className="flex flex-col items-center">
         <FaClock className="text-4xl mb-1" color="#C8F51E" size={60} />
         <h1 className="uppercase font-semibold font-Playwrite text-lg md:text-xl my-4">When</h1>
         <span className="font-semibold font-Playwrite text-sm md:text-base">
-          <p className="my-2">26<sup>th</sup> April, 2024</p>
-          <p className="my-2">(Friday)</p>
+          <p className="my-2"> {eventData[0].conferenceDate}</p>
+          <p className="my-2">( {getDayName(eventData[0].conferenceDate)} )</p>
         </span>
       </div>
     </div>

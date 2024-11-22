@@ -14,8 +14,8 @@ import New_Paper_Submission from '../Components/Author\'s_Desk/New_Paper_Submiss
 import Registration_details from '../Components/Author\'s_Desk/Registration_details';
 import Contact_us from '../Components/Contact_us/Contact_us';
 import LoginPage from '../Components/Admin/LoginPage';
-
 import SideNavbar from '../Components/SideBar/SideNavbar';
+import Welcome_page from '../Components/Admin/Home/Welcome_page';
 
 
 
@@ -45,7 +45,9 @@ function AppRouter() {
         <Route path='/contact_us' element={<Contact_us/>}/>
         <Route path='/admin' element={<LoginPage/>}/>
         <Route path='/update' element={<SideNavbar/>}/>
+        
       </Routes>
+
       </BrowserRouter>
     </div>
   )

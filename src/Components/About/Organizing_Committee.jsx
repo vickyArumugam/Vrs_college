@@ -94,7 +94,7 @@ const Organizing_Committee = () => {
     ];
     return (
         <div>
-            <AboutHeader />
+            <AboutHeader title={"ORGANIZING COMMITTEE"} />
             <AboutLocation />
             <div className="flex flex-col items-center justify-center p-6 md:p-8 gap-6">
                 <div className="w-full flex flex-col items-center text-center">

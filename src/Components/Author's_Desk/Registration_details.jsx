@@ -6,7 +6,7 @@ import AboutFooter from '../About/AboutFooter'
 const Registration_details = () => {
   return (
     <div>
-      <AboutHeader />
+      <AboutHeader  title={"REGISTRATION DETAILS"}/>
       <section>
         <div className="flex flex-col items-center p-8 bg-[#0B0A2A]">
 
