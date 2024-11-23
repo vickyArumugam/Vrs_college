@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AboutLocation from "../About/AboutLocation";
+import React, { useState, useEffect } from "react";
 import Welcome_page from "../Admin/Home/Welcome_page";
 import ConferenceForm from "../Admin/Home/ConferenceForm";
 import KeyDate_Card from "../Admin/Home/KeyDate_Card";
 import Key_Invitees from "../Admin/Home/Key_Invitees";
 import Chief_Patrons from "../Admin/Home/Chief_Patrons";
 import Register_Card from "../Admin/Home/Register_Card";
+import About_conference from "../Admin/About/About_conference";
+import Scope_conference from "../Admin/About/Scope_conferences";
+import About_vrscet from "../Admin/About/About_vrscet";
+import EditorialBoardForm from "../Admin/About/EditorialBoardForm";
+import Earlier_conferences from "../Admin/About/EarlierConferences";
+// import EarlierConferences from "../Admin/About/EarlierConferences";
 
 export default function SideNavbar() {
-    const [activeTab, setActiveTab] = useState("home1"); // Default to first "Home" item
-    const navigate = useNavigate();
+    const [activeSection, setActiveSection] = useState("home"); // Main section (e.g., Home, About)
+    const [activeSubSection, setActiveSubSection] = useState("home1"); // Subsection (e.g., Welcome Page)
 
     // Menu configuration
     const menuItems = [
         {
             key: "home",
             label: "Home",
+            defaultSubKey: "home1",
             subItems: [
                 { key: "home1", label: "Welcome Page", component: <Welcome_page /> },
                 { key: "home2", label: "About the Conference", component: <ConferenceForm /> },
@@ -26,15 +31,39 @@ export default function SideNavbar() {
                 { key: "home6", label: "Register Cards", component: <Register_Card /> },
             ],
         },
-        { key: "about", label: "About", component: <AboutLocation /> },
-        { key: "services", label: "Services", component: <div>Our Services</div> },
-        { key: "contact", label: "Contact", component: <div>Contact Us</div> },
+        {
+            key: "about",
+            label: "About",
+            defaultSubKey: "about1",
+            subItems: [
+                { key: "about1", label: "Earlier Conferences", component: <Earlier_conferences/> },
+                { key: "about2", label: "About the Conference", component: <About_conference/> },
+                { key: "about3", label: "Scope of Conference", component: <Scope_conference/>   },
+                { key: "about4", label: "About VRSCET", component:<About_vrscet/> },
+                { key: "about5", label: "Organizing Committee", component: <div>Organizing Committee Content</div> },
+                { key: "about6", label: "Editorial Board", component: <EditorialBoardForm/> },
+            ],
+        },
     ];
 
-    // Handle menu item click
-    const handleMenuItemClick = (key) => {
-        setActiveTab(key); // Change active tab
+    // Handle section click
+    const handleSectionClick = (sectionKey) => {
+        const section = menuItems.find((item) => item.key === sectionKey);
+        if (section) {
+            setActiveSection(sectionKey);
+            setActiveSubSection(section.defaultSubKey); // Set the default subsection for the section
+        }
     };
+
+    // Handle subsection click
+    const handleSubSectionClick = (subKey) => {
+        setActiveSubSection(subKey);
+    };
+
+    // Get the current section and subsection data
+    const currentSection = menuItems.find((item) => item.key === activeSection);
+    const currentSubSection =
+        currentSection?.subItems.find((subItem) => subItem.key === activeSubSection);
 
     return (
         <div className="flex h-screen">
@@ -46,9 +75,9 @@ export default function SideNavbar() {
                         {menuItems.map((item) => (
                             <li key={item.key}>
                                 <button
-                                    onClick={() => handleMenuItemClick(item.key)}
+                                    onClick={() => handleSectionClick(item.key)}
                                     className={`flex justify-between w-full text-left px-4 py-2 rounded ${
-                                        activeTab === item.key ? "bg-blue-700" : "hover:bg-blue-700"
+                                        activeSection === item.key ? "bg-blue-700" : "hover:bg-blue-700"
                                     }`}
                                 >
                                     {item.label}
@@ -60,37 +89,33 @@ export default function SideNavbar() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 ml-64 "> {/* Added pt-20 for space to accommodate fixed top navbar */}
-                {/* Top Navbar for Home section */}
-                {activeTab === "home" && (
+            <div className="flex-1 ml-64">
+                {/* Top Navbar */}
+                {currentSection && (
                     <div className="bg-[#0B0A2A] text-white p-4 flex justify-between items-center sticky top-0 z-10 h-16">
-                        <h1 className="text-2xl font-bold">Home</h1>
+                        <h1 className="text-2xl font-bold">{currentSection.label}</h1>
                         <div className="flex space-x-4">
-                            {menuItems
-                                .find((item) => item.key === "home")
-                                .subItems.map((subItem) => (
-                                    <button
-                                        key={subItem.key}
-                                        onClick={() => handleMenuItemClick(subItem.key)}
-                                        className={`text-white px-4 py-2 rounded ${
-                                            activeTab === subItem.key ? "bg-blue-700" : "hover:bg-blue-700"
-                                        }`}
-                                    >
-                                        {subItem.label}
-                                    </button>
-                                ))}
+                            {currentSection.subItems.map((subItem) => (
+                                <button
+                                    key={subItem.key}
+                                    onClick={() => handleSubSectionClick(subItem.key)}
+                                    className={`text-white px-4 py-2 rounded ${
+                                        activeSubSection === subItem.key ? "bg-blue-700" : "hover:bg-blue-700"
+                                    }`}
+                                >
+                                    {subItem.label}
+                                </button>
+                            ))}
                         </div>
                     </div>
                 )}
 
-                {/* Display the component corresponding to the active tab */}
-                {menuItems.map(
-                    (item) =>
-                        (item.key === activeTab || item.subItems?.some((sub) => sub.key === activeTab)) &&
-                        (item.subItems
-                            ? item.subItems.find((sub) => sub.key === activeTab)?.component
-                            : item.component)
-                )}
+                {/* Content Area */}
+                <div className="p-4">
+                    {currentSubSection?.component || (
+                        <div className="text-center text-gray-500">Select a subsection</div>
+                    )}
+                </div>
             </div>
         </div>
     );

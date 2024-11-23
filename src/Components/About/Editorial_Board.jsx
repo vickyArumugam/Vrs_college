@@ -1,52 +1,54 @@
-import React from 'react'
-import AboutHeader from './AboutHeader'
-import AboutFooter from './AboutFooter'
-import AboutLocation from './AboutLocation'
-
+import React, { useEffect, useState } from "react";
+import AboutHeader from "./AboutHeader";
+import AboutFooter from "./AboutFooter";
+import AboutLocation from "./AboutLocation";
 
 const Editorial_Board = () => {
-    const members = [
-        {
-            name: "Dr.B.Deepanraj",
-            position: "ASP/Mechanical Engg.",
-            institution: "Prince Mohammed Bin Fahd University",
-            location: "Al Khobar, Saudi Arabia."
-        },
-        {
-            name: "Dr.D.Lenin Singaravelu",
-            position: "ASP/Production Engg.",
-            institution: "National Institute of Technology",
-            location: "Trichy."
-        },
-        {
-            name: "Dr.N.Senthil Kumar",
-            position: "AP & Head / Mech",
-            institution: "National Institute of Technology",
-            location: "Karaikal, UT of Puducherry."
-        },
-        {
-            name: "Dr.K.Devakumar",
-            position: "Manager",
-            institution: "Advanced Technology Products, BHEL",
-            location: "Trichy."
-        },
-        {
-            name: "Dr.Nadir Dizge",
-            position: "Professor",
-            institution: "Dept. of Environmental Science & Engg., Mersin University",
-            location: "Turkey."
+    const [members, setMembers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Fetch members dynamically from the PHP backend
+    const fetchMembers = async () => {
+        try {
+            const response = await fetch("http://localhost/mailapp/editorial_board.php"); // Adjust URL as needed
+            if (!response.ok) {
+                throw new Error(`Error fetching members: ${response.statusText}`);
+            }
+            const data = await response.json();
+            if (data.success) {
+                setMembers(data.data); // Assuming `data.data` contains the array of members
+            } else {
+                throw new Error("Failed to fetch members");
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
         }
-    ];
-  return (
-    <div>
-         <AboutHeader title={"EDITORIAL BOARD"}/>
-            <div className=" w-auto  h-[750px] lg:h-460 flex flex-wrap justify-center my-20 gap-4 p-8">
+    };
+
+    // Fetch members on component mount
+    useEffect(() => {
+        fetchMembers();
+    }, []);
+
+    if (error) return <p className="text-red-500 text-center">{error}</p>;
+
+    if (isLoading) {
+        return <p className="text-center text-gray-700">Loading...</p>;
+    }
+
+    return (
+        <div>
+            <AboutHeader title={"EDITORIAL BOARD"} />
+            <div className="w-auto h-auto flex flex-wrap justify-center my-20 gap-4 p-8">
                 {members.map((member, index) => (
                     <div
                         key={index}
-                        className=" w-[40rem] font-Trebuchet text-19 border-2 font-semibold border-box-editiorial rounded-lg  text-center text-box-editiorial "
+                        className="w-[40rem] font-Trebuchet text-19 border-2 font-semibold border-box-editiorial rounded-lg text-center text-box-editiorial"
                     >
-                        <p >{member.name}</p>
+                        <p>{member.name}</p>
                         <p>{member.position}</p>
                         <p>{member.institution}</p>
                         <p>{member.location}</p>
@@ -55,9 +57,8 @@ const Editorial_Board = () => {
             </div>
             <AboutLocation />
             <AboutFooter />
-      
-    </div>
-  )
-}
+        </div>
+    );
+};
 
-export default Editorial_Board
+export default Editorial_Board;

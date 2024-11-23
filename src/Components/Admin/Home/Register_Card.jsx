@@ -39,7 +39,7 @@ export default function Register_Card() {
                 setMessage("An error occurred while adding the Chief Patron.");
             }
 
-            s
+            
         }
     };
 

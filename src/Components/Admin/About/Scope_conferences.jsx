@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function About_conference() {
+export default function Scope_conference() {
     const [formData, setFormData] = useState({
         title: "",
         subtitle: "",
@@ -16,7 +16,7 @@ export default function About_conference() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost/mailapp/about_about_conference.php', {
+            const response = await fetch('http://localhost/mailapp/about_scope_conference.php', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export default function About_conference() {
         <section className="w-full h-screen flex flex-col justify-center items-center bg-[#fff] py-4 relative">
             <div className="my-10 lg:my-20 max-w-5xl px-4 mx-auto text-center">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#000]">
-                    About Conference Details
+                    Scope Conference Details
                 </h1>
             </div>
 
