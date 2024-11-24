@@ -1,97 +1,39 @@
-import React from 'react'
-import AboutHeader from './AboutHeader'
-import AboutFooter from './AboutFooter'
-import AboutLocation from './AboutLocation'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import AboutHeader from './AboutHeader';
+import AboutFooter from './AboutFooter';
+import AboutLocation from './AboutLocation';
 
-const Organizing_Committee = () => {
-    const sections = [
+const  Organizing_Committee = () => {
+    const [sections, setSections] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
-        {
-            title: "Convenors",
-            members: [
-                {
-                    name: "Dr.J. Joseph Ignatious, M.E., Ph.D.",
-                    position: "Professor / ECE"
-                },
-                {
-                    name: "Dr.G.Perumal, M.E., Ph.D.",
-                    position: "Professor & Head / MECH"
-                },
-                {
-                    name: "Dr.J.K. Jothi Kalpana, M.Tech., Ph.D.",
-                    position: "Professor / CSE"
-                },
-                {
-                    name: "Dr.S. Shanmuga Sundaram, M.E., Ph.D.",
-                    position: "Coordinator/ S&H"
-                }
-            ]
-        },
-        {
-            title: "Advisory Committee",
-            members: [
-                {
-                    name: "Mr.G.Sadiq Basha",
-                    position: "HOD / ECE"
-                },
-                {
-                    name: "Mr.K. Ramesh",
-                    position: "HOD / CSE"
-                },
-                {
-                    name: "Mr.S. Manimaran",
-                    position: "HOD / EEE"
-                },
-                {
-                    name: "Mr.A.Kumar",
-                    position: "HOD / CIVIL"
-                }
-            ]
-        }, {
-            title: "Advisory Committee",
-            members: [
-                {
-                    name: "Mr.G.Sadiq Basha",
-                    position: "HOD / ECE"
-                },
-                {
-                    name: "Mr.K. Ramesh",
-                    position: "HOD / CSE"
-                },
-                {
-                    name: "Mr.S. Manimaran",
-                    position: "HOD / EEE"
-                },
-                {
-                    name: "Mr.A.Kumar",
-                    position: "HOD / CIVIL"
-                }
-            ]
-        }, {
-            title: "Advisory Committee",
-            members: [
-                {
-                    name: "Mr.G.Sadiq Basha",
-                    position: "HOD / ECE"
-                },
-                {
-                    name: "Mr.K. Ramesh",
-                    position: "HOD / CSE"
-                },
-                {
-                    name: "Mr.S. Manimaran",
-                    position: "HOD / EEE"
-                },
-                {
-                    name: "Mr.A.Kumar",
-                    position: "HOD / CIVIL"
-                }, {
-                    name: "Mr.A.Kumar",
-                    position: "HOD / CIVIL"
-                }
-            ]
+    // Fetch data from the backend
+    const fetchSections = async () => {
+        try {
+            const response = await axios.get('http://localhost/mailapp/organizing_committee.php'); // Update with your API URL
+            setSections(response.data);
+            setLoading(false);
+        } catch (err) {
+            console.error('Error fetching sections:', err);
+            setError('Failed to load data.');
+            setLoading(false);
         }
-    ];
+    };
+
+    useEffect(() => {
+        fetchSections();
+    }, []);
+
+    if (loading) {
+        return <div className="text-center p-6">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center text-red-500 p-6">{error}</div>;
+    }
+
     return (
         <div>
             <AboutHeader title={"ORGANIZING COMMITTEE"} />
@@ -135,9 +77,8 @@ const Organizing_Committee = () => {
             </div>
 
             <AboutFooter />
-
         </div>
-    )
-}
+    );
+};
 
-export default Organizing_Committee
+export default  Organizing_Committee;

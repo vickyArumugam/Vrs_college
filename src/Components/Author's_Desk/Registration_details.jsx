@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AboutHeader from '../About/AboutHeader'
 import AboutLocation from '../About/AboutLocation'
 import AboutFooter from '../About/AboutFooter'
 
 const Registration_details = () => {
+  const [account, setAccount] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch account data from the PHP backend
+  useEffect(() => {
+    const fetchAccountDetails = async () => {
+      try {
+        const response = await fetch('http://localhost/mailapp/bank_accounts.php');
+        if (!response.ok) throw new Error('Failed to fetch account data');
+        const data = await response.json();
+        setAccount(data[0]); // Assuming you're returning a single account from the database
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAccountDetails();
+  }, []);
+
+  if (isLoading) return <p>Loading account details...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+
   return (
     <div>
       <AboutHeader  title={"REGISTRATION DETAILS"}/>
@@ -36,31 +61,37 @@ const Registration_details = () => {
         </div>
       </section>
       <section>
-        <div className="flex flex-col items-center ">
-          <div className="w-full bg-gray-100 text-black border border-gray-300">
-            <div className="flex justify-around p-4 border-b border-gray-300 ">
-              <span className="font-bold">Account Name :</span>
-              <span>J.K. Jothi Kalpana </span>
-            </div>
-            <div className="flex justify-around p-4 border-b border-gray-300">
-              <span className="font-bold">Account Number :</span>
-              <span>045100050302269</span>
-            </div>
-            <div className="flex justify-around p-4 border-b border-gray-300">
-              <span className="font-bold">Branch :</span>
-              <span>Villupuram</span>
-            </div>
-            <div className="flex justify-around p-4 border-b border-gray-300">
-              <span className="font-bold">IFSC Code :</span>
-              <span>TMBL0000045</span>
-            </div>
-            <div className="flex justify-around p-4">
-              <span className="font-bold">MICR :</span>
-              <span>605060005</span>
-            </div>
-          </div>
+      <div className="flex flex-col items-center">
+        <div className="w-full bg-gray-100 text-black border border-gray-300">
+          {account ? (
+            <>
+              <div className="flex justify-around p-4 border-b border-gray-300">
+                <span className="font-bold">Account Name :</span>
+                <span>{account.accountName}</span>
+              </div>
+              <div className="flex justify-around p-4 border-b border-gray-300">
+                <span className="font-bold">Account Number :</span>
+                <span>{account.accountNumber}</span>
+              </div>
+              <div className="flex justify-around p-4 border-b border-gray-300">
+                <span className="font-bold">Branch :</span>
+                <span>{account.branch}</span>
+              </div>
+              <div className="flex justify-around p-4 border-b border-gray-300">
+                <span className="font-bold">IFSC Code :</span>
+                <span>{account.ifscCode}</span>
+              </div>
+              <div className="flex justify-around p-4">
+                <span className="font-bold">MICR :</span>
+                <span>{account.micr}</span>
+              </div>
+            </>
+          ) : (
+            <p>No account details found</p>
+          )}
         </div>
-      </section>
+      </div>
+    </section>
 
       <AboutLocation />
       <AboutFooter />

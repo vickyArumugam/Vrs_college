@@ -10,6 +10,11 @@ import Scope_conference from "../Admin/About/Scope_conferences";
 import About_vrscet from "../Admin/About/About_vrscet";
 import EditorialBoardForm from "../Admin/About/EditorialBoardForm";
 import Earlier_conferences from "../Admin/About/EarlierConferences";
+import Conference_tracker from "../Admin/Author's/Conference_tracks";
+import Journal_publication from "../Admin/Author's/Journal_publication";
+import Key_Dates from "../Admin/Author's/Key_date";
+import BankAccountForm from "../Admin/Author's/BankAccountForm";
+
 // import EarlierConferences from "../Admin/About/EarlierConferences";
 
 export default function SideNavbar() {
@@ -42,6 +47,17 @@ export default function SideNavbar() {
                 { key: "about4", label: "About VRSCET", component:<About_vrscet/> },
                 { key: "about5", label: "Organizing Committee", component: <div>Organizing Committee Content</div> },
                 { key: "about6", label: "Editorial Board", component: <EditorialBoardForm/> },
+            ],
+        },
+        {
+            key: "author's desk",
+            label: "Author's Desk",
+            defaultSubKey: "author1",
+            subItems: [
+                { key: "author1", label: "CONFERENCE TRACKS", component: <Conference_tracker/> },
+                { key: "author2", label: "JOURNAL PUBLICATION", component: <Journal_publication/>},
+                { key: "author3", label: "KEY DATES", component: <Key_Dates/>},
+                { key: "author4", label: "REGISTRATION DETAILS", component:<BankAccountForm/>},
             ],
         },
     ];

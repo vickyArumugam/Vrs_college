@@ -1,42 +1,71 @@
-import React from 'react'
-import AboutHeader from '../About/AboutHeader'
-import AboutLocation from '../About/AboutLocation'
-import AboutFooter from '../About/AboutFooter'
+import React, { useEffect, useState } from 'react';
+import AboutHeader from '../About/AboutHeader';
+import AboutLocation from '../About/AboutLocation';
+import AboutFooter from '../About/AboutFooter';
 
 const Journal_Publication = () => {
+  const [aboutConference, setAboutConference] = useState([]);
+  const [isLoadingAbout, setIsLoadingAbout] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchData = async (url, setDataCallback, setLoadingCallback) => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Error fetching data: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setDataCallback(data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        setError(error.message);
+    } finally {
+        setLoadingCallback(false);
+    }
+};
+
+  useEffect(() => {
+    fetchData(
+      'http://localhost/mailapp/author_Journal_publication.php',
+      setAboutConference,
+      setIsLoadingAbout
+    );
+  }, []);
+
+  if (error) {
+    return <p className="text-red-500 text-center">{error}</p>;
+  }
+
+  if (isLoadingAbout) {
+    return <p className="text-center text-white">Loading...</p>;
+  }
+
+  if (aboutConference.length === 0) {
+    return <p className="text-center text-gray-500">No journals available.</p>;
+  }
+
   return (
     <div>
-      <AboutHeader  title={"JOURNAL PUBLICATION"}/>
-      <div className="text-center h-[600px] py-8 md:py-10 text-orange-500 font-bold text-lg space-y-6 md:space-y-8 bg-white flex flex-col justify-center items-center">
+      <AboutHeader title={"JOURNAL PUBLICATION"} />
+      <div className="text-center py-8 md:py-10 text-orange-500 font-bold text-lg space-y-6 md:space-y-8 bg-white">
         <h3 className="text-base font-Helvetica md:text-lg lg:text-4xl font-bold text-[#0B0A2A] px-4 mb-10">
-          Selected, peer-reviewed, and plagiarism-free high-quality articles will
-          <br className="hidden md:block" />
-          be recommended for publication in IEEE Access and SCOPUS.
+          Journals for Publication
         </h3>
 
-        <div className="w-full max-w-3xl h-auto md:h-16 bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg">
-          <p className="my-3">
-            International Journal of Research in Engineering Science (IJRES)
-          </p>
-        </div>
-
-        <div className="w-full max-w-3xl h-auto md:h-16 bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg">
-          <p className="my-3">
-            International Journal of Research in Engineering Science (IJRES)
-          </p>
-        </div>
-
-        <div className="w-full max-w-3xl h-auto md:h-16 bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg">
-          <p className="my-3">
-            International Journal of Research in Engineering Science (IJRES)
-          </p>
-        </div>
+        {aboutConference.map((journal, index) => (
+          <div
+            key={index}
+            className="w-full max-w-3xl h-auto bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4"
+          >
+            <h4 className="my-3 font-bold">{journal.title}</h4>
+            <p className="my-3">{journal.description}</p>
+          </div>
+        ))}
       </div>
       <AboutLocation />
       <AboutFooter />
-
     </div>
-  )
-}
+  );
+};
 
-export default Journal_Publication
+export default Journal_Publication;
