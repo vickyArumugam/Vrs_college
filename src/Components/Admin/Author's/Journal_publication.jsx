@@ -14,12 +14,11 @@ const Journal_publication = () => {
         const fetchJournals = async () => {
             try {
                 const response = await axios.get('http://localhost/mailapp/author_Journal_publication.php');
-                // Ensure response.data is an array
                 const data = Array.isArray(response.data) ? response.data : [];
                 setJournals(data);
             } catch (error) {
                 console.error('Error fetching journals:', error);
-                setJournals([]); // Fallback to empty array in case of error
+                setJournals([]); 
             }
         };
 
@@ -37,16 +36,12 @@ const Journal_publication = () => {
             [name]: updatedDescriptions
         }));
     };
-
-
     const handleAddDescription = () => {
         setFormData((prevState) => ({
             ...prevState,
             descriptions: [...prevState.descriptions, '']
         }));
     };
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -85,8 +80,6 @@ const Journal_publication = () => {
                         required
                     />
                 </div>
-
-
                 {formData.descriptions.map((description, index) => (
                     <div key={index} className="mb-4">
                         <textarea
@@ -99,8 +92,6 @@ const Journal_publication = () => {
                         />
                     </div>
                 ))}
-
-
                 <button
                     type="button"
                     onClick={handleAddDescription}
@@ -108,21 +99,15 @@ const Journal_publication = () => {
                 >
                     Add Another Description
                 </button>
-
-
                 <button type="submit" className="p-2 bg-green-500 text-white rounded ">
                     Submit Journal
                 </button>
             </form>
-
-
             {message && <p className="text-green-500">{message}</p>}
-
-
             <div>
                 {Array.isArray(journals) && journals.length > 0 ? (
                     journals.map((journal, index) => (
-                        <div key={index} className="w-full max-w-3xl h-auto md:h-16 bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4">
+                        <div key={index} className="w-full max-w-3xl h-[5rem] md:h-16 bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4">
                             <p className="my-3">{journal.title}</p>
                             {Array.isArray(journal.descriptions) &&
                                 journal.descriptions.map((desc, idx) => (

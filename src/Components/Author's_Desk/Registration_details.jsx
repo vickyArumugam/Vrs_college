@@ -15,7 +15,7 @@ const Registration_details = () => {
         const response = await fetch('http://localhost/mailapp/bank_accounts.php');
         if (!response.ok) throw new Error('Failed to fetch account data');
         const data = await response.json();
-        setAccount(data[0]); // Assuming you're returning a single account from the database
+        setAccount(data[0]);
       } catch (err) {
         setError(err.message);
       } finally {

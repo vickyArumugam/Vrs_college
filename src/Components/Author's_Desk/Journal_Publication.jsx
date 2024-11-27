@@ -10,19 +10,20 @@ const Journal_Publication = () => {
 
   const fetchData = async (url, setDataCallback, setLoadingCallback) => {
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Error fetching data: ${response.statusText}`);
-        }
-        const data = await response.json();
-        setDataCallback(data);
+      const response = await fetch(url);
+      const text = await response.text(); // Use text() instead of json() for debugging
+      console.log("API Response:", text); // Log the response for inspection
+  
+      const data = JSON.parse(text); // Parse JSON manually
+      setDataCallback(data);
     } catch (error) {
-        console.error('Error fetching data:', error);
-        setError(error.message);
+      console.error('Error fetching data:', error);
+      setError(error.message);
     } finally {
-        setLoadingCallback(false);
+      setLoadingCallback(false);
     }
-};
+  };
+  
 
   useEffect(() => {
     fetchData(
@@ -47,9 +48,9 @@ const Journal_Publication = () => {
   return (
     <div>
       <AboutHeader title={"JOURNAL PUBLICATION"} />
-      <div className="text-center py-8 md:py-10 text-orange-500 font-bold text-lg space-y-6 md:space-y-8 bg-white">
+      <div className=" flex flex-col justify-center items-center text-center py-8 md:py-10 text-orange-500 font-bold text-lg space-y-6 md:space-y-8 bg-white">
         <h3 className="text-base font-Helvetica md:text-lg lg:text-4xl font-bold text-[#0B0A2A] px-4 mb-10">
-          Journals for Publication
+        {aboutConference[0].title}
         </h3>
 
         {aboutConference.map((journal, index) => (
@@ -57,7 +58,7 @@ const Journal_Publication = () => {
             key={index}
             className="w-full max-w-3xl h-auto bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4"
           >
-            <h4 className="my-3 font-bold">{journal.title}</h4>
+            {/* <h4 className="my-3 font-bold">{journal.title}</h4> */}
             <p className="my-3">{journal.description}</p>
           </div>
         ))}

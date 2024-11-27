@@ -1,49 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const OrganizingCommittee = () => {
-  const [sections, setSections] = useState([]);
-  const [newMember, setNewMember] = useState({
-    section: '',
-    name: '',
-    position: '',
-  });
-  const [membersTable, setMembersTable] = useState([]);
-  const [message, setMessage] = useState('');
+  const [sections, setSections] = useState([]); // Holds existing data
+  const [editMember, setEditMember] = useState(null); // To hold the member being edited
+  const [newMember, setNewMember] = useState({ section: "", name: "", position: "" });
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
+  // Fetch all sections and members
   const fetchSections = async () => {
     try {
-      const response = await axios.get('http://localhost/mailapp/organizing_committee.php');
-      setSections(response.data);
-    } catch (error) {
-      console.error('Error fetching sections:', error);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewMember({ ...newMember, [name]: value });
-  };
-
-  const handleAddMember = (e) => {
-    e.preventDefault();
-    if (newMember.section && newMember.name && newMember.position) {
-      setMembersTable([...membersTable, newMember]);
-      setNewMember({ section: '', name: '', position: '' });
-    } else {
-      setMessage('Please fill out all fields.');
-    }
-  };
-
-  const handleSubmitAll = async () => {
-    try {
-      const response = await axios.post('http://localhost/mailapp/organizing_committee.php', membersTable);
-      setMessage(response.data.message || 'Members added successfully!');
-      setMembersTable([]);
-      fetchSections(); // Refresh the sections list
-    } catch (error) {
-      console.error('Error submitting members:', error);
-      setMessage('Error submitting members.');
+      const response = await axios.get("http://localhost/mailapp/organizing_Committee.php");
+      setSections(response.data || []);
+    } catch (err) {
+      console.error("Error fetching sections:", err);
+      setError("Failed to load data.");
     }
   };
 
@@ -51,28 +23,90 @@ const OrganizingCommittee = () => {
     fetchSections();
   }, []);
 
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewMember({ ...newMember, [name]: value });
+  };
+
+  // Add or update a member
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (!newMember.section || !newMember.name || !newMember.position) {
+      setError("Please fill out all fields.");
+      return;
+    }
+
+    try {
+      if (editMember) {
+        // Update an existing member
+        await axios.put(
+          "http://localhost/mailapp/organizing_Committee.php",
+          JSON.stringify({ id: editMember.id, ...newMember }),
+          { headers: { "Content-Type": "application/json" } }
+        );
+        setMessage("Member updated successfully!");
+      } else {
+        // Add a new member
+        await axios.post(
+          "http://localhost/mailapp/organizing_Committee.php",
+          JSON.stringify(newMember),
+          { headers: { "Content-Type": "application/json" } }
+        );
+        setMessage("Member added successfully!");
+      }
+      fetchSections();
+      setNewMember({ section: "", name: "", position: "" });
+      setEditMember(null);
+    } catch (err) {
+      console.error("Error saving member:", err);
+      setError("Failed to save data.");
+    }
+  };
+
+  // Populate the form with the selected member's details for editing
+  const handleEditClick = (member) => {
+    setEditMember(member);
+    setNewMember({ section: member.section, name: member.name, position: member.position });
+  };
+
+  // Delete a member
+  const handleDeleteClick = async (id) => {
+    try {
+      await axios.delete(`http://localhost/mailapp/organizing_Committee.php?id=${id}`);
+      setMessage("Member deleted successfully!");
+      fetchSections();
+    } catch (err) {
+      console.error("Error deleting member:", err);
+      setError("Failed to delete member.");
+    }
+  };
+
   return (
     <div className="p-6 bg-gray-100 text-black">
-      <h2 className="text-center font-bold text-xl mb-4">Organizing Committee</h2>
+      <h2 className="text-center font-bold text-2xl mb-4">Organizing Committee</h2>
       {message && <p className="text-center text-green-500">{message}</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
 
-      {/* Form for adding a member */}
-      <form onSubmit={handleAddMember} className="space-y-4 mb-6">
+      {/* Form */}
+      <form onSubmit={handleFormSubmit} className="space-y-4 mb-6">
         <div>
           <label className="block mb-2">Section:</label>
           <select
             name="section"
             value={newMember.section}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded text-black"
+            className="w-full px-4 py-2 border rounded"
             required
           >
             <option value="">Select Section</option>
-            <option value="Chairman">Chairman</option>
-            <option value="Convenors">Convenors</option>
-            <option value="Advisory Committee">Advisory Committee</option>
-            <option value="Coordinators">Coordinators</option>
-            <option value="Members">Members</option>
+            {["Chairman", "Convenors", "Advisory Committee", "Coordinators", "Members"].map(
+              (section) => (
+                <option key={section} value={section}>
+                  {section}
+                </option>
+              )
+            )}
           </select>
         </div>
 
@@ -84,6 +118,7 @@ const OrganizingCommittee = () => {
             value={newMember.name}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border rounded"
+            placeholder="Enter member's name"
             required
           />
         </div>
@@ -96,60 +131,53 @@ const OrganizingCommittee = () => {
             value={newMember.position}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border rounded"
+            placeholder="Enter member's position"
             required
           />
         </div>
 
         <button type="submit" className="bg-blue-500 text-white px-6 py-2 rounded">
-          Add to Table
+          {editMember ? "Update Member" : "Add Member"}
         </button>
       </form>
 
-      {/* Members Table */}
-      {membersTable.length > 0 && (
-        <div className="mb-6">
-          <h3 className="font-bold text-lg mb-2">Members to be Submitted:</h3>
-          <table className="table-auto border-collapse border border-gray-300 w-full text-left">
-            <thead>
-              <tr>
-                <th className="border border-gray-300 px-4 py-2">Position</th>
-                <th className="border border-gray-300 px-4 py-2">Name</th>
-                <th className="border border-gray-300 px-4 py-2">Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              {membersTable.map((member, index) => (
-                <tr key={index}>
-                  <td className="border border-gray-300 px-4 py-2">{member.section}</td>
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+          <thead>
+            <tr>
+              <th className="border border-gray-300 px-4 py-2">Section</th>
+              <th className="border border-gray-300 px-4 py-2">Name</th>
+              <th className="border border-gray-300 px-4 py-2">Position</th>
+              <th className="border border-gray-300 px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sections.map((section) =>
+              section.members.map((member) => (
+                <tr key={member.id}>
+                  <td className="border border-gray-300 px-4 py-2">{section.title}</td>
                   <td className="border border-gray-300 px-4 py-2">{member.name}</td>
                   <td className="border border-gray-300 px-4 py-2">{member.position}</td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    <button
+                      onClick={() => handleEditClick(member)}
+                      className="bg-yellow-500 text-white px-4 py-1 rounded mr-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteClick(member.id)}
+                      className="bg-red-500 text-white px-4 py-1 rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <button
-            onClick={handleSubmitAll}
-            className="mt-4 bg-green-500 text-white px-6 py-2 rounded"
-          >
-            Submit All
-          </button>
-        </div>
-      )}
-
-      {/* Display existing sections */}
-      <div>
-        {sections.map((section, index) => (
-          <div key={index} className="mb-6">
-            <h3 className="font-bold text-lg mb-2">{section.title}</h3>
-            <ul className="list-disc ml-4">
-              {section.members.map((member, idx) => (
-                <li key={idx} className="text-gray-700">
-                  {member.name} - {member.position}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

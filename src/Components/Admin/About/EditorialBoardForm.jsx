@@ -1,6 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const EditorialBoardForm = () => {
+const fetchMembers = async () => {
+    try {
+        const response = await fetch("http://localhost/mailapp/editorial_board.php", {
+            method: "GET",
+        });
+        const result = await response.json();
+        if (result.success) {
+            return result.data;  // Assuming the data returned is an array of members
+        } else {
+            alert("Error fetching members.");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching members:", error);
+        return [];
+    }
+};
+
+const handleSubmit = async (formData, editMemberId, setFormData, setMembers) => {
+    if (!formData.name || !formData.position || !formData.institution || !formData.location) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    try {
+        const method = editMemberId ? "PUT" : "POST";
+        const url = editMemberId
+            ? `http://localhost/mailapp/editorial_board.php?id=${editMemberId}`
+            : "http://localhost/mailapp/editorial_board.php";
+
+        const response = await fetch(url, {
+            method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+        const result = await response.json();
+
+        if (result.success) {
+            alert(editMemberId ? "Member updated successfully!" : "Member added successfully!");
+            const updatedMembers = await fetchMembers();
+            setMembers(updatedMembers);
+            setFormData({ name: "", position: "", institution: "", location: "" });
+        } else {
+            alert("Error saving member.");
+        }
+    } catch (error) {
+        console.error("Error saving member:", error);
+    }
+};
+
+const handleEdit = (member, setEditMemberId, setFormData) => {
+    setEditMemberId(member.id);
+    setFormData({
+        name: member.name,
+        position: member.position,
+        institution: member.institution,
+        location: member.location,
+    });
+};
+
+const handleDelete = async (id, setMembers) => {
+    try {
+        const response = await fetch(`http://localhost/mailapp/editorial_board.php?id=${id}`, {
+            method: "DELETE",
+        });
+        const result = await response.json();
+
+        if (result.success) {
+            alert("Member deleted successfully!");
+            const updatedMembers = await fetchMembers();
+            setMembers(updatedMembers);
+        } else {
+            alert("Error deleting member.");
+        }
+    } catch (error) {
+        console.error("Error deleting member:", error);
+    }
+};
+
+const OrganizingCommittee = () => {
     const [formData, setFormData] = useState({
         name: "",
         position: "",
@@ -9,55 +88,30 @@ const EditorialBoardForm = () => {
     });
 
     const [members, setMembers] = useState([]);
+    const [editMemberId, setEditMemberId] = useState(null);
 
+    // Fetch members on component mount
+    useEffect(() => {
+        const loadMembers = async () => {
+            const fetchedMembers = await fetchMembers();
+            setMembers(fetchedMembers);
+        };
+
+        loadMembers();
+    }, []);
+
+    // Handle input changes in the form
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleAddMember = async () => {
-        if (
-            formData.name &&
-            formData.position &&
-            formData.institution &&
-            formData.location
-        ) {
-            try {
-                const response = await fetch("http://localhost/mailapp/editorial_board.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(formData),
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    alert("Member added successfully!");
-                    setMembers([...members, { ...formData }]); // Add the member to the local list
-                    setFormData({
-                        name: "",
-                        position: "",
-                        institution: "",
-                        location: "",
-                    });
-                } else {
-                    alert("Error adding member. Please try again.");
-                }
-            } catch (error) {
-                console.error("Error submitting form:", error);
-                alert("Error submitting form. Please try again.");
-            }
-        } else {
-            alert("Please fill in all fields before adding a member.");
-        }
-    };
-
     return (
-        <div className="w-full max-w-2xl mx-auto mt-10">
-            <form className="bg-white shadow-lg p-8 rounded-lg">
-                <h2 className="text-xl font-semibold text-center mb-4">Add New Member</h2>
+        <div className="w-full max-w-4xl mx-auto mt-10">
+            <form className="bg-white shadow-lg p-8 rounded-lg mb-6">
+                <h2 className="text-xl font-semibold text-center mb-4 text-black">
+                    {editMemberId ? "Edit Member" : "Add New Member"}
+                </h2>
 
                 <div className="mb-4">
                     <label className="block text-gray-700 font-medium mb-2">Name</label>
@@ -67,7 +121,6 @@ const EditorialBoardForm = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 text-black"
-                        required
                     />
                 </div>
 
@@ -79,7 +132,6 @@ const EditorialBoardForm = () => {
                         value={formData.position}
                         onChange={handleInputChange}
                         className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 text-black"
-                        required
                     />
                 </div>
 
@@ -91,7 +143,6 @@ const EditorialBoardForm = () => {
                         value={formData.institution}
                         onChange={handleInputChange}
                         className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 text-black"
-                        required
                     />
                 </div>
 
@@ -103,33 +154,60 @@ const EditorialBoardForm = () => {
                         value={formData.location}
                         onChange={handleInputChange}
                         className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 text-black"
-                        required
                     />
                 </div>
 
                 <button
                     type="button"
-                    onClick={handleAddMember}
-                    className="w-full py-2 mb-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300"
+                    onClick={() => handleSubmit(formData, editMemberId, setFormData, setMembers)}
+                    className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300"
                 >
-                    Add Member
+                    {editMemberId ? "Update Member" : "Add Member"}
                 </button>
-
-                {members.length > 0 && (
-                    <>
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Members Added</h3>
-                        <ul className="list-disc list-inside mb-4">
-                            {members.map((member, index) => (
-                                <li key={index} className="mb-2">
-                                    {`${member.name}, ${member.position}, ${member.institution}, ${member.location}`}
-                                </li>
-                            ))}
-                        </ul>
-                    </>
-                )}
             </form>
+
+            <div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Members List</h3>
+                <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+                    <thead>
+                        <tr>
+                            <th className="border border-gray-300 px-4 py-2">ID</th>
+                            <th className="border border-gray-300 px-4 py-2">Name</th>
+                            <th className="border border-gray-300 px-4 py-2">Position</th>
+                            <th className="border border-gray-300 px-4 py-2">Institution</th>
+                            <th className="border border-gray-300 px-4 py-2">Location</th>
+                            <th className="border border-gray-300 px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {members.map((member) => (
+                            <tr key={member.id}>
+                                <td className="border border-gray-300 px-4 py-2">{member.id}</td>
+                                <td className="border border-gray-300 px-4 py-2">{member.name}</td>
+                                <td className="border border-gray-300 px-4 py-2">{member.position}</td>
+                                <td className="border border-gray-300 px-4 py-2">{member.institution}</td>
+                                <td className="border border-gray-300 px-4 py-2">{member.location}</td>
+                                <td className="border border-gray-300 px-4 py-2">
+                                    <button
+                                        onClick={() => handleEdit(member, setEditMemberId, setFormData)}
+                                        className="bg-yellow-500 text-white px-4 py-1 rounded mr-2"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(member.id, setMembers)}
+                                        className="bg-red-500 text-white px-4 py-1 rounded"
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
 
-export default EditorialBoardForm;
+export default OrganizingCommittee;

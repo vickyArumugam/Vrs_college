@@ -14,6 +14,7 @@ import Conference_tracker from "../Admin/Author's/Conference_tracks";
 import Journal_publication from "../Admin/Author's/Journal_publication";
 import Key_Dates from "../Admin/Author's/Key_date";
 import BankAccountForm from "../Admin/Author's/BankAccountForm";
+import OrganizingCommittee from "../Admin/About/Organizing_committee";
 
 // import EarlierConferences from "../Admin/About/EarlierConferences";
 
@@ -45,7 +46,7 @@ export default function SideNavbar() {
                 { key: "about2", label: "About the Conference", component: <About_conference/> },
                 { key: "about3", label: "Scope of Conference", component: <Scope_conference/>   },
                 { key: "about4", label: "About VRSCET", component:<About_vrscet/> },
-                { key: "about5", label: "Organizing Committee", component: <div>Organizing Committee Content</div> },
+                { key: "about5", label: "Organizing Committee", component:<OrganizingCommittee/>},
                 { key: "about6", label: "Editorial Board", component: <EditorialBoardForm/> },
             ],
         },

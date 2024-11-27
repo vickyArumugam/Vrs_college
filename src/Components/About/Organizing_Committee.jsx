@@ -39,20 +39,6 @@ const  Organizing_Committee = () => {
             <AboutHeader title={"ORGANIZING COMMITTEE"} />
             <AboutLocation />
             <div className="flex flex-col items-center justify-center p-6 md:p-8 gap-6">
-                <div className="w-full flex flex-col items-center text-center">
-                    <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t mb-5 mt-10">
-                        Chairman
-                    </div>
-                    <div className="border-blue-600 rounded-b p-4 w-full max-w-lg">
-                        <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700">
-                            <div className="text-box-editiorial border-2 font-semibold border-box-editiorial p-4 w-full max-w-sm md:max-w-xs mx-auto">
-                                <p className="font-semibold">Dr.N.Anbazhaghan, M.E., Ph.D.</p>
-                                <p>Principal</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 {sections.map((section, index) => (
                     <div key={index} className="w-full flex flex-col items-center text-center relative">
                         <div className="w-full max-w-sm md:max-w-md bg-box-editiorial text-white font-bold py-2 rounded-t mb-5">
@@ -75,7 +61,6 @@ const  Organizing_Committee = () => {
                     </div>
                 ))}
             </div>
-
             <AboutFooter />
         </div>
     );
