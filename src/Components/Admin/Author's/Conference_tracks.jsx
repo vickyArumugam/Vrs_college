@@ -41,7 +41,7 @@ const DynamicFieldsForm = () => {
     };
 
     return (
-        <div className="text-center py-10 text-[#0B0A2A] font-bold text-lg space-y-10 bg-white">
+        <div className=" h-[850px] text-center py-10 text-[#0B0A2A] font-bold text-lg space-y-10 bg-white">
            
 
             {/* Display any message */}

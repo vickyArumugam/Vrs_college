@@ -60,7 +60,6 @@ const Journal_publication = () => {
             console.error('Error submitting data:', error);
         }
     };
-
     return (
         <div className="text-center py-10 text-[#0B0A2A] font-bold text-lg space-y-10 bg-white">
             <h1 className="font-bold text-25 font-Andika hover:text-[#C8F51E]">
@@ -104,11 +103,11 @@ const Journal_publication = () => {
                 </button>
             </form>
             {message && <p className="text-green-500">{message}</p>}
-            <div>
+            <div className='flex flex-col justify-center items-center'>
                 {Array.isArray(journals) && journals.length > 0 ? (
                     journals.map((journal, index) => (
-                        <div key={index} className="w-full max-w-3xl h-[5rem] md:h-16 bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4">
-                            <p className="my-3">{journal.title}</p>
+                        <div key={index} className="w-full max-w-5xl h-[7rem] md:h-20 bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4">
+                            <p className="my-3">{journal.description}</p>
                             {Array.isArray(journal.descriptions) &&
                                 journal.descriptions.map((desc, idx) => (
                                     <p key={idx} className="my-3">{desc}</p>

@@ -3,10 +3,11 @@ import axios from "axios";
 
 const OrganizingCommittee = () => {
   const [sections, setSections] = useState([]); // Holds existing data
-  const [editMember, setEditMember] = useState(null); // To hold the member being edited
+  const [editMember, setEditMember] = useState(null); // Member being edited
   const [newMember, setNewMember] = useState({ section: "", name: "", position: "" });
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility
 
   // Fetch all sections and members
   const fetchSections = async () => {
@@ -39,7 +40,7 @@ const OrganizingCommittee = () => {
 
     try {
       if (editMember) {
-        // Update an existing member
+        // Update existing member
         await axios.put(
           "http://localhost/mailapp/organizing_Committee.php",
           JSON.stringify({ id: editMember.id, ...newMember }),
@@ -47,7 +48,7 @@ const OrganizingCommittee = () => {
         );
         setMessage("Member updated successfully!");
       } else {
-        // Add a new member
+        // Add new member
         await axios.post(
           "http://localhost/mailapp/organizing_Committee.php",
           JSON.stringify(newMember),
@@ -58,16 +59,25 @@ const OrganizingCommittee = () => {
       fetchSections();
       setNewMember({ section: "", name: "", position: "" });
       setEditMember(null);
+      setIsModalOpen(false); // Close modal
     } catch (err) {
       console.error("Error saving member:", err);
       setError("Failed to save data.");
     }
   };
 
-  // Populate the form with the selected member's details for editing
+  // Open the modal and set editing state
   const handleEditClick = (member) => {
     setEditMember(member);
     setNewMember({ section: member.section, name: member.name, position: member.position });
+    setIsModalOpen(true);
+  };
+
+  // Open the modal for adding a new member
+  const handleAddClick = () => {
+    setEditMember(null);
+    setNewMember({ section: "", name: "", position: "" });
+    setIsModalOpen(true);
   };
 
   // Delete a member
@@ -88,58 +98,12 @@ const OrganizingCommittee = () => {
       {message && <p className="text-center text-green-500">{message}</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
 
-      {/* Form */}
-      <form onSubmit={handleFormSubmit} className="space-y-4 mb-6">
-        <div>
-          <label className="block mb-2">Section:</label>
-          <select
-            name="section"
-            value={newMember.section}
-            onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded"
-            required
-          >
-            <option value="">Select Section</option>
-            {["Chairman", "Convenors", "Advisory Committee", "Coordinators", "Members"].map(
-              (section) => (
-                <option key={section} value={section}>
-                  {section}
-                </option>
-              )
-            )}
-          </select>
-        </div>
-
-        <div>
-          <label className="block mb-2">Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={newMember.name}
-            onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded"
-            placeholder="Enter member's name"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block mb-2">Position:</label>
-          <input
-            type="text"
-            name="position"
-            value={newMember.position}
-            onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded"
-            placeholder="Enter member's position"
-            required
-          />
-        </div>
-
-        <button type="submit" className="bg-blue-500 text-white px-6 py-2 rounded">
-          {editMember ? "Update Member" : "Add Member"}
-        </button>
-      </form>
+      <button
+        onClick={handleAddClick}
+        className="bg-blue-500 text-white px-6 py-2 rounded mb-4"
+      >
+        Add Member
+      </button>
 
       {/* Table */}
       <div className="overflow-x-auto">
@@ -179,6 +143,75 @@ const OrganizingCommittee = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-6 w-1/3">
+            <h3 className="text-lg font-bold mb-4">{editMember ? "Edit Member" : "Add Member"}</h3>
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div>
+                <label className="block mb-2">Section:</label>
+                <select
+                  name="section"
+                  value={newMember.section}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded"
+                  required
+                >
+                  <option value="">Select Section</option>
+                  {["Chairman", "Convenors", "Advisory Committee", "Coordinators", "Members"].map(
+                    (section) => (
+                      <option key={section} value={section}>
+                        {section}
+                      </option>
+                    )
+                  )}
+                </select>
+              </div>
+
+              <div>
+                <label className="block mb-2">Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={newMember.name}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded"
+                  placeholder="Enter member's name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2">Position:</label>
+                <input
+                  type="text"
+                  name="position"
+                  value={newMember.position}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded"
+                  placeholder="Enter member's position"
+                  required
+                />
+              </div>
+
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+                  {editMember ? "Update" : "Add"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

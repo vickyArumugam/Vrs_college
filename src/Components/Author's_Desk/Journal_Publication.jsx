@@ -11,10 +11,8 @@ const Journal_Publication = () => {
   const fetchData = async (url, setDataCallback, setLoadingCallback) => {
     try {
       const response = await fetch(url);
-      const text = await response.text(); // Use text() instead of json() for debugging
-      console.log("API Response:", text); // Log the response for inspection
-  
-      const data = JSON.parse(text); // Parse JSON manually
+      const text = await response.text(); 
+      const data = JSON.parse(text);
       setDataCallback(data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -44,13 +42,12 @@ const Journal_Publication = () => {
   if (aboutConference.length === 0) {
     return <p className="text-center text-gray-500">No journals available.</p>;
   }
-
   return (
     <div>
       <AboutHeader title={"JOURNAL PUBLICATION"} />
       <div className=" flex flex-col justify-center items-center text-center py-8 md:py-10 text-orange-500 font-bold text-lg space-y-6 md:space-y-8 bg-white">
-        <h3 className="text-base font-Helvetica md:text-lg lg:text-4xl font-bold text-[#0B0A2A] px-4 mb-10">
-        {aboutConference[0].title}
+        <h3 className=" w-[65%] text-base font-Helvetica md:text-lg lg:text-4xl font-bold text-[#0B0A2A] px-4 mb-10">
+        {aboutConference[1].title}
         </h3>
 
         {aboutConference.map((journal, index) => (

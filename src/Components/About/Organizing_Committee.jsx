@@ -46,11 +46,12 @@ const  Organizing_Committee = () => {
                         </div>
 
                         <div className="border-blue-600 rounded-b p-4 w-full max-w-7xl">
-                            <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-y-4 gap-x-6">
+                            <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700 ">
+                            {/* grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-y-4 gap-x-6 */}
                                 {section.members.map((member, idx) => (
                                     <div
                                         key={idx}
-                                        className="text-box-editiorial border-2 font-semibold border-box-editiorial p-4 w-full max-w-xs mx-auto"
+                                        className=" text-box-editiorial border-2 font-semibold border-box-editiorial p-4 w-full max-w-xs mx-auto"
                                     >
                                         <p className="font-semibold">{member.name}</p>
                                         <p>{member.position}</p>

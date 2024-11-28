@@ -17,15 +17,6 @@ const Home = () => {
     const [isLoadingRegisterCard, setIsLoadingRegisterCard] = useState(true)
     const [isLoadingContact, setIsLoadingContact] = useState(true)
 
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //         setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
-    //     }, 1000);
-
-    //     return () => clearInterval(intervalId);
-    // }, []);
-
-    // Dynamically updating values
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(0);
     const [value3, setValue3] = useState(0);
@@ -104,14 +95,12 @@ const Home = () => {
                 <div className="sm:max-w-full h-auto mx-auto text-center relative text-white mt-20 sm:mt-40 px-4">
                     <h1 className="text-[36px] sm:text-[54px] font-bold font-Kaisei-Decol mb-3">
                         {eventData[0].conferenceTitle}
-                        {/* <sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup> */}
                     </h1>
                     <h2 className="text-[20px] sm:text-[40px] text-[#C8F51E] font-medium font-Playwrite animate-float animate-once animate-duration-1000 animate-ease-in-out mb-5">
                         {eventData[0].conferenceSubtitle}
                     </h2>
                     <h2 className="text-[30px] sm:text-[50px] font-medium font-Helvetica mb-3">
                         {eventData[0].conferenceDate}
-                        {/* <sup className={`${colors[colorIndex]} font-Playwrite`}>th</sup> */}
                     </h2>
                     <h1 className="text-[30px] sm:text-[50px] mb-6 font-bold font-Kaisei-Decol">
                         {eventData[0].conferenceType}
