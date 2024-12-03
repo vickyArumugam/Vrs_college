@@ -34,7 +34,7 @@ export default function ConferenceForm() {
     };
 
     return (
-        <section className="w-full h-screen flex flex-col justify-center items-center bg-[#fff] py-4 relative">
+        <section className="w-full h-screen flex flex-col justify-center items-center bg-[#fff] py-4">
             <div className="my-10 lg:my-20 max-w-5xl px-4 mx-auto text-center">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#000]">
                     Update Conference Details

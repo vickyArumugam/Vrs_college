@@ -93,14 +93,14 @@ const OrganizingCommittee = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 text-black">
+    <div className="p-6 bg-[#0B0A2A] text-white">
       <h2 className="text-center font-bold text-2xl mb-4">Organizing Committee</h2>
       {message && <p className="text-center text-green-500">{message}</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
 
       <button
         onClick={handleAddClick}
-        className="bg-blue-500 text-white px-6 py-2 rounded mb-4"
+        className="bg-[#C8F51E] text-[#0B0A2A] px-6 py-2 rounded mb-4"
       >
         Add Member
       </button>
@@ -126,7 +126,7 @@ const OrganizingCommittee = () => {
                   <td className="border border-gray-300 px-4 py-2">
                     <button
                       onClick={() => handleEditClick(member)}
-                      className="bg-yellow-500 text-white px-4 py-1 rounded mr-2"
+                      className="bg-yellow-500 text-[#0B0A2A] px-4 py-1 rounded mr-2"
                     >
                       Edit
                     </button>
@@ -147,7 +147,7 @@ const OrganizingCommittee = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
-          <div className="bg-white rounded-lg p-6 w-1/3">
+          <div className="bg-[#0B0A2A] text-white rounded-lg p-6 w-1/3">
             <h3 className="text-lg font-bold mb-4">{editMember ? "Edit Member" : "Add Member"}</h3>
             <form onSubmit={handleFormSubmit} className="space-y-4">
               <div>
@@ -156,7 +156,7 @@ const OrganizingCommittee = () => {
                   name="section"
                   value={newMember.section}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border rounded"
+                  className="w-full px-4 py-2 bg-gray-700 text-white border rounded"
                   required
                 >
                   <option value="">Select Section</option>
@@ -177,7 +177,7 @@ const OrganizingCommittee = () => {
                   name="name"
                   value={newMember.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border rounded"
+                  className="w-full px-4 py-2 bg-gray-700 text-white border rounded"
                   placeholder="Enter member's name"
                   required
                 />
@@ -190,7 +190,7 @@ const OrganizingCommittee = () => {
                   name="position"
                   value={newMember.position}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border rounded"
+                  className="w-full px-4 py-2 bg-gray-700 text-white border rounded"
                   placeholder="Enter member's position"
                   required
                 />
@@ -204,7 +204,7 @@ const OrganizingCommittee = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+                <button type="submit" className="bg-[#C8F51E] text-[#0B0A2A] px-4 py-2 rounded">
                   {editMember ? "Update" : "Add"}
                 </button>
               </div>

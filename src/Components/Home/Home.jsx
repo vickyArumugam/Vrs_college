@@ -202,11 +202,11 @@ const Home = () => {
                             className="relative w-[320px] h-[350px] bg-[#0A0A23] border-2 border-gray-300 rounded-lg flex flex-col justify-end items-center transform transition-transform duration-500 hover:scale-105"
                         >
                             <div className="absolute top-0 left-0 w-full h-full bg-[#7CB342] clip-curved"></div>
-                            <div className="absolute top-5 w-[120px] h-[120px] bg-gray-300 rounded-full border-3 border-[#C8F51E]"></div>
-                            <div className="relative z-10 text-center mb-10 px-4 space-y-3">
+                            <div className="absolute top-5 w-[80px] h-[80px] bg-gray-300 rounded-full border-3 border-[#C8F51E]"></div>
+                            <div className="relative z-10 text-center mb-10 px-4 space-y-3 ">
                                 <img
                                     src={item.image_url}
-                                    className="w-[110px] h-[110px] object-cover rounded-full mb-[6.10rem]"
+                                    className="w-[130px] h-[130px] object-cover rounded-full mb-[5.5rem] ml-10"
                                     alt={item.name}
                                 />
                                 <h1 className="text-white text-lg font-bold">
@@ -229,7 +229,7 @@ const Home = () => {
                                 key={index}
                                 className="sm:w-52 h-64 md:w-64 lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
                             >
-                                <h1 className="font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
+                                <h1 className=" w-44 font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
                                  {item.category}
                                 </h1>
                                 <h1 className="font-roboto text-2xl text-center font-bold text-white">

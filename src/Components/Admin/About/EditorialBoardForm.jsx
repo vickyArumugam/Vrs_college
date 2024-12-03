@@ -1,181 +1,185 @@
 import React, { useState, useEffect } from "react";
 
 const fetchMembers = async () => {
-    try {
-        const response = await fetch("http://localhost/mailapp/editorial_board.php");
-        const result = await response.json();
-        return result.success ? result.data : [];
-    } catch (error) {
-        console.error("Error fetching members:", error);
-        return [];
-    }
+  try {
+    const response = await fetch("http://localhost/mailapp/editorial_board.php");
+    const result = await response.json();
+    return result.success ? result.data : [];
+  } catch (error) {
+    console.error("Error fetching members:", error);
+    return [];
+  }
 };
 
 const OrganizingCommittee = () => {
-    const [formData, setFormData] = useState({ name: "", position: "", institution: "", location: "" });
-    const [members, setMembers] = useState([]);
-    const [editMemberId, setEditMemberId] = useState(null);
-    const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({ name: "", position: "", institution: "", location: "" });
+  const [members, setMembers] = useState([]);
+  const [editMemberId, setEditMemberId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const loadMembers = async () => {
-            const data = await fetchMembers();
-            setMembers(data);
-        };
-        loadMembers();
-    }, []);
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+  useEffect(() => {
+    const loadMembers = async () => {
+      const data = await fetchMembers();
+      setMembers(data);
     };
+    loadMembers();
+  }, []);
 
-    const handleSubmit = async () => {
-        if (!formData.name || !formData.position || !formData.institution || !formData.location) {
-            alert("Please fill in all fields.");
-            return;
-        }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-        setLoading(true);
-        const method = editMemberId ? "PUT" : "POST";
-        const url = editMemberId
-            ? `http://localhost/mailapp/editorial_board.php?id=${editMemberId}`
-            : "http://localhost/mailapp/editorial_board.php";
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.position || !formData.institution || !formData.location) {
+      alert("Please fill in all fields.");
+      return;
+    }
 
-        try {
-            const response = await fetch(url, {
-                method,
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
-            });
-            const result = await response.json();
+    setLoading(true);
+    const method = editMemberId ? "PUT" : "POST";
+    const url = editMemberId
+      ? `http://localhost/mailapp/editorial_board.php?id=${editMemberId}`
+      : "http://localhost/mailapp/editorial_board.php";
 
-            if (result.success) {
-                const updatedMembers = await fetchMembers();
-                setMembers(updatedMembers);
-                setFormData({ name: "", position: "", institution: "", location: "" });
-                setEditMemberId(null);
-            } else {
-                alert("Error saving member.");
-            }
-        } catch (error) {
-            console.error("Error saving member:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
 
-    const handleEdit = (member) => {
-        setEditMemberId(member.id);
-        setFormData(member);
-    };
+      if (result.success) {
+        const updatedMembers = await fetchMembers();
+        setMembers(updatedMembers);
+        setFormData({ name: "", position: "", institution: "", location: "" });
+        setEditMemberId(null);
+      } else {
+        alert("Error saving member.");
+      }
+    } catch (error) {
+      console.error("Error saving member:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const handleDelete = async (id) => {
+  const handleEdit = (member) => {
+    setEditMemberId(member.id);
+    setFormData(member);
+  };
 
-        setLoading(true);
-        try {
-            const response = await fetch(`http://localhost/mailapp/editorial_board.php?id=${id}`, { method: "DELETE" });
-            const result = await response.json();
+  const handleDelete = async (id) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost/mailapp/editorial_board.php?id=${id}`, { method: "DELETE" });
+      const result = await response.json();
 
-            if (result.success) {
-                const updatedMembers = await fetchMembers();
-                setMembers(updatedMembers);
-            } else {
-                alert("Error deleting member.");
-            }
-        } catch (error) {
-            console.error("Error deleting member:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-      
-    return (
-        <div className="p-6 max-w-4xl mx-auto ">
-            <h1 className="text-2xl font-bold mb-4 text-center">Organizing Committee</h1>
-            <form className="bg-gray-100 shadow p-6 rounded-lg mb-6 text-black">
-                <h2 className="text-lg font-semibold mb-4">{editMemberId ? "Edit Member" : "Add New Member"}</h2>
-                <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Name"
-                    className="w-full mb-4 px-4 py-2 border rounded"
-                />
-                <input
-                    type="text"
-                    name="position"
-                    value={formData.position}
-                    onChange={handleInputChange}
-                    placeholder="Position"
-                    className="w-full mb-4 px-4 py-2 border rounded"
-                />
-                <input
-                    type="text"
-                    name="institution"
-                    value={formData.institution}
-                    onChange={handleInputChange}
-                    placeholder="Institution"
-                    className="w-full mb-4 px-4 py-2 border rounded"
-                />
-                <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    placeholder="Location"
-                    className="w-full mb-4 px-4 py-2 border rounded"
-                />
-                <button
-                    type="button"
-                    onClick={handleSubmit}
-                    className={`w-full py-2 text-white rounded ${
-                        loading ? "bg-gray-400" : "bg-green-500 hover:bg-green-600"
-                    }`}
-                    disabled={loading}
-                >
-                    {loading ? "Saving..." : editMemberId ? "Update Member" : "Add Member"}
-                </button>
-            </form>
+      if (result.success) {
+        const updatedMembers = await fetchMembers();
+        setMembers(updatedMembers);
+      } else {
+        alert("Error deleting member.");
+      }
+    } catch (error) {
+      console.error("Error deleting member:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            <table className="w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th className="border px-4 py-2">Name</th>
-                        <th className="border px-4 py-2">Position</th>
-                        <th className="border px-4 py-2">Institution</th>
-                        <th className="border px-4 py-2">Location</th>
-                        <th className="border px-4 py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {members.map((member) => (
-                        <tr key={member.id}>
-                            <td className="border px-4 py-2">{member.name}</td>
-                            <td className="border px-4 py-2">{member.position}</td>
-                            <td className="border px-4 py-2">{member.institution}</td>
-                            <td className="border px-4 py-2">{member.location}</td>
-                            <td className="border px-4 py-2">
-                                <button
-                                    onClick={() => handleEdit(member)}
-                                    className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(member.id)}
-                                    className="bg-red-500 text-white px-2 py-1 rounded"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+  return (
+    <div className="bg-blue-50 p-8 max-w-4xl mx-auto rounded-lg shadow-lg">
+      <h1 className="text-3xl font-extrabold text-center text-blue-900 mb-6">Organizing Committee</h1>
+
+      {/* Form for adding or editing members */}
+      <form className="bg-white shadow-md rounded-lg p-6 mb-8 space-y-6">
+        <h2 className="text-xl font-semibold text-gray-800">{editMemberId ? "Edit Member" : "Add New Member"}</h2>
+        
+        <div className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Name"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+          <input
+            type="text"
+            name="position"
+            value={formData.position}
+            onChange={handleInputChange}
+            placeholder="Position"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+          <input
+            type="text"
+            name="institution"
+            value={formData.institution}
+            onChange={handleInputChange}
+            placeholder="Institution"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            placeholder="Location"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
         </div>
-    );
+
+        <button
+          type="button"
+          onClick={handleSubmit}
+          className={`w-full py-3 text-white rounded-lg ${loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300"}`}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : editMemberId ? "Update Member" : "Add Member"}
+        </button>
+      </form>
+
+      {/* Members table */}
+      <table className="w-full table-auto border-collapse bg-white rounded-lg shadow-md">
+        <thead>
+          <tr>
+            <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Name</th>
+            <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Position</th>
+            <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Institution</th>
+            <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Location</th>
+            <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {members.map((member) => (
+            <tr key={member.id} className="border-b border-gray-200 hover:bg-gray-50">
+              <td className="px-6 py-4 text-sm text-gray-800">{member.name}</td>
+              <td className="px-6 py-4 text-sm text-gray-800">{member.position}</td>
+              <td className="px-6 py-4 text-sm text-gray-800">{member.institution}</td>
+              <td className="px-6 py-4 text-sm text-gray-800">{member.location}</td>
+              <td className="px-6 py-4">
+                <button
+                  onClick={() => handleEdit(member)}
+                  className="px-4 py-2 bg-yellow-500 text-white rounded-md mr-2 hover:bg-yellow-600 focus:outline-none"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(member.id)}
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default OrganizingCommittee;

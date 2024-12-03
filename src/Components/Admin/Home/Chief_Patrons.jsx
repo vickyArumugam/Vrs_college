@@ -60,10 +60,10 @@ export default function Chief_Patrons() {
             {/* Form */}
             <form
                 onSubmit={handleSubmit}
-                className="w-11/12 max-w-md bg-white border border-gray-300 p-6 rounded-lg shadow-md"
+                className="w-11/12 max-w-md bg-[#0B0A2A] border border-gray-300 p-6 rounded-lg shadow-md"
             >
                 <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Name</label>
+                    <label className="block text-white font-medium mb-2">Name</label>
                     <input
                         type="text"
                         name="name"
@@ -71,11 +71,11 @@ export default function Chief_Patrons() {
                         onChange={handleChange}
                         placeholder="Enter name"
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Role</label>
+                    <label className="block text-white font-medium mb-2">Role</label>
                     <input
                         type="text"
                         name="role"
@@ -83,11 +83,11 @@ export default function Chief_Patrons() {
                         onChange={handleChange}
                         placeholder="Enter role or designation"
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Image URL</label>
+                    <label className="block text-white font-medium mb-2">Image URL</label>
                     <input
                         type="text"
                         name="imageUrl"
@@ -95,12 +95,12 @@ export default function Chief_Patrons() {
                         onChange={handleChange}
                         placeholder="Enter image URL"
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                 </div>
                 <button
                     type="submit"
-                    className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-500"
+                    className="w-full py-2 bg-green-500  text-white font-semibold rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-500"
                 >
                     Add Chief Patron
                 </button>

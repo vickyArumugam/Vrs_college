@@ -134,10 +134,10 @@ export default function EarlierConferences() {
                             name="image"
                             accept="image/*"
                             onChange={handleFileChange}
-                            className="w-full px-4 py-2 text-black rounded"
+                            className="w-full px-4 py-2 text-green-500 rounded"
                         />
                     </div>
-                    <button type="submit" className="bg-[#C8F51E] text-black px-6 py-2 rounded font-bold">
+                    <button type="submit" className=" bg-green-500 hover:bg-green-700  text-white px-6 py-2 rounded font-bold">
                         Submit
                     </button>
                 </form>

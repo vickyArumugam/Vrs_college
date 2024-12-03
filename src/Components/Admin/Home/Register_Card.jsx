@@ -50,17 +50,17 @@ export default function Register_Card() {
     return (
         <div className="min-h-screen bg-gray-100 py-10 flex flex-col items-center">
             <div className="my-10 lg:my-20 max-w-5xl px-4 mx-auto text-center">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#000]">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol  text-[#000]">
                 Register Card
                 </h1>
             </div>
             {/* Form to add cards */}
             <form
                 onSubmit={handleSubmit}
-                className="w-11/12 max-w-lg bg-white border border-gray-300 p-6 rounded-lg shadow-md"
+                className="w-11/12 max-w-lg bg-[#0B0A2A] border border-gray-300 p-6 rounded-lg shadow-md"
             >
                 <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Category</label>
+                    <label className="block text-white font-medium mb-2">Category</label>
                     <input
                         type="text"
                         name="category"
@@ -72,7 +72,7 @@ export default function Register_Card() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Currency</label>
+                    <label className="block  text-white font-medium mb-2">Currency</label>
                     <input
                         type="text"
                         name="currency"
@@ -84,7 +84,7 @@ export default function Register_Card() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Value</label>
+                    <label className="block  text-white font-medium mb-2">Value</label>
                     <input
                         type="text"
                         name="value"

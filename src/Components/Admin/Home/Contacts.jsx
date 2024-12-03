@@ -98,8 +98,8 @@ export default function Contacts() {
           <label htmlFor="district" className="block mb-1">States</label>
           <input
             type="text"
-            id="state"
-            name="state"
+            id="states"
+            name="states"
             value={formData.states}
             onChange={handleChange}
             className="w-full p-2 rounded bg-gray-700 text-white"

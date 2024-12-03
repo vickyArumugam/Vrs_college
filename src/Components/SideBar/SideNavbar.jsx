@@ -15,6 +15,7 @@ import Journal_publication from "../Admin/Author's/Journal_publication";
 import Key_Dates from "../Admin/Author's/Key_date";
 import BankAccountForm from "../Admin/Author's/BankAccountForm";
 import OrganizingCommittee from "../Admin/About/Organizing_committee";
+import Contacts from "../Admin/Home/Contacts";
 
 // import EarlierConferences from "../Admin/About/EarlierConferences";
 
@@ -59,6 +60,15 @@ export default function SideNavbar() {
                 { key: "author2", label: "JOURNAL PUBLICATION", component: <Journal_publication/>},
                 { key: "author3", label: "KEY DATES", component: <Key_Dates/>},
                 { key: "author4", label: "REGISTRATION DETAILS", component:<BankAccountForm/>},
+            ],
+        },
+        {
+            key: "Countact Us",
+            label: "Countact Us",
+            defaultSubKey: "countact1",
+            subItems: [
+                { key: "countact1", label: "COUNTACT US", component: <Contacts/> },
+               
             ],
         },
     ];
@@ -109,7 +119,7 @@ export default function SideNavbar() {
             <div className="flex-1 ml-64">
                 {/* Top Navbar */}
                 {currentSection && (
-                    <div className="bg-[#0B0A2A] text-white p-4 flex justify-between items-center sticky top-0 z-10 h-16">
+                    <div className="bg-[#0B0A2A] text-white p-4 flex justify-between items-center sticky top-0 h-16">
                         <h1 className="text-2xl font-bold">{currentSection.label}</h1>
                         <div className="flex space-x-4">
                             {currentSection.subItems.map((subItem) => (

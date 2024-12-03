@@ -31,7 +31,7 @@ const Registration_details = () => {
 
   return (
     <div>
-      <AboutHeader  title={"REGISTRATION DETAILS"}/>
+      <AboutHeader title={"REGISTRATION DETAILS"} />
       <section>
         <div className="flex flex-col items-center p-8 bg-[#0B0A2A]">
 
@@ -60,38 +60,45 @@ const Registration_details = () => {
           </button>
         </div>
       </section>
-      <section>
-      <div className="flex flex-col items-center">
-        <div className="w-full bg-gray-100 text-black border border-gray-300">
+      <section className="flex items-center justify-center min-h-screen bg-gray-100 text-black">
+        <div className="w-full max-w-5xl bg-white border border-gray-300 shadow-md">
           {account ? (
-            <>
-              <div className="flex justify-around p-4 border-b border-gray-300">
-                <span className="font-bold">Account Name :</span>
-                <span>{account.accountName}</span>
-              </div>
-              <div className="flex justify-around p-4 border-b border-gray-300">
-                <span className="font-bold">Account Number :</span>
-                <span>{account.accountNumber}</span>
-              </div>
-              <div className="flex justify-around p-4 border-b border-gray-300">
-                <span className="font-bold">Branch :</span>
-                <span>{account.branch}</span>
-              </div>
-              <div className="flex justify-around p-4 border-b border-gray-300">
-                <span className="font-bold">IFSC Code :</span>
-                <span>{account.ifscCode}</span>
-              </div>
-              <div className="flex justify-around p-4">
-                <span className="font-bold">MICR :</span>
-                <span>{account.micr}</span>
-              </div>
-            </>
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="px-4 py-2 border-b border-gray-300">Field</th>
+                  <th className="px-4 py-2 border-b border-gray-300">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="px-4 py-2 border-b border-gray-300 font-bold">Account Name</td>
+                  <td className="px-4 py-2 border-b border-gray-300">{account.accountName}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 border-b border-gray-300 font-bold">Account Number</td>
+                  <td className="px-4 py-2 border-b border-gray-300">{account.accountNumber}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 border-b border-gray-300 font-bold">Branch</td>
+                  <td className="px-4 py-2 border-b border-gray-300">{account.branch}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 border-b border-gray-300 font-bold">IFSC Code</td>
+                  <td className="px-4 py-2 border-b border-gray-300">{account.ifscCode}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 font-bold">MICR</td>
+                  <td className="px-4 py-2">{account.micr}</td>
+                </tr>
+              </tbody>
+            </table>
           ) : (
-            <p>No account details found</p>
+            <p className="text-center p-4">No account details found</p>
           )}
         </div>
-      </div>
-    </section>
+      </section>
+
 
       <AboutLocation />
       <AboutFooter />

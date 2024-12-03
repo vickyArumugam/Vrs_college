@@ -5,7 +5,6 @@ const Key_Dates = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Handle the form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -31,37 +30,46 @@ const Key_Dates = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-8">
-      <h2 className="text-center text-2xl font-bold mb-4">Add New Key Date</h2>
-
-      {/* Form to add a new key date */}
-      <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
-        <input
-          type="text"
-          value={newDate.description}
-          onChange={(e) => setNewDate({ ...newDate, description: e.target.value })}
-          placeholder="Enter Description"
-          className="p-2 border border-gray-300 rounded w-full text-black"
-          required
-        />
-        <input
-          type="date"
-          value={newDate.date}
-          onChange={(e) => setNewDate({ ...newDate, date: e.target.value })}
-          className="p-2 border border-gray-300 rounded w-full text-black"
-          required
-        />
+    <div className="flex flex-col items-center py-10">
+      <h1 className="text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-8">
+        Add Key Date
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-[#0B0A2A] p-6 rounded-lg text-white w-full max-w-md shadow-lg"
+      >
+        <div className="mb-4">
+          <label htmlFor="description" className="block mb-1">Description</label>
+          <input
+            type="text"
+            id="description"
+            value={newDate.description}
+            onChange={(e) => setNewDate({ ...newDate, description: e.target.value })}
+            placeholder="Enter Description"
+            className="w-full p-2 rounded bg-gray-700 text-white"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="date" className="block mb-1">Date</label>
+          <input
+            type="date"
+            id="date"
+            value={newDate.date}
+            onChange={(e) => setNewDate({ ...newDate, date: e.target.value })}
+            className="w-full p-2 rounded bg-gray-700 text-white"
+            required
+          />
+        </div>
         <button
           type="submit"
-          className="p-2 bg-green-500 text-white rounded w-full"
+          className="w-full p-2 bg-blue-500 hover:bg-blue-700 text-white rounded"
           disabled={isLoading}
         >
           {isLoading ? 'Adding...' : 'Add Key Date'}
         </button>
       </form>
-
-      {/* Error handling */}
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+      {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
     </div>
   );
 };
