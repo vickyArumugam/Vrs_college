@@ -31,7 +31,7 @@ function WelcomePage() {
     } catch (error) {
       console.error('Error submitting form:', error);
     }
-    navigate('/');
+    // navigate('/');
   };
 
   return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../Core/Header';
 
 const Home = () => {
@@ -9,6 +10,8 @@ const Home = () => {
     const [patrons, setPatrons] = useState([]);
     const [rcards, setRcards] = useState([]);
     const [contact, setContact] = useState([]);
+    const [map, setMap] = useState([]);
+    const [links, setLinks] = useState([]);
     const [error, setError] = useState(null);
     const [isLoadingEvent, setIsLoadingEvent] = useState(true);
     const [isLoadingAbout, setIsLoadingAbout] = useState(true);
@@ -16,45 +19,56 @@ const Home = () => {
     const [isLoadingKeyInvitees, setIsLoadingKeyInvitees] = useState(true)
     const [isLoadingRegisterCard, setIsLoadingRegisterCard] = useState(true)
     const [isLoadingContact, setIsLoadingContact] = useState(true)
+    const [isLoadingmap, setIsLoadingmap] = useState(true)
+    const [isLoadingLinks, setIsLoadingLinks] = useState(true)
 
-    const [value1, setValue1] = useState(0);
-    const [value2, setValue2] = useState(0);
-    const [value3, setValue3] = useState(0);
-    const [value4, setValue4] = useState(0);
-    const targets = [750, 750, 1500, 2500];
+    
+    // const [value1, setValue1] = useState(0);
+    // const [value2, setValue2] = useState(0);
+    // const [value3, setValue3] = useState(0);
+    // const [value4, setValue4] = useState(0);
+    // const targets = [750, 750, 1500, 2500];
+    // const navigate = useNavigate();
 
-    useEffect(() => {
-        const incrementTime = 40;
-        const totalIncrements = 100;
-        const increments = targets.map(target => target / totalIncrements);
+   
 
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + window.innerHeight;
-            const triggerPosition = document.documentElement.scrollHeight / 2;
+    // useEffect(() => {
+    //     const incrementTime = 40;
+    //     const totalIncrements = 100;
+    //     const increments = targets.map(target => target / totalIncrements);
 
-            if (scrollPosition >= triggerPosition) {
-                const interval = setInterval(() => {
-                    setValue1(prev => Math.min(prev + increments[0], targets[0]));
-                    setValue2(prev => Math.min(prev + increments[1], targets[1]));
-                    setValue3(prev => Math.min(prev + increments[2], targets[2]));
-                    setValue4(prev => Math.min(prev + increments[3], targets[3]));
+    //     const handleScroll = () => {
+    //         const scrollPosition = window.scrollY + window.innerHeight;
+    //         const triggerPosition = document.documentElement.scrollHeight / 2;
 
-                    if (
-                        value1 >= targets[0] &&
-                        value2 >= targets[1] &&
-                        value3 >= targets[2] &&
-                        value4 >= targets[3]
-                    ) {
-                        clearInterval(interval);
-                    }
-                }, incrementTime);
-                window.removeEventListener('scroll', handleScroll);
-            }
-        };
-        window.addEventListener('scroll', handleScroll);
+    //         if (scrollPosition >= triggerPosition) {
+    //             const interval = setInterval(() => {
+    //                 setValue1(prev => Math.min(prev + increments[0], targets[0]));
+    //                 setValue2(prev => Math.min(prev + increments[1], targets[1]));
+    //                 setValue3(prev => Math.min(prev + increments[2], targets[2]));
+    //                 setValue4(prev => Math.min(prev + increments[3], targets[3]));
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [targets, value1, value2, value3, value4]);
+    //                 if (
+    //                     value1 >= targets[0] &&
+    //                     value2 >= targets[1] &&
+    //                     value3 >= targets[2] &&
+    //                     value4 >= targets[3]
+    //                 ) {
+    //                     clearInterval(interval);
+    //                 }
+    //             }, incrementTime);
+    //             window.removeEventListener('scroll', handleScroll);
+    //         }
+    //     };
+    //     window.addEventListener('scroll', handleScroll);
+
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, [targets, value1, value2, value3, value4]);
+
+
+    const handleButtonClick = () => {
+        navigate('/author/new_paper_submission');
+    };
 
     const fetchData = async (url, setDataCallback, setLoadingCallback) => {
         try {
@@ -71,6 +85,34 @@ const Home = () => {
             setLoadingCallback(false);
         }
     };
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+
+        // Get day with ordinal suffix
+        const day = date.getDate();
+        const ordinal =
+            day % 10 === 1 && day !== 11
+                ? "st"
+                : day % 10 === 2 && day !== 12
+                ? "nd"
+                : day % 10 === 3 && day !== 13
+                ? "rd"
+                : "th";
+
+        // Format month and year
+        const formattedDate = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            year: "numeric",
+        }).format(date);
+
+        return `${day}${ordinal} ${formattedDate}`;
+    };
+    const icons = {
+        Facebook: "/images/facebook_5968764 (1).png",
+        Instagram: "/images/instagram_1384015.png",
+        Twitter: "/images/twitter_3955031.png",
+        YouTube: "/images/social_15707814.png"
+    };
 
     useEffect(() => {
         fetchData('http://localhost/mailapp/updateConference.php', setEventData, setIsLoadingEvent);
@@ -78,13 +120,16 @@ const Home = () => {
         fetchData('http://localhost/mailapp/KeyDates.php', setkeydates, setIsLoadingKey);
         fetchData('http://localhost/mailapp/Key_invitees.php', setkeyInviees, setIsLoadingKeyInvitees);
         fetchData('http://localhost/mailapp/chief_patrons.php', setPatrons, setIsLoadingKeyInvitees);
-        fetchData('http://localhost/mailapp/register_card.php', setRcards, setIsLoadingRegisterCard );
-        fetchData('http://localhost/mailapp/contact.php', setContact,setIsLoadingContact);
+        fetchData('http://localhost/mailapp/register_card.php', setRcards, setIsLoadingRegisterCard);
+        fetchData('http://localhost/mailapp/contact.php', setContact, setIsLoadingContact);
+        fetchData('http://localhost/mailapp/map_url.php', setMap, setIsLoadingmap);
+        fetchData('http://localhost/mailapp/social.php', setLinks, setIsLoadingLinks);
+
     }, []);
 
     if (error) return <p className="text-red-500 text-center">{error}</p>;
 
-    if (isLoadingEvent || isLoadingAbout || isLoadingKey || isLoadingKeyInvitees || isLoadingRegisterCard || isLoadingContact ) {
+    if (isLoadingEvent || isLoadingAbout || isLoadingKey || isLoadingKeyInvitees || isLoadingRegisterCard || isLoadingContact || isLoadingmap || isLoadingLinks) {
         return <p className="text-center text-white">Loading...</p>;
     }
     return (
@@ -99,13 +144,15 @@ const Home = () => {
                     <h2 className="text-[20px] sm:text-[40px] text-[#C8F51E] font-medium font-Playwrite animate-float animate-once animate-duration-1000 animate-ease-in-out mb-5">
                         {eventData[0].conferenceSubtitle}
                     </h2>
-                    <h2 className="text-[30px] sm:text-[50px] font-medium font-Helvetica mb-3">
-                        {eventData[0].conferenceDate}
-                    </h2>
+                    {eventData.length > 0 && (
+                        <h2 className="text-[30px] sm:text-[50px] font-medium font-Helvetica mb-3">
+                            {formatDate(eventData[0].conferenceDate)}
+                        </h2>
+                    )}
                     <h1 className="text-[30px] sm:text-[50px] mb-6 font-bold font-Kaisei-Decol">
                         {eventData[0].conferenceType}
                     </h1>
-                    <button className="uppercase w-52 sm:w-64 h-12 mb-10 sm:mb-20 mt-5 text-[#afcf38] bg-white text-[20px] sm:text-[23px] font-semibold rounded-full p-2 mr-4 pr-7">
+                    <button onClick={handleButtonClick} className="uppercase w-52 sm:w-64 h-12 mb-10 sm:mb-20 mt-5 text-[#afcf38] bg-white text-[20px] sm:text-[23px] font-semibold rounded-full p-2 mr-4 pr-7">
                         Regester
                     </button>
                 </div>
@@ -164,29 +211,28 @@ const Home = () => {
                     </h1>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-4 my-10 sm:my-20 border-2 border-[#C8F51E] rounded-lg group relative">
-                    <div className="w-[300px] h-[400px] flex flex-col justify-center items-center rounded-xl bg-white border shadow-sm relative p-6">
-                        <div
-                            className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave1 left-[36%] top-[30%] lg:top-[22%]"
-
-                        />
-                        <div
-                            className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave2 left-[36%] top-[30%] lg:top-[22%]"
-
-                        />
-                        <img
-                            src={keyInviees[0].image_url}
-                            className="w-32 h-32 rounded-full object-cover mb-50 z-10"
-
-                        />
-                        <h1 className="text-lg sm:text-xl md:text-2xl text-center font-bold text-black mt-4">
-                            {keyInviees[0].name}
-                        </h1>
-                        <p className="text-center text-sm sm:text-base md:text-lg text-black mt-2">
-                            {keyInviees[0].title}
-                        </p>
-                    </div>
+                    {keyInviees.length > 0 && keyInviees[0]?.image_url ? (
+                        <div className="w-[300px] h-[400px] flex flex-col justify-center items-center rounded-xl bg-white border shadow-sm relative p-6">
+                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave1 left-[36%] top-[30%] lg:top-[22%]" />
+                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave2 left-[36%] top-[30%] lg:top-[22%]" />
+                            <img
+                                src={keyInviees[0].image_url}
+                                className="w-32 h-32 rounded-full object-cover mb-50 z-10"
+                                alt={keyInviees[0].name || "Key Invitee"}
+                            />
+                            <h1 className="text-lg sm:text-xl md:text-2xl text-center font-bold text-black mt-4">
+                                {keyInviees[0].name || "Unknown"}
+                            </h1>
+                            <p className="text-center text-sm sm:text-base md:text-lg text-black mt-2">
+                                {keyInviees[0].title || "No Title"}
+                            </p>
+                        </div>
+                    ) : (
+                        <p className="text-center text-red-500">No invitee data available</p>
+                    )}
                 </div>
             </section>
+
 
             <section className="w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4">
                 <div className="text-center mb-10 sm:mb-20">
@@ -223,28 +269,28 @@ const Home = () => {
 
             <section className="w-full py-10 sm:py-20 bg-black">
                 <div className="flex flex-wrap justify-center gap-6 sm:gap-10 lg:gap-20 px-4">
-                    
-                         {rcards.map((item, index) => (
-                            <div
-                                key={index}
-                                className="sm:w-52 h-64 md:w-64 lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
-                            >
-                                <h1 className=" w-44 font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
-                                 {item.category}
-                                </h1>
-                                <h1 className="font-roboto text-2xl text-center font-bold text-white">
-                                  {item.currency}
-                                </h1>
-                                <hr className="w-2/4 border-[#C8F51E] my-5" />
-                                <h1 className="font-roboto text-4xl sm:text-5xl text-center font-bold text-yellow-300">
-                                    {Math.floor(item.value)}
-                                </h1>
-                                <button className="uppercase w-32 sm:w-40 mt-4 h-10 text-white bg-red-600 font-medium rounded-lg">
-                                    Register here
-                                </button>
-                            </div>
-                        ))}
-                    
+
+                    {rcards.map((item, index) => (
+                        <div
+                            key={index}
+                            className="sm:w-52 h-64 md:w-64 lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
+                        >
+                            <h1 className=" lg:w-64 sm:w-64 h-24 font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
+                                {item.category}
+                            </h1>
+                            <h1 className="font-roboto text-2xl text-center font-bold text-white">
+                                {item.currency}
+                            </h1>
+                            <hr className="w-2/4 border-[#C8F51E] my-5" />
+                            <h1 className="font-roboto text-4xl sm:text-5xl text-center font-bold text-yellow-300">
+                                {Math.floor(item.value)}
+                            </h1>
+                            <button className="uppercase w-32 sm:w-40 mt-4 h-10 text-white bg-red-600 font-medium rounded-lg">
+                                Register here
+                            </button>
+                        </div>
+                    ))}
+
                 </div>
             </section>
             <section className=' w-full h-[580px] text-center bg-[#0B0A2A] '>
@@ -261,25 +307,38 @@ const Home = () => {
                 </div>
             </section>
 
-            <section>
-                <div className="flex justify-center " >
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52538.87974771864!2d79.41420418992182!3d11.836981751948784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a54ab06a0d742d3%3A0xeabe40e3ddd35f48!2sVRS%20College%20Of%20Engineering%20and%20Technology!5e0!3m2!1sen!2sin!4v1729960808177!5m2!1sen!2sin"
-                        style={{ border: 0 }}
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        className="shadow-lg w-full h-96"
-                    />
-                </div>
-            </section>
+            {map && (
+                <section>
+                    <div className="flex justify-center " >
+                        <iframe
+                            src={map.iframe_url}
+                            style={{ border: 0 }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            className="shadow-lg w-full h-[400px]"
+                        />
+                    </div>
+                </section>
+            )}
 
             <section className='bg-white'>
                 <div className=' w-full h-20 flex justify-center items-center  gap-10 '>
-                    <img src="/images/facebook_5968764 (1).png" alt='facebook-icon' className='transform transition-transform duration-200 hover:scale-110 border-3 hover:border-[#C8F51E] rounded-full' />
-                    <img src="/images/twitter_3955031.png" alt="twitter-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
-                    <img src="/images/instagram_1384015.png" alt="insta-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
-                    <img src="/images/social_15707814.png" alt="youtube-icon" className='transform transition-transform duration-200 hover:scale-110  border-3 hover:border-[#C8F51E] rounded-full' />
+                    {links.map((link) => (
+                        <a
+                            key={link.id}
+                            href={`https://${link.link_url}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transform transition-transform duration-200 hover:scale-110 border-3 hover:border-[#C8F51E] rounded-full"
+                        >
+                            <img
+                                src={icons[link.platform] || "/images/default_icon.png"}
+                                alt={`${link.platform}-icon`}
+                                className="w-8 h-8"
+                            />
+                        </a>
+                    ))}
                 </div>
                 <div className='bg-footer-bg p-2 text-footer-text  text-center '>
                     <p className='text-[#C8F51E]'>

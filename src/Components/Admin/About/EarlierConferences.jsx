@@ -154,7 +154,7 @@ export default function EarlierConferences() {
                                 className="p-4 bg-[#1C1C1C] rounded shadow-md hover:shadow-lg transition-shadow"
                             >
                                 <h4 className="text-lg font-bold text-[#C8F51E] mb-2">
-                                    {conf.conferenceName}
+                                    {conf.conferenceName || "No Name"} {/* Fallback if conferenceName is missing */}
                                 </h4>
                                 <p className="text-sm text-gray-300">
                                     <strong>Date:</strong> {conf.conferenceDate}
@@ -167,7 +167,7 @@ export default function EarlierConferences() {
                                 </p>
                                 {conf.image && (
                                     <img
-                                        src={`${conf.image}`}
+                                        src={`data:image/jpeg;base64,${conf.image}`}
                                         alt="Conference"
                                         className="mt-4 w-full h-40 object-cover rounded"
                                     />
@@ -175,8 +175,8 @@ export default function EarlierConferences() {
                             </div>
                         ))}
                     </div>
-                ) : (
-                    <p className="text-center text-gray-400">No conferences found.</p>
+                ) :  (
+                <p className="text-center text-gray-400">No conferences found.</p>
                 )}
             </div>
         </div>
