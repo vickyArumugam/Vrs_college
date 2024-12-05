@@ -12,6 +12,7 @@ const Home = () => {
     const [contact, setContact] = useState([]);
     const [map, setMap] = useState([]);
     const [links, setLinks] = useState([]);
+    const [copyRight, setCopyRight] = useState([]);
     const [error, setError] = useState(null);
     const [isLoadingEvent, setIsLoadingEvent] = useState(true);
     const [isLoadingAbout, setIsLoadingAbout] = useState(true);
@@ -21,8 +22,9 @@ const Home = () => {
     const [isLoadingContact, setIsLoadingContact] = useState(true)
     const [isLoadingmap, setIsLoadingmap] = useState(true)
     const [isLoadingLinks, setIsLoadingLinks] = useState(true)
+    const [isLoadingcopyRight, setIsLoadingCopyRight] = useState(true)
 
-    
+  
     // const [value1, setValue1] = useState(0);
     // const [value2, setValue2] = useState(0);
     // const [value3, setValue3] = useState(0);
@@ -30,7 +32,7 @@ const Home = () => {
     // const targets = [750, 750, 1500, 2500];
     // const navigate = useNavigate();
 
-   
+
 
     // useEffect(() => {
     //     const incrementTime = 40;
@@ -94,10 +96,10 @@ const Home = () => {
             day % 10 === 1 && day !== 11
                 ? "st"
                 : day % 10 === 2 && day !== 12
-                ? "nd"
-                : day % 10 === 3 && day !== 13
-                ? "rd"
-                : "th";
+                    ? "nd"
+                    : day % 10 === 3 && day !== 13
+                        ? "rd"
+                        : "th";
 
         // Format month and year
         const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -124,18 +126,27 @@ const Home = () => {
         fetchData('http://localhost/mailapp/contact.php', setContact, setIsLoadingContact);
         fetchData('http://localhost/mailapp/map_url.php', setMap, setIsLoadingmap);
         fetchData('http://localhost/mailapp/social.php', setLinks, setIsLoadingLinks);
+        fetchData('http://localhost/mailapp/CopyRights.php', setCopyRight, setIsLoadingCopyRight);
 
     }, []);
 
     if (error) return <p className="text-red-500 text-center">{error}</p>;
 
-    if (isLoadingEvent || isLoadingAbout || isLoadingKey || isLoadingKeyInvitees || isLoadingRegisterCard || isLoadingContact || isLoadingmap || isLoadingLinks) {
+    if (isLoadingEvent || isLoadingAbout || isLoadingKey || isLoadingKeyInvitees || isLoadingRegisterCard || isLoadingContact || isLoadingmap || isLoadingLinks||isLoadingcopyRight) {
         return <p className="text-center text-white">Loading...</p>;
     }
     return (
         <div>
             <Header />
-            <section className="relative sm:max-w-full h-auto py-4 bg-[url('/images/corporate-businessman-giving-presentation-large-audience.jpg')] bg-cover bg-center">
+            <section className="relative sm:max-w-full h-auto py-4  bg-cover bg-center"
+            style={{
+                backgroundImage: `url(${
+                  eventData[0]?.backgroundImage
+                    ? `data:image/jpeg;base64,${eventData[0].backgroundImage}`
+                    : '/images/corporate-businessman-giving-presentation-large-audience.jpg'
+                })`,
+              }}
+            >
                 <div className="absolute inset-0 bg-black opacity-75"></div>
                 <div className="sm:max-w-full h-auto mx-auto text-center relative text-white mt-20 sm:mt-40 px-4">
                     <h1 className="text-[36px] sm:text-[54px] font-bold font-Kaisei-Decol mb-3">
@@ -213,10 +224,10 @@ const Home = () => {
                 <div className="flex flex-col justify-center items-center gap-4 my-10 sm:my-20 border-2 border-[#C8F51E] rounded-lg group relative">
                     {keyInviees.length > 0 && keyInviees[0]?.image_url ? (
                         <div className="w-[300px] h-[400px] flex flex-col justify-center items-center rounded-xl bg-white border shadow-sm relative p-6">
-                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave1 left-[36%] top-[30%] lg:top-[22%]" />
-                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave2 left-[36%] top-[30%] lg:top-[22%]" />
+                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave1 left-[36%] top-[30%] lg:top-[18%]" />
+                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave2 left-[36%] top-[30%] lg:top-[18%]" />
                             <img
-                                src={keyInviees[0].image_url}
+                                src={`data:image/jpeg;base64,${keyInviees[0].image_url}`}
                                 className="w-32 h-32 rounded-full object-cover mb-50 z-10"
                                 alt={keyInviees[0].name || "Key Invitee"}
                             />
@@ -250,11 +261,11 @@ const Home = () => {
                             <div className="absolute top-0 left-0 w-full h-full bg-[#7CB342] clip-curved"></div>
                             <div className="absolute top-5 w-[80px] h-[80px] bg-gray-300 rounded-full border-3 border-[#C8F51E]"></div>
                             <div className="relative z-10 text-center mb-10 px-4 space-y-3 ">
-                                <img
-                                    src={item.image_url}
-                                    className="w-[130px] h-[130px] object-cover rounded-full mb-[5.5rem] ml-10"
-                                    alt={item.name}
-                                />
+                            <img
+                                src={`data:image/jpeg;base64,${item.image_url}`}
+                                className="w-32 h-32 rounded-full object-cover mb-50 z-10 mb-24 ml-10"
+                                alt={item.name || "Key Invitee"}
+                            />
                                 <h1 className="text-white text-lg font-bold">
                                     {item.name}
                                 </h1>
@@ -342,7 +353,7 @@ const Home = () => {
                 </div>
                 <div className='bg-footer-bg p-2 text-footer-text  text-center '>
                     <p className='text-[#C8F51E]'>
-                        Copyright 2024 - V.R.S. College of Engineering and Technology
+                       {copyRight.copyRight}
                     </p>
                 </div>
             </section>

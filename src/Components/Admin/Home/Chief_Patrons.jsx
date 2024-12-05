@@ -5,44 +5,58 @@ export default function Chief_Patrons() {
     const [formData, setFormData] = useState({
         name: "",
         role: "",
-        imageUrl: "",
+        image: null, // Change from imageUrl to image to handle file upload
     });
 
     const [message, setMessage] = useState(""); // To display success/error messages
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value, files } = e.target;
+        if (name === "image") {
+            setFormData({ ...formData, image: files[0] });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.name && formData.role && formData.imageUrl) {
+        if (formData.name && formData.role && formData.image) {
             try {
+                const data = new FormData();
+                data.append("name", formData.name);
+                data.append("role", formData.role);
+                data.append("image", formData.image);
+    
                 const response = await fetch("http://localhost/mailapp/chief_patrons.php", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(formData),
+                    body: data,
                 });
-
-                const data = await response.json();
-                if (data.success) {
+    
+                const responseData = await response.json();
+                if (responseData.success) {
                     setMessage("Chief Patron added successfully!");
-                    setCards([...cards, formData]); // Update the local state
+    
+                    // Assuming backend returns imageUrl as base64 or URL
+                    const newCard = {
+                        name: formData.name,
+                        role: formData.role,
+                        imageUrl: responseData.imageUrl || "", // Update based on your backend response
+                    };
+                    setCards([...cards, newCard]); // Add the new card to the list
                 } else {
-                    setMessage(data.message || "Failed to add Chief Patron.");
+                    setMessage(responseData.message || "Failed to add Chief Patron.");
                 }
             } catch (error) {
                 setMessage("An error occurred while adding the Chief Patron.");
             }
-
-            setFormData({ name: "", role: "", imageUrl: "" }); // Reset the form
+    
+            setFormData({ name: "", role: "", image: null }); // Reset the form
         } else {
             setMessage("Please fill out all fields.");
         }
     };
+    
 
     const handleDeleteCard = (index) => {
         setCards(cards.filter((_, i) => i !== index)); // Remove a card by index
@@ -87,13 +101,11 @@ export default function Chief_Patrons() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-white font-medium mb-2">Image URL</label>
+                    <label className="block text-white font-medium mb-2">Image</label>
                     <input
-                        type="text"
-                        name="imageUrl"
-                        value={formData.imageUrl}
+                        type="file"
+                        name="image"
                         onChange={handleChange}
-                        placeholder="Enter image URL"
                         required
                         className="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     />

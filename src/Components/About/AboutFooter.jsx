@@ -5,7 +5,9 @@ const AboutFooter = () => {
   const [contact, setContact] = useState([]);
   const [error, setError] = useState(null);
   const [eventData, setEventData] = useState(null);
+  const [image, setImage] = useState(null);
   const [isLoadingEvent, setIsLoadingEvent] = useState(true);
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   const fetchData = async (url, setDataCallback, setLoadingCallback) => {
     try {
@@ -26,20 +28,29 @@ const AboutFooter = () => {
   useEffect(() => {
     fetchData('http://localhost/mailapp/contact.php', setContact, setIsLoadingContact);
     // Fetch event data (if needed)
-    fetchData('http://localhost/mailapp/updateConference.php', setEventData, setIsLoadingEvent);;
+    fetchData('http://localhost/mailapp/updateConference.php', setEventData, setIsLoadingEvent);
+    fetchData('http://localhost/mailapp/footerBackgroundImage.php', setImage, setIsLoadingImage);
   }, []);
 
   const getYear = (date) => {
     return date ? new Date(date).getFullYear() : 'N/A';
   };
 
-  if (isLoadingContact) return <div>Loading...</div>;
+  if (isLoadingContact||isLoadingEvent||isLoadingImage) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (contact.length === 0) return <div>No contact information available.</div>;
 
   return (
     <div>
-      <section className="w-full h-[300px] lg:h-[400px] flex flex-col text-center justify-center bg-[url('/images/footer-img-2.jpg')] bg-cover bg-center relative">
+      <section className="w-full h-[300px] lg:h-[400px] flex flex-col text-center justify-center  bg-cover bg-center relative" 
+       style={{
+        backgroundImage: `url(${
+          image[0]?.backgroundImage
+            ? `data:image/jpeg;base64,${image[0].backgroundImage}`
+            : '/images/corporate-businessman-giving-presentation-large-audience.jpg'
+        })`,
+      }}
+      >
         <div className="absolute inset-0 bg-black opacity-25"></div>
         <div className="relative px-4">
           <h1 className="text-[#0B0A2A] font-Kaisei-Decol text-4xl sm:text-5xl md:text-6xl font-extrabold my-5">

@@ -20,6 +20,10 @@ import { div } from "framer-motion/client";
 import MapForm from "../Admin/Contact/MapForm";
 import CopyRights from "../Admin/Contact/CopyRights";
 import SocialMedia from "../Admin/Contact/SocialMedia";
+import AboutHeader from "../About/AboutHeader";
+import AboutHeaderForm from "../Admin/About/aboutHeader";
+import UploadLogo from "../Admin/Contact/UploadLogo";
+import AboutFooterForm from "../Admin/About/AboutFooter";
 
 
 // import EarlierConferences from "../Admin/About/EarlierConferences";
@@ -54,6 +58,8 @@ export default function SideNavbar() {
                 { key: "about4", label: "About VRSCET", component:<About_vrscet/> },
                 { key: "about5", label: "Organizing Committee", component:<OrganizingCommittee/>},
                 { key: "about6", label: "Editorial Board", component: <EditorialBoardForm/> },
+                { key: "about7", label: "AboutHeaderImage", component: <AboutHeaderForm/> },
+                { key: "about8", label: "AboutfooterImage", component: <AboutFooterForm/> },
             ],
         },
         {
@@ -76,6 +82,7 @@ export default function SideNavbar() {
                 { key: "countact2", label: "MEDIA LINK", component: <SocialMedia/>},
                 { key: "countact3", label: "MAP LINK", component: <MapForm/>},
                 { key: "countact4", label: "COPY RIGHT", component: <CopyRights/> },
+                { key: "countact5", label: "UPLOAD LOGO", component: <UploadLogo/> },
                
             ],
         },
