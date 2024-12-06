@@ -286,7 +286,7 @@ const Home = () => {
                             key={index}
                             className="sm:w-52 h-64 md:w-64 lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
                         >
-                            <h1 className=" lg:w-64 sm:w-64 h-24 font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
+                            <h1 className="w-44 h-24 font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
                                 {item.category}
                             </h1>
                             <h1 className="font-roboto text-2xl text-center font-bold text-white">

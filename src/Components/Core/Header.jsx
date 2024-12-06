@@ -41,6 +41,8 @@ export default function Header() {
             .catch(error => console.error('Error fetching logo image:', error));
     }, []);
 
+    
+
 
     return (
         <div className="bg-transparent bg-cover bg-fixed bg-center relative">
