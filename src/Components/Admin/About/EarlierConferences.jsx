@@ -14,7 +14,6 @@ export default function EarlierConferences() {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
 
-    // Fetch existing conferences
     useEffect(() => {
         const fetchConferences = async () => {
             try {
@@ -29,20 +28,17 @@ export default function EarlierConferences() {
         fetchConferences();
     }, []);
 
-    // Handle input changes for text fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    // Handle file input changes
     const handleFileChange = (e) => {
         setFormData({ ...formData, image: e.target.files[0] });
     };
 
-    // Submit form data
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const data = new FormData();
         data.append("conferenceName", formData.conferenceName);
         data.append("conferenceDate", formData.conferenceDate);
@@ -78,7 +74,6 @@ export default function EarlierConferences() {
 
     return (
         <div className="mt-10 p-6 bg-black text-white">
-            {/* Form Card */}
             <div className="max-w-md mx-auto bg-[#1C1C1C] shadow-lg rounded-lg p-6">
                 <h2 className="text-center font-bold text-xl mb-4 text-[#C8F51E]">Add Conference Details</h2>
                 {message && <p className="text-center text-green-500">{message}</p>}
@@ -143,7 +138,6 @@ export default function EarlierConferences() {
                 </form>
             </div>
 
-            {/* Conferences Display Section */}
             <div className="mt-10">
                 <h3 className="text-lg font-bold mb-4">Existing Conferences</h3>
                 {conferences.length > 0 ? (
@@ -154,7 +148,7 @@ export default function EarlierConferences() {
                                 className="p-4 bg-[#1C1C1C] rounded shadow-md hover:shadow-lg transition-shadow"
                             >
                                 <h4 className="text-lg font-bold text-[#C8F51E] mb-2">
-                                    {conf.conferenceName || "No Name"} {/* Fallback if conferenceName is missing */}
+                                    {conf.conferenceName || "No Name"}
                                 </h4>
                                 <p className="text-sm text-gray-300">
                                     <strong>Date:</strong> {conf.conferenceDate}
@@ -175,8 +169,8 @@ export default function EarlierConferences() {
                             </div>
                         ))}
                     </div>
-                ) :  (
-                <p className="text-center text-gray-400">No conferences found.</p>
+                ) : (
+                    <p className="text-center text-gray-400">No conferences found.</p>
                 )}
             </div>
         </div>

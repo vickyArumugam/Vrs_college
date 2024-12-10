@@ -16,7 +16,7 @@ const DynamicFieldsForm = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         if (fields.some((field) => !field.field_name)) {
             setMessage('All fields must be filled out.');
@@ -46,9 +46,8 @@ const DynamicFieldsForm = () => {
             >
                 {message && (
                     <p
-                        className={`text-center text-lg font-medium ${
-                            message.includes('successfully') ? 'text-green-600' : 'text-red-600'
-                        } mb-4`}
+                        className={`text-center text-lg font-medium ${message.includes('successfully') ? 'text-green-600' : 'text-red-600'
+                            } mb-4`}
                     >
                         {message}
                     </p>

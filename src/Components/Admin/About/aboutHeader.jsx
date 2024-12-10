@@ -13,7 +13,7 @@ const AboutHeaderForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const formDataObj = new FormData();
     formDataObj.append('backgroundImage', formData.backgroundImage);
 

@@ -14,7 +14,7 @@ export default function ConferenceForm() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const response = await fetch('http://localhost/mailapp/about_conference.php', {
               method: 'POST',
@@ -30,7 +30,7 @@ export default function ConferenceForm() {
             console.error('Error submitting form:', error);
           }
           navigate('/');
-        // Perform form submission or API call
+
     };
 
     return (

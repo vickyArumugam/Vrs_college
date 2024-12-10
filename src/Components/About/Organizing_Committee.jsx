@@ -4,15 +4,14 @@ import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import AboutLocation from './AboutLocation';
 
-const  Organizing_Committee = () => {
+const Organizing_Committee = () => {
     const [sections, setSections] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    // Fetch data from the backend
     const fetchSections = async () => {
         try {
-            const response = await axios.get('http://localhost/mailapp/organizing_committee.php'); // Update with your API URL
+            const response = await axios.get('http://localhost/mailapp/organizing_committee.php');
             setSections(response.data);
             setLoading(false);
         } catch (err) {
@@ -47,7 +46,6 @@ const  Organizing_Committee = () => {
 
                         <div className="border-blue-600 rounded-b p-4 w-full max-w-7xl">
                             <div className="font-Trebuchet text-base md:text-lg font-semibold text-blue-700 ">
-                            {/* grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-y-4 gap-x-6 */}
                                 {section.members.map((member, idx) => (
                                     <div
                                         key={idx}
@@ -67,4 +65,4 @@ const  Organizing_Committee = () => {
     );
 };
 
-export default  Organizing_Committee;
+export default Organizing_Committee;

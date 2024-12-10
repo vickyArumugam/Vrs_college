@@ -14,14 +14,14 @@ export default function About_vrscet() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const response = await fetch('http://localhost/mailapp/about_vrscet_conference.php', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData),
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
             });
 
             const result = await response.json();
@@ -43,8 +43,6 @@ export default function About_vrscet() {
                 onSubmit={handleSubmit}
                 className="w-full px-5 md:w-8/12 lg:w-7/12 xl:w-5/12 bg-[#0B0A2A] p-8 rounded-lg shadow-lg"
             >
-               
-                {/* Description */}
                 <div className="mb-4">
                     <label className="block text-gray-200 text-sm font-semibold mb-2">
                         Description
@@ -59,10 +57,6 @@ export default function About_vrscet() {
                         className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8F51E]"
                     ></textarea>
                 </div>
-
-               
-
-                {/* Submit Button */}
                 <button
                     type="submit"
                     className="w-full py-2 bg-green-500 hover:bg-green-700 rounded text-white transition"

@@ -4,7 +4,7 @@ import AboutHeader from '../About/AboutHeader';
 function Contact_us() {
   const [isLoadingContact, setIsLoadingContact] = useState(true);
   const [contact, setContact] = useState([]);
-  const [error, setError] = useState(null);  // Add error state
+  const [error, setError] = useState(null);
 
   const fetchData = async (url, setDataCallback, setLoadingCallback) => {
     try {
@@ -16,7 +16,7 @@ function Contact_us() {
       setDataCallback(data);
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError(error.message); // Set the error message if fetch fails
+      setError(error.message);
     } finally {
       setLoadingCallback(false);
     }
@@ -25,7 +25,6 @@ function Contact_us() {
   useEffect(() => {
     fetchData('http://localhost/mailapp/contact.php', setContact, setIsLoadingContact);
   }, []);
-
   // Check if contact has data before accessing contact[0]
   if (isLoadingContact) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

@@ -24,50 +24,6 @@ const Home = () => {
     const [isLoadingLinks, setIsLoadingLinks] = useState(true)
     const [isLoadingcopyRight, setIsLoadingCopyRight] = useState(true)
 
-  
-    // const [value1, setValue1] = useState(0);
-    // const [value2, setValue2] = useState(0);
-    // const [value3, setValue3] = useState(0);
-    // const [value4, setValue4] = useState(0);
-    // const targets = [750, 750, 1500, 2500];
-    // const navigate = useNavigate();
-
-
-
-    // useEffect(() => {
-    //     const incrementTime = 40;
-    //     const totalIncrements = 100;
-    //     const increments = targets.map(target => target / totalIncrements);
-
-    //     const handleScroll = () => {
-    //         const scrollPosition = window.scrollY + window.innerHeight;
-    //         const triggerPosition = document.documentElement.scrollHeight / 2;
-
-    //         if (scrollPosition >= triggerPosition) {
-    //             const interval = setInterval(() => {
-    //                 setValue1(prev => Math.min(prev + increments[0], targets[0]));
-    //                 setValue2(prev => Math.min(prev + increments[1], targets[1]));
-    //                 setValue3(prev => Math.min(prev + increments[2], targets[2]));
-    //                 setValue4(prev => Math.min(prev + increments[3], targets[3]));
-
-    //                 if (
-    //                     value1 >= targets[0] &&
-    //                     value2 >= targets[1] &&
-    //                     value3 >= targets[2] &&
-    //                     value4 >= targets[3]
-    //                 ) {
-    //                     clearInterval(interval);
-    //                 }
-    //             }, incrementTime);
-    //             window.removeEventListener('scroll', handleScroll);
-    //         }
-    //     };
-    //     window.addEventListener('scroll', handleScroll);
-
-    //     return () => window.removeEventListener('scroll', handleScroll);
-    // }, [targets, value1, value2, value3, value4]);
-
-
     const handleButtonClick = () => {
         navigate('/author/new_paper_submission');
     };
@@ -89,8 +45,6 @@ const Home = () => {
     };
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-
-        // Get day with ordinal suffix
         const day = date.getDate();
         const ordinal =
             day % 10 === 1 && day !== 11
@@ -101,7 +55,6 @@ const Home = () => {
                         ? "rd"
                         : "th";
 
-        // Format month and year
         const formattedDate = new Intl.DateTimeFormat("en-US", {
             month: "long",
             year: "numeric",
@@ -193,7 +146,7 @@ const Home = () => {
                     {keydates.map((item, index) => (
                         <div
                             key={index}
-                            className={`w-48 sm:w-60 h-60 lg:h-80 ${index % 2 === 0 ? "bg-[#0B0A2A]" : "bg-[#C8F51E99]"
+                            className={`w-48 sm:w-60 h-60 lg:h-80 md:h-80  ${index % 2 === 0 ? "bg-[#0B0A2A]" : "bg-[#C8F51E99]"
                                 } border-2 border-b-white p-4 ${index % 2 === 0
                                     ? "rounded-tl-[40px] rounded-br-[40px]"
                                     : "rounded-tr-[40px] rounded-bl-[40px]"
@@ -224,8 +177,8 @@ const Home = () => {
                 <div className="flex flex-col justify-center items-center gap-4 my-10 sm:my-20 border-2 border-[#C8F51E] rounded-lg group relative">
                     {keyInviees.length > 0 && keyInviees[0]?.image_url ? (
                         <div className="w-[300px] h-[400px] flex flex-col justify-center items-center rounded-xl bg-white border shadow-sm relative p-6">
-                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave1 left-[36%] top-[30%] lg:top-[18%]" />
-                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave2 left-[36%] top-[30%] lg:top-[18%]" />
+                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave1 left-[36%] top-[30%] lg:top-[18%] md:top-[18%]" />
+                            <div className="absolute rounded-full w-[80px] h-[80px] border-4 border-[#C8F51E] animate-wave2 left-[36%] top-[30%] lg:top-[18%] md:top-[18%]" />
                             <img
                                 src={`data:image/jpeg;base64,${keyInviees[0].image_url}`}
                                 className="w-32 h-32 rounded-full object-cover mb-50 z-10"
@@ -284,7 +237,7 @@ const Home = () => {
                     {rcards.map((item, index) => (
                         <div
                             key={index}
-                            className="sm:w-52 h-64 md:w-64 lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
+                            className="sm:w-52 h-64 md:w-64 md:h-auto lg:h-80 bg-[#0B0A2A] border-2 border-b-white p-6 sm:p-8 rounded-lg flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
                         >
                             <h1 className="w-44 h-24 font-Trebuchet text-lg sm:text-xl text-center font-bold mb-3 text-white">
                                 {item.category}

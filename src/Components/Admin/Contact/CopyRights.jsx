@@ -3,16 +3,14 @@ import React, { useState, useEffect } from "react";
 const CopyRights = () => {
   const [footerContent, setFooterContent] = useState("");
 
-  // Fetch current footer content
   const fetchFooter = async () => {
     const response = await fetch("http://localhost/mailapp/CopyRights.php");
     const result = await response.text();
     setFooterContent(result);
   };
 
-  // Update footer content
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const response = await fetch("http://localhost/mailapp/CopyRights.php", {
       method: "POST",
       headers: {
@@ -37,7 +35,7 @@ const CopyRights = () => {
         <div>
           <label className="block text-sm font-medium">CopyRights Content</label>
           <textarea
-            
+
             onChange={(e) => setFooterContent(e.target.value)}
             className="mt-1 block w-full  border rounded text-black"
             rows="2"

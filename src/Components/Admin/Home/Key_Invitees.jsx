@@ -19,7 +19,7 @@ export default function KeyInviteesForm() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         const data = new FormData();
         data.append("name", formData.name);
@@ -28,7 +28,7 @@ export default function KeyInviteesForm() {
 
         fetch("http://localhost/mailapp/key_invitees.php", {
             method: "POST",
-            body: data, // Send FormData
+            body: data,
         })
             .then((response) => response.json())
             .then((result) => {

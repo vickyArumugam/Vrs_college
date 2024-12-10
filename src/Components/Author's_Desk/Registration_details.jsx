@@ -98,8 +98,6 @@ const Registration_details = () => {
           )}
         </div>
       </section>
-
-
       <AboutLocation />
       <AboutFooter />
 

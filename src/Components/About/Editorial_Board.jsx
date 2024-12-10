@@ -8,16 +8,15 @@ const Editorial_Board = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Fetch members dynamically from the PHP backend
     const fetchMembers = async () => {
         try {
-            const response = await fetch("http://localhost/mailapp/editorial_board.php"); // Adjust URL as needed
+            const response = await fetch("http://localhost/mailapp/editorial_board.php");
             if (!response.ok) {
                 throw new Error(`Error fetching members: ${response.statusText}`);
             }
             const data = await response.json();
             if (data.success) {
-                setMembers(data.data); // Assuming `data.data` contains the array of members
+                setMembers(data.data);
             } else {
                 throw new Error("Failed to fetch members");
             }
@@ -28,7 +27,6 @@ const Editorial_Board = () => {
         }
     };
 
-    // Fetch members on component mount
     useEffect(() => {
         fetchMembers();
     }, []);

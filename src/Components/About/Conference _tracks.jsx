@@ -3,8 +3,6 @@ import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import axios from 'axios';
 
-
-
 const ConferenceTracks = () => {
     const [sections, setSections] = useState([]);
 

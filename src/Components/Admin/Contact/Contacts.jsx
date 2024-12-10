@@ -9,8 +9,8 @@ export default function Contacts() {
     district: '',
     mobile: '',
     email: '',
-    states:'',
-    country:'',
+    states: '',
+    country: '',
   });
 
   const [response, setResponse] = useState('');
@@ -20,7 +20,7 @@ export default function Contacts() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const res = await axios.post('http://localhost/mailapp/contact.php', formData);
       setResponse(res.data.message);
@@ -31,8 +31,8 @@ export default function Contacts() {
         district: '',
         mobile: '',
         email: '',
-        states:'',
-        country:'',
+        states: '',
+        country: '',
       });
     } catch (error) {
       setResponse('Error: Unable to submit the form.');

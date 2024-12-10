@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const OrganizingCommittee = () => {
-  const [sections, setSections] = useState([]); // Holds existing data
-  const [editMember, setEditMember] = useState(null); // Member being edited
+  const [sections, setSections] = useState([]);
+  const [editMember, setEditMember] = useState(null);
   const [newMember, setNewMember] = useState({ section: "", name: "", position: "" });
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch all sections and members
+
   const fetchSections = async () => {
     try {
       const response = await axios.get("http://localhost/mailapp/organizing_Committee.php");
@@ -24,15 +24,13 @@ const OrganizingCommittee = () => {
     fetchSections();
   }, []);
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewMember({ ...newMember, [name]: value });
   };
 
-  // Add or update a member
   const handleFormSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!newMember.section || !newMember.name || !newMember.position) {
       setError("Please fill out all fields.");
       return;
@@ -40,7 +38,7 @@ const OrganizingCommittee = () => {
 
     try {
       if (editMember) {
-        // Update existing member
+
         await axios.put(
           "http://localhost/mailapp/organizing_Committee.php",
           JSON.stringify({ id: editMember.id, ...newMember }),
@@ -48,7 +46,7 @@ const OrganizingCommittee = () => {
         );
         setMessage("Member updated successfully!");
       } else {
-        // Add new member
+
         await axios.post(
           "http://localhost/mailapp/organizing_Committee.php",
           JSON.stringify(newMember),
@@ -59,28 +57,25 @@ const OrganizingCommittee = () => {
       fetchSections();
       setNewMember({ section: "", name: "", position: "" });
       setEditMember(null);
-      setIsModalOpen(false); // Close modal
+      setIsModalOpen(false);
     } catch (err) {
       console.error("Error saving member:", err);
       setError("Failed to save data.");
     }
   };
 
-  // Open the modal and set editing state
   const handleEditClick = (member) => {
     setEditMember(member);
     setNewMember({ section: member.section, name: member.name, position: member.position });
     setIsModalOpen(true);
   };
 
-  // Open the modal for adding a new member
   const handleAddClick = () => {
     setEditMember(null);
     setNewMember({ section: "", name: "", position: "" });
     setIsModalOpen(true);
   };
 
-  // Delete a member
   const handleDeleteClick = async (id) => {
     try {
       await axios.delete(`http://localhost/mailapp/organizing_Committee.php?id=${id}`);
@@ -104,8 +99,6 @@ const OrganizingCommittee = () => {
       >
         Add Member
       </button>
-
-      {/* Table */}
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse border border-gray-300 w-full text-left">
           <thead>
@@ -143,8 +136,6 @@ const OrganizingCommittee = () => {
           </tbody>
         </table>
       </div>
-
-      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
           <div className="bg-[#0B0A2A] text-white rounded-lg p-6 w-1/3">

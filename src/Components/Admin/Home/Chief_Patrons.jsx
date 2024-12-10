@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 export default function Chief_Patrons() {
-    const [cards, setCards] = useState([]); // Stores all speaker cards
+    const [cards, setCards] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
         role: "",
-        image: null, // Change from imageUrl to image to handle file upload
+        image: null,
     });
 
-    const [message, setMessage] = useState(""); // To display success/error messages
+    const [message, setMessage] = useState("");
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -20,43 +20,41 @@ export default function Chief_Patrons() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         if (formData.name && formData.role && formData.image) {
             try {
                 const data = new FormData();
                 data.append("name", formData.name);
                 data.append("role", formData.role);
                 data.append("image", formData.image);
-    
+
                 const response = await fetch("http://localhost/mailapp/chief_patrons.php", {
                     method: "POST",
                     body: data,
                 });
-    
+
                 const responseData = await response.json();
                 if (responseData.success) {
                     setMessage("Chief Patron added successfully!");
-    
-                    // Assuming backend returns imageUrl as base64 or URL
                     const newCard = {
                         name: formData.name,
                         role: formData.role,
-                        imageUrl: responseData.imageUrl || "", // Update based on your backend response
+                        imageUrl: responseData.imageUrl || "",
                     };
-                    setCards([...cards, newCard]); // Add the new card to the list
+                    setCards([...cards, newCard]);
                 } else {
                     setMessage(responseData.message || "Failed to add Chief Patron.");
                 }
             } catch (error) {
                 setMessage("An error occurred while adding the Chief Patron.");
             }
-    
-            setFormData({ name: "", role: "", image: null }); // Reset the form
+
+            setFormData({ name: "", role: "", image: null });
         } else {
             setMessage("Please fill out all fields.");
         }
     };
-    
+
 
     const handleDeleteCard = (index) => {
         setCards(cards.filter((_, i) => i !== index)); // Remove a card by index

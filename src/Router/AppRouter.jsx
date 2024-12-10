@@ -45,17 +45,10 @@ function AppRouter() {
         <Route path='/contact_us' element={<Contact_us/>}/>
         <Route path='/admin' element={<LoginPage/>}/>
         <Route path='/update' element={<SideNavbar/>}/>
-        
       </Routes>
-
       </BrowserRouter>
     </div>
   )
 }
 
 export default AppRouter;
-
-{/* <option value="Academicians">Academicians</option>
-                <option value="Students & PG/Ph.D Scholar">Students & PG/Ph.D Scholar</option>
-                <option value="Industry Delegates">Industry Delegates</option>
-                <option value="Overseas DElegates">Overseas DElegates</option> */}

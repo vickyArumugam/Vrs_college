@@ -16,14 +16,13 @@ import Key_Dates from "../Admin/Author's/Key_date";
 import BankAccountForm from "../Admin/Author's/BankAccountForm";
 import OrganizingCommittee from "../Admin/About/Organizing_committee";
 import Contacts from "../Admin/Contact/Contacts";
-import { div } from "framer-motion/client";
 import MapForm from "../Admin/Contact/MapForm";
 import CopyRights from "../Admin/Contact/CopyRights";
 import SocialMedia from "../Admin/Contact/SocialMedia";
-import AboutHeader from "../About/AboutHeader";
 import AboutHeaderForm from "../Admin/About/aboutHeader";
 import UploadLogo from "../Admin/Contact/UploadLogo";
 import AboutFooterForm from "../Admin/About/AboutFooter";
+import Theme from "../Admin/Contact/Theme";
 
 
 // import EarlierConferences from "../Admin/About/EarlierConferences";
@@ -86,6 +85,15 @@ export default function SideNavbar() {
                
             ],
         },
+        {
+            key: "Settings",
+            label: "Settings",
+            defaultSubKey: "Settings1",
+            subItems: [
+                { key: "Settings1", label: "Change Theme", component: <div><Theme/></div> },
+                { key: "Settings2", label: "Change Font", component: <div>change font</div> }
+            ],
+        }
     ];
 
     // Handle section click

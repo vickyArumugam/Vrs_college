@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
@@ -6,6 +6,7 @@ export default function Header() {
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [logoImage, setLogoImage] = useState('');
+    const dropdownRef = useRef(null);
 
     const handleMouseEnter = (dropdown) => {
         setOpenDropdown(dropdown);
@@ -17,6 +18,7 @@ export default function Header() {
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+        setOpenDropdown(null);
     };
 
     useEffect(() => {
@@ -41,8 +43,19 @@ export default function Header() {
             .catch(error => console.error('Error fetching logo image:', error));
     }, []);
 
-    
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setOpenDropdown(null);
+            }
+        };
 
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     return (
         <div className="bg-transparent bg-cover bg-fixed bg-center relative">
@@ -51,7 +64,7 @@ export default function Header() {
                     } flex lg:justify-around justify-between items-center max-w-full mx-auto px-4 py-4 transition-all duration-300 z-40`}
             >
                 <div className="w-40 h-12">
-                    <img  src={
+                    <img src={
                         logoImage
                             ? `data:image/jpeg;base64,${logoImage}` // If logoImage is set, use it as the src
                             : '/images/cropped-ICVRSCET-1.png' // Fallback if logoImage is not available
@@ -60,7 +73,9 @@ export default function Header() {
 
                 {/* Desktop Menu */}
                 <div className="hidden lg:flex items-center">
-                    <ul className="text-[#C8F51E] text-lg font-bold flex gap-8 items-center">
+                    <ul className="text-[#C8F51E] text-lg font-bold flex gap-8 items-center"
+                        ref={dropdownRef}
+                    >
                         <li>
                             <Link to="/" className="hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition">
                                 HOME
@@ -221,7 +236,7 @@ export default function Header() {
                                 )}
                             </li>
                             <li className='w-full hover:text-white hover:bg-blue-900'>
-                                <Link to="#" onMouseEnter={() => handleMouseEnter('authors')}>AUTHOR'S DESK</Link>
+                                <Link to="#" className="px-2" onClick={() => setOpenDropdown(openDropdown === 'authors' ? null : 'authors')}>AUTHOR'S DESK</Link>
                                 {openDropdown === 'authors' && (
                                     <div className='absolute bg-white text-black p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10 right-40'>
                                         <ul onMouseLeave={handleMouseLeave} className='text-left font-roboto'>
@@ -235,7 +250,7 @@ export default function Header() {
                                 )}
                             </li>
                             <li className='w-full hover:text-white hover:bg-blue-900'>
-                                <Link to="#" onMouseEnter={() => handleMouseEnter('reach')}>REACH US</Link>
+                                <Link to="#" className="px-2" onClick={() => setOpenDropdown(openDropdown === 'reach' ? null : 'reach')}>REACH US</Link>
                                 {openDropdown === 'reach' && (
                                     <div className='absolute bg-white text-black p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10 right-40'>
                                         <ul onMouseLeave={handleMouseLeave} className='text-left font-roboto'>

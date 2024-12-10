@@ -92,11 +92,9 @@ const OrganizingCommittee = () => {
   return (
     <div className="bg-blue-50 p-8 max-w-4xl mx-auto rounded-lg shadow-lg">
       <h1 className="text-3xl font-extrabold text-center text-blue-900 mb-6">Organizing Committee</h1>
-
-      {/* Form for adding or editing members */}
       <form className="bg-white shadow-md rounded-lg p-6 mb-8 space-y-6">
         <h2 className="text-xl font-semibold text-gray-800">{editMemberId ? "Edit Member" : "Add New Member"}</h2>
-        
+
         <div className="space-y-4">
           <input
             type="text"
@@ -141,8 +139,6 @@ const OrganizingCommittee = () => {
           {loading ? "Saving..." : editMemberId ? "Update Member" : "Add Member"}
         </button>
       </form>
-
-      {/* Members table */}
       <table className="w-full table-auto border-collapse bg-white rounded-lg shadow-md">
         <thead>
           <tr>

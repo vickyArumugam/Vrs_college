@@ -13,10 +13,10 @@ export default function KeyDate_Card() {
     };
 
     const handleSubmitCard = (e) => {
-        e.preventDefault();
-        if ( formData.description && formData.date) {
+        // e.preventDefault();
+        if (formData.description && formData.date) {
             setCards([...cards, formData]);
-            setFormData({  description: "", date: "" });
+            setFormData({ description: "", date: "" });
         }
     };
 
@@ -26,32 +26,30 @@ export default function KeyDate_Card() {
 
     const handleSubmitAll = async () => {
         if (cards.length === 0) return;
-    
+
         try {
             const response = await fetch('http://localhost/mailapp/keyDates.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(cards), // Send all cards as JSON
+                body: JSON.stringify(cards),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error: ${response.statusText}`);
             }
-    
-            const result = await response.json(); // Parse response
+
+            const result = await response.json();
             console.log('API Response:', result);
             alert('All cards submitted successfully!');
-    
-            // Optionally clear cards after successful submission
             setCards([]);
         } catch (error) {
             console.error('Error submitting cards:', error);
             alert('Failed to submit cards.');
         }
     };
-    
+
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-[#fff]">
@@ -66,20 +64,6 @@ export default function KeyDate_Card() {
                 onSubmit={handleSubmitCard}
                 className="w-11/12 max-w-md bg-[#0B0A2A] border-2 border-b-white p-6 rounded-lg lg:mt-1 transition-all duration-300 ease-in-out"
             >
-                {/* <div className="mb-4">
-                    <label className="block text-sm font-semibold text-white mb-2">
-                        Title
-                    </label>
-                    <input
-                        type="text"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        placeholder="Enter title"
-                        required
-                        className="w-full px-4 py-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8F51E]"
-                    />
-                </div> */}
                 <div className="mb-4">
                     <label className="block text-sm font-semibold text-white mb-2">
                         Description
@@ -124,7 +108,7 @@ export default function KeyDate_Card() {
                     >
                         {/* Card Number */}
                         <div className="absolute top-2 left-2 bg-[#C8F51E] text-black text-sm font-bold px-3 py-1 rounded">
-                            {`Card ${index+1}`}
+                            {`Card ${index + 1}`}
                         </div>
                         {/* Delete Button */}
                         <button
@@ -133,12 +117,8 @@ export default function KeyDate_Card() {
                         >
                             Delete
                         </button>
-                        {/* Card Content */}
+
                         <div className="mt-[30%] text-white">
-                            {/* <h1 className="font-Andika text-lg text-center font-bold">
-                                {card.title}
-                            </h1> */}
-                            
                             <p className="text-center">{card.description}</p>
                             <hr className="w-2/4 border-[#C8F51E] mx-auto my-3" />
                             <h1 className="font-roboto text-lg text-center font-bold mt-3">

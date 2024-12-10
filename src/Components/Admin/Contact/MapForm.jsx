@@ -5,7 +5,7 @@ const MapForm = () => {
   const [data, setData] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const response = await fetch("http://localhost/mailapp/map_url.php", {
       method: "POST",
       headers: {

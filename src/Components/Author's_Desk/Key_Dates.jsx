@@ -7,32 +7,32 @@ const Key_Dates = () => {
     const [aboutConference, setAboutConference] = useState(null);
     const [isLoadingAbout, setIsLoadingAbout] = useState(true);
     const [error, setError] = useState(null);
-  
+
     const fetchData = async (url, setDataCallback, setLoadingCallback) => {
-      try {
-          const response = await fetch(url);
-          if (!response.ok) {
-              throw new Error(`Error fetching data: ${response.statusText}`);
-          }
-          const data = await response.json();
-          setDataCallback(data);
-      } catch (error) {
-          console.error('Error fetching data:', error);
-          setError(error.message);
-      } finally {
-          setLoadingCallback(false);
-      }
-  };
-  
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Error fetching data: ${response.statusText}`);
+            }
+            const data = await response.json();
+            setDataCallback(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setError(error.message);
+        } finally {
+            setLoadingCallback(false);
+        }
+    };
+
     useEffect(() => {
-      fetchData('http://localhost/mailapp/key_dates.php', setAboutConference, setIsLoadingAbout);
+        fetchData('http://localhost/mailapp/key_dates.php', setAboutConference, setIsLoadingAbout);
     }, []);
-  
+
     if (error) return <p className="text-red-500 text-center">{error}</p>;
-  
-      if ( isLoadingAbout) {
-          return <p className="text-center text-white">Loading...</p>;
-      }
+
+    if (isLoadingAbout) {
+        return <p className="text-center text-white">Loading...</p>;
+    }
 
     return (
         <div>

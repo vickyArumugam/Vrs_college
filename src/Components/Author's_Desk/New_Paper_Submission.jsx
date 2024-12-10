@@ -22,7 +22,7 @@ const New_Paper_Submission = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const formData = new FormData();
 
     formData.append('paper_title', paperTitle);
@@ -52,7 +52,7 @@ const New_Paper_Submission = () => {
 
   return (
     <div>
-      <AboutHeader  title={"NEW PAPER SUBMISSION"}/>
+      <AboutHeader title={"NEW PAPER SUBMISSION"} />
       <div className='w-full  flex items-center justify-center bg-gray-100 p-4 md:p-8'>
         <form
           className='bg-white shadow-lg rounded-lg p-6 md:p-8 max-w-lg md:max-w-2xl w-full space-y-6 my-10 md:my-20'
@@ -62,8 +62,6 @@ const New_Paper_Submission = () => {
           <h2 className='text-xl md:text-2xl font-semibold text-center text-green-600'>
             Submit Your Paper
           </h2>
-
-          {/* Input Fields */}
           <div>
             <label className='block text-green-600 font-medium'>Enter Paper Title</label>
             <input
@@ -138,9 +136,8 @@ const New_Paper_Submission = () => {
             <label className='block text-green-600 font-medium'>Upload Paper</label>
             <div className='flex items-center mt-1'>
               <label
-                className={`flex-grow px-4 py-2 border border-gray-300 rounded-lg ${
-                  fileName ? 'text-green-600' : 'text-red-500'
-                }`}
+                className={`flex-grow px-4 py-2 border border-gray-300 rounded-lg ${fileName ? 'text-green-600' : 'text-red-500'
+                  }`}
               >
                 {fileName || 'No file chosen'}
               </label>
@@ -159,7 +156,6 @@ const New_Paper_Submission = () => {
               </label>
             </div>
           </div>
-
           {/* Submit Button */}
           <button
             type='submit'

@@ -9,7 +9,7 @@ function WelcomePage() {
     conferenceType: '',
   });
 
-  const [backgroundImage, setBackgroundImage] = useState(null); // New state for the image file
+  const [backgroundImage, setBackgroundImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function WelcomePage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const formData = new FormData();
     Object.entries(conferenceData).forEach(([key, value]) => {
@@ -36,7 +36,7 @@ function WelcomePage() {
     try {
       const response = await fetch('http://localhost/mailapp/updateConference.php', {
         method: 'POST',
-        body: formData, // Send form data
+        body: formData,
       });
 
       const result = await response.json();
@@ -44,7 +44,6 @@ function WelcomePage() {
     } catch (error) {
       console.error('Error submitting form:', error);
     }
-    // navigate('/');
   };
 
   return (

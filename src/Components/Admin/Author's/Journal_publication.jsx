@@ -43,7 +43,7 @@ const Journal_publication = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     if (!formData.title || formData.descriptions.some((desc) => !desc.trim())) {
       setMessage('Both title and at least one description are required.');
@@ -53,7 +53,7 @@ const Journal_publication = () => {
     try {
       const response = await axios.post('http://localhost/mailapp/author_Journal_publication.php', formData);
       setMessage(response.data.message || 'Data submitted successfully!');
-      setFormData({ title: '', descriptions: [''] }); // Reset form
+      setFormData({ title: '', descriptions: [''] }); 
       setJournals([...journals, formData]); // Add new journal to list
     } catch (error) {
       setMessage('Error submitting data');
