@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Header() {
+export default function Header(props) {
     const [isSticky, setIsSticky] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
