@@ -13,7 +13,7 @@ export default function KeyDate_Card() {
     };
 
     const handleSubmitCard = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         if (formData.description && formData.date) {
             setCards([...cards, formData]);
             setFormData({ description: "", date: "" });

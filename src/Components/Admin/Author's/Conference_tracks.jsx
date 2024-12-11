@@ -16,7 +16,7 @@ const DynamicFieldsForm = () => {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
 
         if (fields.some((field) => !field.field_name)) {
             setMessage('All fields must be filled out.');

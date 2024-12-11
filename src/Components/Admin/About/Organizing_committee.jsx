@@ -30,7 +30,7 @@ const OrganizingCommittee = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     if (!newMember.section || !newMember.name || !newMember.position) {
       setError("Please fill out all fields.");
       return;

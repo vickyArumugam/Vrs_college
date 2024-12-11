@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ConferenceForm() {
     const [formData, setFormData] = useState({
@@ -12,9 +13,9 @@ export default function ConferenceForm() {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         try {
             const response = await fetch('http://localhost/mailapp/about_conference.php', {
               method: 'POST',

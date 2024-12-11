@@ -14,7 +14,7 @@ export default function About_conference() {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         try {
             const response = await fetch('http://localhost/mailapp/about_about_conference.php', {
                 method: 'POST',

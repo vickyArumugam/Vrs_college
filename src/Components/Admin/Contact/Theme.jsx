@@ -36,40 +36,36 @@ export default function Theme() {
     }, []);
 
     return (
-        <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-md shadow-md">
-            <h2 className="text-2xl font-bold text-center mb-4 text-black">Set Theme</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Set Theme</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Select Theme 1
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Select Theme 1</label>
                     <input
                         type="color"
                         value={color1}
                         onChange={(e) => setColor1(e.target.value)}
-                        className="w-full h-10 border-2 border-gray-300 rounded-md focus:ring focus:ring-green-300"
+                        className="w-full h-10 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-green-300"
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Select Theme 2
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Select Theme 2</label>
                     <input
                         type="color"
                         value={color2}
                         onChange={(e) => setColor2(e.target.value)}
-                        className="w-full h-10 border-2 border-gray-300 rounded-md focus:ring focus:ring-green-300"
+                        className="w-full h-10 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-green-300"
                     />
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-green-500 text-white py-2 rounded-md font-medium hover:bg-green-600 transition"
+                    className="w-full bg-green-500 text-white py-2 rounded-md font-medium hover:bg-green-600 transition duration-300"
                 >
-                    Save Colors
+                    Submit Colors
                 </button>
             </form>
 
-            <h3 className="text-xl font-semibold mt-6 text-black">Saved Colors</h3>
+            <h3 className="text-xl font-semibold mt-8 text-gray-800">Saved Colors</h3>
             <table className="w-full mt-4 border border-gray-300">
                 <thead>
                     <tr className="bg-gray-200">

@@ -3,7 +3,7 @@ import AboutHeader from "./AboutHeader";
 import AboutFooter from "./AboutFooter";
 import AboutLocation from "./AboutLocation";
 
-const Editorial_Board = () => {
+const Editorial_Board = (props) => {
     const [members, setMembers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -39,7 +39,7 @@ const Editorial_Board = () => {
 
     return (
         <div>
-            <AboutHeader title={"EDITORIAL BOARD"} />
+            <AboutHeader title={"EDITORIAL BOARD"}  theme1={props.color1} theme2={props.color2}/>
             <div className="w-auto h-auto flex flex-wrap justify-center my-20 gap-4 p-8">
                 {members.map((member, index) => (
                     <div
@@ -54,7 +54,7 @@ const Editorial_Board = () => {
                 ))}
             </div>
             <AboutLocation />
-            <AboutFooter />
+            <AboutFooter theme1={props.color1} theme2={props.color2} />
         </div>
     );
 };

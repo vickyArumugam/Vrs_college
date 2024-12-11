@@ -43,7 +43,7 @@ const Journal_publication = () => {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     if (!formData.title || formData.descriptions.some((desc) => !desc.trim())) {
       setMessage('Both title and at least one description are required.');

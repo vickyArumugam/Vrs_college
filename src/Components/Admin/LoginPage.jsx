@@ -12,7 +12,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     try {
       const response = await fetch('http://localhost/mailapp/login.php', {
         method: 'POST',

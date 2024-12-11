@@ -15,7 +15,7 @@ export default function Register_Card() {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         if (formData.category && formData.currency && formData.value) {
             setCards([...cards, formData]);
             setFormData({ category: "", currency: "", value: "" });

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Core/Header';
 
-const Home = () => {
+const Home = (props) => {
     const [eventData, setEventData] = useState(null);
     const [aboutConference, setAboutConference] = useState(null);
     const [keydates, setkeydates] = useState([]);
@@ -23,6 +23,7 @@ const Home = () => {
     const [isLoadingmap, setIsLoadingmap] = useState(true)
     const [isLoadingLinks, setIsLoadingLinks] = useState(true)
     const [isLoadingcopyRight, setIsLoadingCopyRight] = useState(true)
+    const [isHovered, setIsHovered] = useState(false);
 
     const handleButtonClick = () => {
         navigate('/author/new_paper_submission');
@@ -83,29 +84,30 @@ const Home = () => {
 
     }, []);
 
+    const textColor = isHovered ? props.color2 : 'white';
+
     if (error) return <p className="text-red-500 text-center">{error}</p>;
 
-    if (isLoadingEvent || isLoadingAbout || isLoadingKey || isLoadingKeyInvitees || isLoadingRegisterCard || isLoadingContact || isLoadingmap || isLoadingLinks||isLoadingcopyRight) {
+    if (isLoadingEvent || isLoadingAbout || isLoadingKey || isLoadingKeyInvitees || isLoadingRegisterCard || isLoadingContact || isLoadingmap || isLoadingLinks || isLoadingcopyRight) {
         return <p className="text-center text-white">Loading...</p>;
     }
     return (
         <div>
             <Header />
             <section className="relative sm:max-w-full h-auto py-4  bg-cover bg-center"
-            style={{
-                backgroundImage: `url(${
-                  eventData[0]?.backgroundImage
-                    ? `data:image/jpeg;base64,${eventData[0].backgroundImage}`
-                    : '/images/corporate-businessman-giving-presentation-large-audience.jpg'
-                })`,
-              }}
+                style={{
+                    backgroundImage: `url(${eventData[0]?.backgroundImage
+                            ? `data:image/jpeg;base64,${eventData[0].backgroundImage}`
+                            : '/images/corporate-businessman-giving-presentation-large-audience.jpg'
+                        })`,
+                }}
             >
                 <div className="absolute inset-0 bg-black opacity-75"></div>
                 <div className="sm:max-w-full h-auto mx-auto text-center relative text-white mt-20 sm:mt-40 px-4">
                     <h1 className="text-[36px] sm:text-[54px] font-bold font-Kaisei-Decol mb-3">
                         {eventData[0].conferenceTitle}
                     </h1>
-                    <h2 className="text-[20px] sm:text-[40px] text-[#C8F51E] font-medium font-Playwrite animate-float animate-once animate-duration-1000 animate-ease-in-out mb-5">
+                    <h2 className="text-[20px] sm:text-[40px]  font-medium font-Playwrite animate-float animate-once animate-duration-1000 animate-ease-in-out mb-5" style={{ color: props.color2 }}>
                         {eventData[0].conferenceSubtitle}
                     </h2>
                     {eventData.length > 0 && (
@@ -123,14 +125,19 @@ const Home = () => {
             </section>
 
 
-            <section className='w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4 relative'>
+            <section className='w-full flex flex-col justify-center items-center  py-4 relative' style={{ backgroundColor: props.color1 }}>
                 <div className='my-10 lg:my-20 max-w-5xl px-4 mx-auto text-center'>
-                    <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E]'>
+                    <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol'style={{ color: props.color2 }}>
                         About the Conference
                     </h1>
                 </div>
                 <div className='flex justify-center items-center w-full px-5 md:w-8/12 lg:w-7/12 xl:w-5/12 mb-10 lg:mb-20'>
-                    <p className='text-white text-base p-5 lg:p-0 sm:text-lg md:text-xl lg:text-2xl font-Andika font-thin text-justify lg:leading-relaxed  tracking-wider hover:text-[#C8F51E]'>
+                    <p className='text-white text-base p-5 lg:p-0 sm:text-lg md:text-xl lg:text-2xl font-Andika font-thin text-justify lg:leading-relaxed  tracking-wider '
+                        style={{
+                            color: textColor,  // Use dynamic text color
+                        }}
+                        onMouseEnter={() => setIsHovered(true)}  // Set hover state to true
+                        onMouseLeave={() => setIsHovered(false)}>
                         {aboutConference[0].description}
                     </p>
                 </div>
@@ -138,7 +145,7 @@ const Home = () => {
 
             <section className="w-full py-4">
                 <div className="max-w-5xl mx-auto text-center">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-20 mt-10">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold font-Kaisei-Decol  mb-20 mt-10" style={{ color: props.color2 }}>
                         KEY DATES
                     </h1>
                 </div>
@@ -170,7 +177,7 @@ const Home = () => {
             <section className="w-full flex flex-col justify-center items-center py-4 bg-[url('/images/bg-img-2.png')] bg-cover bg-center relative">
                 <div className="absolute inset-0 bg-gray-400 opacity-25"></div>
                 <div className="text-center relative">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] uppercase mt-12">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[54px] font-bold font-Kaisei-Decol  uppercase mt-12" style={{ color: props.color2 }}>
                         Key Invitees
                     </h1>
                 </div>
@@ -200,7 +207,7 @@ const Home = () => {
 
             <section className="w-full flex flex-col justify-center items-center bg-[#0B0A2A] py-4">
                 <div className="text-center mb-10 sm:mb-20">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mt-10 sm:mt-20 uppercase">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[54px] font-bold font-Kaisei-Decol  mt-10 sm:mt-20 uppercase" style={{ color: props.color2 }}>
                         Chief Patrons
                     </h1>
                 </div>
@@ -214,11 +221,11 @@ const Home = () => {
                             <div className="absolute top-0 left-0 w-full h-full bg-[#7CB342] clip-curved"></div>
                             <div className="absolute top-5 w-[80px] h-[80px] bg-gray-300 rounded-full border-3 border-[#C8F51E]"></div>
                             <div className="relative z-10 text-center mb-10 px-4 space-y-3 ">
-                            <img
-                                src={`data:image/jpeg;base64,${item.image_url}`}
-                                className="w-32 h-32 rounded-full object-cover mb-50 z-10 mb-24 ml-10"
-                                alt={item.name || "Key Invitee"}
-                            />
+                                <img
+                                    src={`data:image/jpeg;base64,${item.image_url}`}
+                                    className="w-32 h-32 rounded-full object-cover mb-50 z-10 mb-24 ml-10"
+                                    alt={item.name || "Key Invitee"}
+                                />
                                 <h1 className="text-white text-lg font-bold">
                                     {item.name}
                                 </h1>
@@ -259,7 +266,7 @@ const Home = () => {
             </section>
             <section className=' w-full h-[580px] text-center bg-[#0B0A2A] '>
                 <div className='flex flex-col'>
-                    <h1 className='text-[54px] font-bold font-Kaisei-Decol text-[#C8F51E] mb-10 mt-10'>Contact Us</h1>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol  mb-10 mt-10'style={{ color: props.color2 }}>Contact Us</h1>
                     <h2 className=' text-2xl  lg:text-4xl text-white font-bold font-montserrat-subrayada'>{contact[0].college_name}</h2>
                     <h3 className='  text-xl  lg:text-2xl  my-6 text-yellow-300'>({contact[0].iso_number})</h3>
                     <span className=' text-xl lg:text-2xl text-white mb-14 font-Playwrite '>
@@ -305,8 +312,8 @@ const Home = () => {
                     ))}
                 </div>
                 <div className='bg-footer-bg p-2 text-footer-text  text-center '>
-                    <p className='text-[#C8F51E]'>
-                       {copyRight.copyRight}
+                    <p style={{ backgroundColor: '#000', color: props.color2 }} className="p-2 text-center z-10">
+                        {copyRight.copyRight}
                     </p>
                 </div>
             </section>

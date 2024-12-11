@@ -3,7 +3,7 @@ import AboutHeader from '../About/AboutHeader';
 import AboutLocation from '../About/AboutLocation';
 import AboutFooter from '../About/AboutFooter';
 
-const Journal_Publication = () => {
+const Journal_Publication = (props) => {
   const [aboutConference, setAboutConference] = useState([]);
   const [isLoadingAbout, setIsLoadingAbout] = useState(true);
   const [error, setError] = useState(null);
@@ -44,7 +44,7 @@ const Journal_Publication = () => {
   }
   return (
     <div>
-      <AboutHeader title={"JOURNAL PUBLICATION"} />
+      <AboutHeader title={"JOURNAL PUBLICATION"} theme1={props.color1} theme2={props.color2} />
       <div className=" flex flex-col justify-center items-center text-center py-8 md:py-10 text-orange-500 font-bold text-lg space-y-6 md:space-y-8 bg-white">
         <h3 className=" w-[65%] text-base font-Helvetica md:text-lg lg:text-4xl font-bold text-[#0B0A2A] px-4 mb-10">
           {aboutConference[1].title}
@@ -60,7 +60,7 @@ const Journal_Publication = () => {
         ))}
       </div>
       <AboutLocation />
-      <AboutFooter />
+      <AboutFooter theme1={props.color1} theme2={props.color2} />
     </div>
   );
 };

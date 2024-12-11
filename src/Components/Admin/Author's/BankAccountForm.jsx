@@ -12,7 +12,7 @@ const BankAccountForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     setIsLoading(true);
     try {
       const response = await fetch('http://localhost/mailapp/bank_accounts.php', {

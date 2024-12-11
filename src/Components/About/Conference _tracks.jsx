@@ -3,7 +3,7 @@ import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import axios from 'axios';
 
-const ConferenceTracks = () => {
+const ConferenceTracks = (props) => {
     const [sections, setSections] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const ConferenceTracks = () => {
 
     return (
         <div>
-            <AboutHeader title={"EARLIER CONFERENCES"} />
+            <AboutHeader title={"EARLIER CONFERENCES"} theme1={props.color1} theme2={props.color2} />
             <section className="bg-[#0B0A2A]">
                 {sections.map((section) => (
                     <div className="bg-black" key={section.id}>
@@ -40,7 +40,7 @@ const ConferenceTracks = () => {
                     </div>
                 ))}
             </section>
-            <AboutFooter />
+            <AboutFooter theme1={props.color1} theme2={props.color2} />
         </div>
     );
 };

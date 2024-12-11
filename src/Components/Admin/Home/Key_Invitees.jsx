@@ -19,7 +19,7 @@ export default function KeyInviteesForm() {
     };
 
     const handleSubmit = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
 
         const data = new FormData();
         data.append("name", formData.name);

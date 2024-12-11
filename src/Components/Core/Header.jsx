@@ -198,12 +198,10 @@ export default function Header() {
                 <div className='lg:hidden flex items-center'>
                     <button onClick={toggleMobileMenu} className="text-[#C8F51E] focus:outline-none">
                         {isMobileMenuOpen ? (
-                            // Close Icon (X)
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         ) : (
-                            // Menu Icon (Three Lines)
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                             </svg>
@@ -214,7 +212,7 @@ export default function Header() {
                 {/* Mobile Dropdown Menu */}
                 {isMobileMenuOpen && (
                     <div className="absolute top-full right-0 w-[50%] bg-[#0B0A2A] text-[#C8F51E] lg:hidden">
-                        <ul className="flex flex-col items-center py-4 gap-2 text-lg font-bold text-center">
+                        <ul className="flex flex-col items-center py-4 gap-2 text-lg font-bold text-center" ref={dropdownRef}>
                             <li className='w-full hover:text-white hover:bg-blue-900'>
                                 <Link to="/" className="">HOME</Link>
                             </li>

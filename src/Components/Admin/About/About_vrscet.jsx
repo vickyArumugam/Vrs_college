@@ -14,7 +14,7 @@ export default function About_vrscet() {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         try {
             const response = await fetch('http://localhost/mailapp/about_vrscet_conference.php', {
                 method: 'POST',

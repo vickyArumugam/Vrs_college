@@ -4,7 +4,7 @@ import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import AboutLocation from './AboutLocation';
 
-const Organizing_Committee = () => {
+const Organizing_Committee = (props) => {
     const [sections, setSections] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -35,7 +35,7 @@ const Organizing_Committee = () => {
 
     return (
         <div>
-            <AboutHeader title={"ORGANIZING COMMITTEE"} />
+            <AboutHeader title={"ORGANIZING COMMITTEE"} theme1={props.color1} theme2={props.color2} />
             <AboutLocation />
             <div className="flex flex-col items-center justify-center p-6 md:p-8 gap-6">
                 {sections.map((section, index) => (
@@ -60,7 +60,7 @@ const Organizing_Committee = () => {
                     </div>
                 ))}
             </div>
-            <AboutFooter />
+            <AboutFooter theme1={props.color1} theme2={props.color2} />
         </div>
     );
 };

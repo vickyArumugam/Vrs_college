@@ -14,7 +14,7 @@ export default function Scope_conference() {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         try {
             const response = await fetch('http://localhost/mailapp/about_scope_conference.php', {
                 method: 'POST',

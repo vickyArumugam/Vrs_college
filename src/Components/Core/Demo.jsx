@@ -140,3 +140,25 @@ export default function Header() {
         </div>
     );
 }
+
+
+const [savedColors, setSavedColors] = useState([]);
+
+// Fetch colors from the PHP file
+const fetchColors = async () => {
+  try {
+    const response = await axios.get("http://localhost/mailapp/colors.php");
+    if (response.data && Array.isArray(response.data)) {
+      setSavedColors(response.data);
+    } else {
+      console.error("Invalid data format from server:", response.data);
+    }
+  } catch (error) {
+    console.error("Error fetching colors:", error);
+  }
+};
+
+// Fetch colors when the app loads
+useEffect(() => {
+  fetchColors();
+}, []);

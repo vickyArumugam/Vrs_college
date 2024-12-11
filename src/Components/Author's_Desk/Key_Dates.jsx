@@ -3,7 +3,7 @@ import AboutHeader from '../About/AboutHeader'
 import AboutLocation from '../About/AboutLocation'
 import AboutFooter from '../About/AboutFooter'
 
-const Key_Dates = () => {
+const Key_Dates = (props) => {
     const [aboutConference, setAboutConference] = useState(null);
     const [isLoadingAbout, setIsLoadingAbout] = useState(true);
     const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ const Key_Dates = () => {
 
     return (
         <div>
-            <AboutHeader title={"KEY DATES"} />
+            <AboutHeader title={"KEY DATES"} theme1={props.color1} theme2={props.color2}/>
             <div className="w-full lg:h-[600px] bg-[#0B0A2A] flex flex-col items-center justify-center">
                 {aboutConference.map((item, index) => (
                     <div key={index} className={`${item.bgColor} flex justify-center py-4 md:py-6`}>
@@ -52,7 +52,7 @@ const Key_Dates = () => {
                 ))}
             </div>
             <AboutLocation />
-            <AboutFooter />
+            <AboutFooter theme1={props.color1} theme2={props.color2} />
 
         </div>
     )

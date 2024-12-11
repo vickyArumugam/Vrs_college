@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AboutHeader from '../About/AboutHeader';
 
-function Contact_us() {
+function Contact_us(props) {
   const [isLoadingContact, setIsLoadingContact] = useState(true);
   const [contact, setContact] = useState([]);
   const [error, setError] = useState(null);
@@ -32,7 +32,7 @@ function Contact_us() {
 
   return (
     <div>
-      <AboutHeader title={"CONTACT US"} />
+      <AboutHeader title={"CONTACT US"}  theme1={props.color1} theme2={props.color2}/>
       <section>
         <div className="flex justify-center">
           <iframe
@@ -63,9 +63,8 @@ function Contact_us() {
           </div>
         </div>
       </section>
-
       <div className='bg-footer-bg p-2 text-footer-text text-center'>
-        <p className='text-[#C8F51E]'>
+        <p style={{ backgroundColor: '#000', color: props.color2 }} className="p-2 text-center z-10">
           Copyright 2024 - V.R.S. College of Engineering and Technology
         </p>
       </div>

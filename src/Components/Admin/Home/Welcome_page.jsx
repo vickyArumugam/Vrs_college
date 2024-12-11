@@ -22,7 +22,7 @@ function WelcomePage() {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     const formData = new FormData();
     Object.entries(conferenceData).forEach(([key, value]) => {

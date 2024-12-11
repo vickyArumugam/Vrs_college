@@ -3,7 +3,7 @@ import AboutHeader from '../About/AboutHeader'
 import AboutLocation from '../About/AboutLocation'
 import AboutFooter from '../About/AboutFooter'
 
-const Registration_details = () => {
+const Registration_details = (props) => {
   const [account, setAccount] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +31,7 @@ const Registration_details = () => {
 
   return (
     <div>
-      <AboutHeader title={"REGISTRATION DETAILS"} />
+      <AboutHeader title={"REGISTRATION DETAILS"} theme1={props.color1} theme2={props.color2}/>
       <section>
         <div className="flex flex-col items-center p-8 bg-[#0B0A2A]">
 
@@ -99,7 +99,7 @@ const Registration_details = () => {
         </div>
       </section>
       <AboutLocation />
-      <AboutFooter />
+      <AboutFooter theme1={props.color1} theme2={props.color2} />
 
     </div>
   )

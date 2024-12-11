@@ -38,7 +38,7 @@ export default function EarlierConferences() {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         const data = new FormData();
         data.append("conferenceName", formData.conferenceName);
         data.append("conferenceDate", formData.conferenceDate);

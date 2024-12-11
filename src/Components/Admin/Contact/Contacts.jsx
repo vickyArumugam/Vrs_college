@@ -20,7 +20,7 @@ export default function Contacts() {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     try {
       const res = await axios.post('http://localhost/mailapp/contact.php', formData);
       setResponse(res.data.message);

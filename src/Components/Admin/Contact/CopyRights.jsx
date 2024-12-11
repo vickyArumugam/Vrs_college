@@ -10,7 +10,7 @@ const CopyRights = () => {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const response = await fetch("http://localhost/mailapp/CopyRights.php", {
       method: "POST",
       headers: {

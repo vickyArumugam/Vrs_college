@@ -4,7 +4,7 @@ import AboutLocation from '../About/AboutLocation'
 import AboutFooter from '../About/AboutFooter'
 
 
-const Conference_tracks = () => {
+const Conference_tracks = (props) => {
   const [aboutConference, setAboutConference] = useState(null);
   const [isLoadingAbout, setIsLoadingAbout] = useState(true);
   const [error, setError] = useState(null);
@@ -37,7 +37,7 @@ const Conference_tracks = () => {
 
   return (
     <div>
-      <AboutHeader title={"CONFERENCE TRACKS"} />
+      <AboutHeader title={"CONFERENCE TRACKS"} theme1={props.color1} theme2={props.color2} />
       <div className="text-center py-10 text-[#0B0A2A] font-bold text-lg space-y-10 bg-white ">
         <h1 className='font-bold text-25 font-Andika hover:text-[#C8F51E]'>
           {aboutConference[0].field_name}
@@ -51,7 +51,7 @@ const Conference_tracks = () => {
         <hr className="border-[#0B0A2A] border-t-2 mt-4 text-center" />
       </div>
       <AboutLocation />
-      <AboutFooter />
+      <AboutFooter theme1={props.color1} theme2={props.color2} />
 
     </div>
   )

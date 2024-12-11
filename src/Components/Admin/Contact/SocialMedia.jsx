@@ -6,7 +6,7 @@ const SocialMedia = () => {
   const [links, setLinks] = useState([]);
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const response = await fetch("http://localhost/mailapp/social.php", {
       method: "POST",
       headers: {

@@ -20,7 +20,7 @@ export default function Chief_Patrons() {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         if (formData.name && formData.role && formData.image) {
             try {
                 const data = new FormData();
