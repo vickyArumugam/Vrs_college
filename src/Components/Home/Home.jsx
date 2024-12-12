@@ -24,6 +24,10 @@ const Home = (props) => {
     const [isLoadingLinks, setIsLoadingLinks] = useState(true)
     const [isLoadingcopyRight, setIsLoadingCopyRight] = useState(true)
     const [isHovered, setIsHovered] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = React.useState(null);
+
+
+    const textColor1 = isHovered ? props.color2 : 'white';
 
     const handleButtonClick = () => {
         navigate('/author/new_paper_submission');
@@ -137,7 +141,8 @@ const Home = (props) => {
                             color: textColor,
                         }}
                         onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}>
+                        onMouseLeave={() => setIsHovered(false)}
+                    >
                         {aboutConference[0].description}
                     </p>
                 </div>
@@ -256,9 +261,9 @@ const Home = (props) => {
 
             <section
                 className="w-full flex flex-col justify-center items-center py-4  bg-[url('/images/SL-043021-42650-16.jpg')] bg-cover bg-center relative"
-                // style={{ backgroundColor: props.color1 || '#0B0A2A' }} // Dynamic section background color
+            // style={{ backgroundColor: props.color1 || '#0B0A2A' }} // Dynamic section background color
             >
-                  <div
+                <div
                     className="absolute inset-0"
                     style={{
                         backgroundColor: props.color1,
@@ -303,17 +308,17 @@ const Home = (props) => {
                                 />
                                 <h1
                                     className="text-lg font-bold"
-                                    style={{ color: props.color1 || '#FFFFFF' }} // Dynamic name color
+                                // style={{ color: props.color1 || '#FFFFFF' }} 
                                 >
                                     {item.name}
                                 </h1>
                                 <div
-                                    className="w-12 h-1 mx-auto mt-1"
+                                    className="w-28 h-2 mx-auto mt-1"
                                     style={{ backgroundColor: props.color1 || '#C8F51E' }} // Dynamic divider color
                                 ></div>
                                 <p
                                     className="text-sm"
-                                    style={{ color: props.color2 || '#FFFFFF' }} // Dynamic role text color
+                                // style={{ color: props.color2 || '#FFFFFF' }} // Dynamic role text color
                                 >
                                     {item.role}
                                 </p>
@@ -366,13 +371,7 @@ const Home = (props) => {
                                 {Math.floor(item.value)}
                             </h1>
                             <button
-                                className="uppercase w-32 sm:w-40 mt-4 h-10 font-medium rounded-lg"
-                                style={{
-                                    backgroundColor: item.buttonBgColor || '#DC2626', 
-                                
-                                    color: item.buttonTextColor || 'white',
-                                }}
-                            >
+                                className="uppercase w-32 sm:w-40 mt-4 h-10 font-medium rounded-lg bg-red-500" >
                                 Register here
                             </button>
                         </div>
@@ -410,27 +409,28 @@ const Home = (props) => {
             )}
 
             <section className='bg-white'>
-                <div className=' w-full h-20 flex justify-center items-center  gap-10 '>
-                    {links.map((link) => (
+                <div className="w-full h-20 flex justify-center items-center gap-10">
+                    {links.map((link, index) => (
                         <a
                             key={link.id}
                             href={`https://${link.link_url}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="transform transition-transform duration-200 hover:scale-110 border-3 hover:border-[#C8F51E] rounded-full"
+                            className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
+                            style={{
+                                borderColor: hoveredIndex === index ? props.color1 : "transparent", // Change border color on hover
+                                borderWidth: hoveredIndex === index ? "3px" : "2px", // Add visual feedback
+                            }}
+                            onMouseEnter={() => setHoveredIndex(index)} // Track hovered link
+                            onMouseLeave={() => setHoveredIndex(null)} // Reset hover state
                         >
                             <img
-                                src={icons[link.platform] || "/images/default_icon.png"}
+                                src={icons[link.platform] || "https://example.com/images/default_icon.png"}
                                 alt={`${link.platform}-icon`}
                                 className="w-8 h-8"
                             />
                         </a>
                     ))}
-                </div>
-                <div className='bg-footer-bg p-2 text-footer-text  text-center '>
-                    <p style={{ backgroundColor: '#000', color: props.color2 }} className="p-2 text-center z-10">
-                        {copyRight.copyRight}
-                    </p>
                 </div>
             </section>
         </div>

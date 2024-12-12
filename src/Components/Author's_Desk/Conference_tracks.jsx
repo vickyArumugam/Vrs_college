@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import AboutHeader from '../About/AboutHeader'
-import AboutLocation from '../About/AboutLocation'
-import AboutFooter from '../About/AboutFooter'
+import React, { useEffect, useState } from 'react';
+import AboutHeader from '../About/AboutHeader';
+import AboutLocation from '../About/AboutLocation';
+import AboutFooter from '../About/AboutFooter';
 
-
-const Conference_tracks = (props) => {
-  const [aboutConference, setAboutConference] = useState(null);
+const ConferenceTracks = (props) => {
+  const [aboutConference, setAboutConference] = useState([]);
   const [isLoadingAbout, setIsLoadingAbout] = useState(true);
   const [error, setError] = useState(null);
+  const [hoverIndex, setHoverIndex] = useState(null); // For dynamic hover effect
 
   const fetchData = async (url, setDataCallback, setLoadingCallback) => {
     try {
@@ -38,23 +38,29 @@ const Conference_tracks = (props) => {
   return (
     <div>
       <AboutHeader title={"CONFERENCE TRACKS"} theme1={props.color1} theme2={props.color2} />
-      <div className="text-center py-10 text-[#0B0A2A] font-bold text-lg space-y-10 bg-white ">
-        <h1 className='font-bold text-25 font-Andika hover:text-[#C8F51E]'>
-          {aboutConference[0].field_name}
-        </h1>
-        <hr className="border-[#0B0A2A] border-t-2 mt-4 text-center" />
-        <h1 className='font-bold text-25 font-Andika hover:text-[#C8F51E] '>  {aboutConference[1].field_name}</h1>
-        <hr className="border-[#0B0A2A] border-t-2 mt-4 text-center" />
-        <h1 className='font-bold text-25 font-Andika hover:text-[#C8F51E]'> {aboutConference[2].field_name}</h1>
-        <hr className="border-[#0B0A2A] border-t-2 mt-4 text-center" />
-        <h1 className='font-bold text-25 font-Andika hover:text-[#C8F51E] '>  {aboutConference[3].field_name} </h1>
-        <hr className="border-[#0B0A2A] border-t-2 mt-4 text-center" />
+      <div className="text-center py-10 text-[#0B0A2A] font-bold text-lg space-y-10 bg-white">
+        {aboutConference.map((item, index) => (
+          <React.Fragment key={index}>
+            <h1
+              className="font-bold text-25 font-Andika"
+              style={{
+                color: hoverIndex === index ? props.hoverColor : props.color1, // Dynamic hover effect
+              }}
+              onMouseEnter={() => setHoverIndex(index)}
+              onMouseLeave={() => setHoverIndex(null)}
+            >
+              {item.field_name}
+            </h1>
+            {index < aboutConference.length - 1 && (
+              <hr className="border-[#0B0A2A] border-t-2 mt-4 text-center" />
+            )}
+          </React.Fragment>
+        ))}
       </div>
       <AboutLocation />
       <AboutFooter theme1={props.color1} theme2={props.color2} />
-
     </div>
-  )
-}
+  );
+};
 
-export default Conference_tracks
+export default ConferenceTracks;

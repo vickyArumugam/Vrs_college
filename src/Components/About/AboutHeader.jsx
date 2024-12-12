@@ -30,7 +30,7 @@ const AboutHeader = (props) => {
           }}
         >
           <div className="absolute inset-0 bg-black opacity-25"></div>
-          <Header />
+          <Header color1={props.theme1} color2={props.theme2} />
           <h1 className=" text-center w-full text-xl sm:text-3xl md:text-4xl lg:text-5xl font-light font-Kaisei-Decol absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2  transition-all duration-300 ease-in-out animate-fadeup "
            style={{
             color: props.theme2, // Use the dynamic text color from props

@@ -82,7 +82,7 @@ const AboutFooter = (props) => {
               alt="facebook-icon"
               className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
               style={{
-                borderColor: hoveredImage === 1 ? props.theme2 : props.theme1,
+                borderColor: hoveredImage === 1 ? props.theme2 : '',
               }}
               onMouseEnter={() => handleMouseEnter(1)}
               onMouseLeave={handleMouseLeave}
@@ -92,7 +92,7 @@ const AboutFooter = (props) => {
               alt="twitter-icon"
               className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
               style={{
-                borderColor: hoveredImage === 2 ? props.theme2 : props.theme1,
+                borderColor: hoveredImage === 2 ? props.theme2 : '',
               }}
               onMouseEnter={() => handleMouseEnter(2)}
               onMouseLeave={handleMouseLeave}
@@ -102,7 +102,7 @@ const AboutFooter = (props) => {
               alt="insta-icon"
               className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
               style={{
-                borderColor: hoveredImage === 3 ? props.theme2 : props.theme1,
+                borderColor: hoveredImage === 3 ? props.theme2 : '',
               }}
               onMouseEnter={() => handleMouseEnter(3)}
               onMouseLeave={handleMouseLeave}
@@ -112,7 +112,7 @@ const AboutFooter = (props) => {
               alt="youtube-icon"
               className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
               style={{
-                borderColor: hoveredImage === 4 ? props.theme2 : props.theme1,
+                borderColor: hoveredImage === 4 ? props.theme2 : '',
               }}
               onMouseEnter={() => handleMouseEnter(4)}
               onMouseLeave={handleMouseLeave}

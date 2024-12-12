@@ -31,45 +31,60 @@ const Registration_details = (props) => {
 
   return (
     <div>
-      <AboutHeader title={"REGISTRATION DETAILS"} theme1={props.color1} theme2={props.color2}/>
+      <AboutHeader title={"REGISTRATION DETAILS"} theme1={props.color1} theme2={props.color2} />
       <section>
-        <div className="flex flex-col items-center p-8 bg-[#0B0A2A]">
-
-          <div className=" w-80 md:w-96 border border-[#C8F51E]">
-            <div className="bg-[#0B0A2A] text-white  border-b border-[#C8F51E]">
-              <p className='p-4'>Registration fee will be made only after the acceptance of your article.</p>
+        <div
+          className="flex flex-col items-center p-8"
+          style={{ backgroundColor: props.color1 }} // Primary background color
+        >
+          <div
+            className="w-80 md:w-96 border"
+            style={{ borderColor: props.color2 }} // Border color
+          >
+            <div
+              className="border-b p-4"
+              style={{ backgroundColor: props.color1, color: "white", borderBottomColor: props.color2 }}
+            >
+              Registration fee will be made only after the acceptance of your article.
             </div>
-            <div className="bg-[#0B0A2A] text-white border-b border-[#C8F51E]">
-              <p className='p-4'>Payment can be made through Online Transfer (NEFT / IMPS) or Cash Deposit.</p>
+            <div
+              className="border-b p-4"
+              style={{ backgroundColor: props.color1, color: "white", borderBottomColor: props.color2 }}
+            >
+              Payment can be made through Online Transfer (NEFT / IMPS) or Cash Deposit.
             </div>
-            <div className="bg-[#0B0A2A] text-white  border-b border-[#C8F51E]">
-              <p className='p-4'> After making payment, kindly send us the proof of the payment (Screenshot / Reference Number / Transaction ID or Counter Slip) along with your Paper ID & necessary details.</p>
+            <div
+              className="border-b p-4"
+              style={{ backgroundColor: props.color1, color: "white", borderBottomColor: props.color2 }}
+            >
+              After making payment, kindly send us the proof of the payment (Screenshot / Reference Number /
+              Transaction ID or Counter Slip) along with your Paper ID & necessary details.
             </div>
-            <div className="bg-[#0B0A2A] text-white border-b border-[#C8F51E]">
-              <p className='p-4 m-0'>
-                It is mandatory for at least one author of each accepted paper to register and attend the conference to present the paper.
-              </p>
+            <div
+              className="border-b p-4 m-0"
+              style={{ backgroundColor: props.color1, color: "white", borderBottomColor: props.color2 }}
+            >
+              It is mandatory for at least one author of each accepted paper to register and attend the conference to
+              present the paper.
             </div>
-            <div className="bg-[#0B0A2A] text-white">
-              <p className='p-4'>All the abstracts of the selected papers will be published in the conference proceedings with ISBN.</p>
+            <div className="p-4" style={{ backgroundColor: props.color1, color: "white" }}>
+              All the abstracts of the selected papers will be published in the conference proceedings with ISBN.
             </div>
           </div>
 
-          <button className="mt-8 bg-[#FFA500] text-white font-bold py-2 px-6 rounded">
+          <button
+            className="mt-8 font-bold py-2 px-6 rounded"
+            style={{ backgroundColor: props.color2, color: "white" }} // Button uses secondary color
+          >
             Bank Details
           </button>
         </div>
       </section>
-      <section className="flex items-center justify-center min-h-screen bg-gray-100 text-black">
+      <section className="flex items-center justify-center h-400 bg-gray-100 text-black">
         <div className="w-full max-w-5xl bg-white border border-gray-300 shadow-md">
           {account ? (
             <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-gray-200">
-                  <th className="px-4 py-2 border-b border-gray-300">Field</th>
-                  <th className="px-4 py-2 border-b border-gray-300">Value</th>
-                </tr>
-              </thead>
+             
               <tbody>
                 <tr>
                   <td className="px-4 py-2 border-b border-gray-300 font-bold">Account Name</td>

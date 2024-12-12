@@ -53,7 +53,8 @@ const Journal_Publication = (props) => {
         {aboutConference.map((journal, index) => (
           <div
             key={index}
-            className="w-full max-w-3xl h-auto bg-[#0B0A2A] text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4"
+            className="w-full max-w-3xl h-auto  text-white text-lg md:text-2xl font-Trebuchet text-center rounded-lg mb-4"
+            style={{ backgroundColor: props.color1 }}
           >
             <p className="my-3">{journal.description}</p>
           </div>

@@ -23,7 +23,8 @@ const ConferenceTracks = (props) => {
             <section className="bg-[#0B0A2A]">
                 {sections.map((section) => (
                     <div className="bg-black" key={section.id}>
-                        <h1 className="w-[60%] ml-[20%] mt-20 text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-Kaisei-Decol text-[#C8F51E] p-1 lg:p-0">
+                        <h1 className="w-[60%] ml-[20%] mt-20 text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-Kaisei-Decol p-1 lg:p-0"
+                         style={{ color: props.color2 }}>
                             {section.conference_name}
                         </h1>
                         <p className="w-[40%] ml-[30%] text-center text-base sm:text-lg md:text-xl text-bold font-Helvetica my-10">

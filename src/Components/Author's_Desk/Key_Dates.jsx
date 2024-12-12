@@ -37,14 +37,25 @@ const Key_Dates = (props) => {
     return (
         <div>
             <AboutHeader title={"KEY DATES"} theme1={props.color1} theme2={props.color2}/>
-            <div className="w-full lg:h-[600px] bg-[#0B0A2A] flex flex-col items-center justify-center">
+            <div className="w-full lg:h-[600px]  flex flex-col items-center justify-center"
+            style={{ backgroundColor: props.color1 }}>
                 {aboutConference.map((item, index) => (
                     <div key={index} className={`${item.bgColor} flex justify-center py-4 md:py-6`}>
                         <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4 lg:gap-10">
-                            <span className=" lg:w-96 text-white border border-[#C8F51E] px-3 md:px-4 py-3 md:py-4 font-bold text-sm md:text-base lg:text-lg text-center">
+                            <span className=" lg:w-96 text-white border  px-3 md:px-4 py-3 md:py-4 font-bold text-sm md:text-base lg:text-lg text-center"
+                              style={{
+                                borderColor: props.color2,
+                              
+                            }}
+                            >
                                 {item.description}
                             </span>
-                            <span className="text-white border border-[#C8F51E] px-3 md:px-4 py-3 md:py-4 font-bold text-sm md:text-base lg:text-lg text-center">
+                            <span className="text-white border px-3 md:px-4 py-3 md:py-4 font-bold text-sm md:text-base lg:text-lg text-center"
+                              style={{
+                                borderColor: props.color2,
+                            
+                            }}
+                            >
                                 {item.date}
                             </span>
                         </div>

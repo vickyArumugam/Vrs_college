@@ -60,9 +60,13 @@ export default function Header(props) {
     return (
         <div className="bg-transparent bg-cover bg-fixed bg-center relative">
             <nav
-                className={`${isSticky ? 'fixed top-[-1px] left-0 right-0 bg-[#0B0A2A] shadow-lg' : 'bg-transparent relative'
+                className={`${isSticky
+                    ? 'fixed top-[-1px] left-0 right-0 bg-[#0B0A2A] shadow-lg'
+                    : 'bg-transparent relative'
                     } flex lg:justify-around justify-between items-center max-w-full mx-auto px-4 py-4 transition-all duration-300 z-40`}
+                style={isSticky ? {backgroundColor:'#000'} :{ backgroundColor: props.color1 }}
             >
+
                 <div className="w-40 h-12">
                     <img src={
                         logoImage
@@ -73,8 +77,9 @@ export default function Header(props) {
 
                 {/* Desktop Menu */}
                 <div className="hidden lg:flex items-center">
-                    <ul className="text-[#C8F51E] text-lg font-bold flex gap-8 items-center"
+                    <ul className=" text-lg font-bold flex gap-8 items-center"
                         ref={dropdownRef}
+                        style={{ color: props.color2 }}
                     >
                         <li>
                             <Link to="/" className="hover:text-white hover:bg-blue-900 px-3 py-2 rounded-md transition">
@@ -90,35 +95,43 @@ export default function Header(props) {
                                 ABOUT US
                             </Link>
                             {openDropdown === 'about' && (
-                                <div className="absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10">
+                                <div className="absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 z-10"
+                                    style={{ borderColor: props.color2 }}
+                                >
                                     <ul onMouseLeave={handleMouseLeave} className="text-left font-roboto">
                                         <li>
-                                            <Link to="/about/conference_tracks" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/about/conference_tracks" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 earlier conferences
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/about/about_conference" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/about/about_conference" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 about the conference
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/about/scope_conference" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/about/scope_conference" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 scope of conference
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/about/about_vrscet" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/about/about_vrscet" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 about vrscet
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/about/organizing_committee" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/about/organizing_committee" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 organizing committee
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/about/editorial_board" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/about/editorial_board" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 editorial board
                                             </Link>
                                         </li>
@@ -135,30 +148,37 @@ export default function Header(props) {
                                 AUTHOR'S DESK
                             </Link>
                             {openDropdown === 'authors' && (
-                                <div className="absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10">
+                                <div className="absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4  z-10"
+                                    style={{ borderColor: props.color2 }}
+                                >
                                     <ul onMouseLeave={handleMouseLeave} className="text-left font-roboto">
                                         <li>
-                                            <Link to="/author/conference_tracks" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/author/conference_tracks" className="block py-1 uppercase hover:bg-green-100 border-b text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 conference tracks
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/author/journal_publication" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/author/journal_publication" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 journal publication
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/author/key_dates" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/author/key_dates" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 key dates
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/author/registration_details" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/author/registration_details" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 registration details
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/author/new_paper_submission" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/author/new_paper_submission" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 new paper submission
                                             </Link>
                                         </li>
@@ -175,15 +195,18 @@ export default function Header(props) {
                                 REACH US
                             </Link>
                             {openDropdown === 'reach' && (
-                                <div className="absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4 border-[#C8F51E] z-10">
+                                <div className="absolute bg-white text-black mt-6 p-4 w-44 text-base border-t-4  z-10"
+                                    style={{ borderColor: props.color2 }}>
                                     <ul onMouseLeave={handleMouseLeave} className="text-left font-roboto">
                                         <li>
-                                            <Link to="/contact_us" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/contact_us" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 contact us
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/admin" className="block py-1 uppercase hover:bg-green-100 border-b border-b-[#C8F51E] text-sm">
+                                            <Link to="/admin" className="block py-1 uppercase hover:bg-green-100 border-b  text-sm"
+                                                style={{ borderColor: props.color2 }}>
                                                 Admin page
                                             </Link>
                                         </li>

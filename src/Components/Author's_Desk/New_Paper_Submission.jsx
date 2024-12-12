@@ -52,18 +52,26 @@ const New_Paper_Submission = (props) => {
 
   return (
     <div>
-      <AboutHeader title={"NEW PAPER SUBMISSION"}  theme1={props.color1} theme2={props.color2}/>
-      <div className='w-full  flex items-center justify-center bg-gray-100 p-4 md:p-8'>
+      <AboutHeader title={"NEW PAPER SUBMISSION"} theme1={props.color1} theme2={props.color2} />
+      <div className='w-full flex items-center justify-center bg-gray-100 p-4 md:p-8'>
         <form
           className='bg-white shadow-lg rounded-lg p-6 md:p-8 max-w-lg md:max-w-2xl w-full space-y-6 my-10 md:my-20'
           onSubmit={handleSubmit}
-          action="mail.php" method="POST" enctype="multipart/form-data"
+          action="mail.php"
+          method="POST"
+          enctype="multipart/form-data"
         >
-          <h2 className='text-xl md:text-2xl font-semibold text-center text-green-600'>
+          <h2
+            className='text-xl md:text-2xl font-semibold text-center'
+            style={{ color: props.color2 }}
+          >
             Submit Your Paper
           </h2>
+
           <div>
-            <label className='block text-green-600 font-medium'>Enter Paper Title</label>
+            <label className='block font-medium' style={{ color: props.color2 }}>
+              Enter Paper Title
+            </label>
             <input
               type='text'
               required
@@ -74,7 +82,9 @@ const New_Paper_Submission = (props) => {
           </div>
 
           <div>
-            <label className='block text-green-600 font-medium'>Enter First Author Full Name</label>
+            <label className='block font-medium' style={{ color: props.color2 }}>
+              Enter First Author Full Name
+            </label>
             <input
               type='text'
               required
@@ -85,7 +95,9 @@ const New_Paper_Submission = (props) => {
           </div>
 
           <div>
-            <label className='block text-green-600 font-medium'>Enter First Author Mobile Number</label>
+            <label className='block font-medium' style={{ color: props.color2 }}>
+              Enter First Author Mobile Number
+            </label>
             <input
               type='text'
               required
@@ -96,7 +108,9 @@ const New_Paper_Submission = (props) => {
           </div>
 
           <div>
-            <label className='block text-green-600 font-medium'>Enter First Author Email Address</label>
+            <label className='block font-medium' style={{ color: props.color2 }}>
+              Enter First Author Email Address
+            </label>
             <input
               type='email'
               required
@@ -107,7 +121,9 @@ const New_Paper_Submission = (props) => {
           </div>
 
           <div>
-            <label className='block text-green-600 font-medium'>Enter First Author Institution Name</label>
+            <label className='block font-medium' style={{ color: props.color2 }}>
+              Enter First Author Institution Name
+            </label>
             <input
               type='text'
               required
@@ -118,7 +134,9 @@ const New_Paper_Submission = (props) => {
           </div>
 
           <div>
-            <label className='block text-green-600 font-medium'>Select First Author Category</label>
+            <label className='block font-medium' style={{ color: props.color2 }}>
+              Select First Author Category
+            </label>
             <select
               className='appearance-none mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700'
               value={category}
@@ -133,10 +151,12 @@ const New_Paper_Submission = (props) => {
 
           {/* File Upload */}
           <div>
-            <label className='block text-green-600 font-medium'>Upload Paper</label>
+            <label className='block font-medium' style={{ color: props.color2 }}>
+              Upload Paper
+            </label>
             <div className='flex items-center mt-1'>
               <label
-                className={`flex-grow px-4 py-2 border border-gray-300 rounded-lg ${fileName ? 'text-green-600' : 'text-red-500'
+                className={`flex-grow px-4 py-2 border border-gray-300 rounded-lg ${fileName ? 'text-gray-700' : 'text-red-500'
                   }`}
               >
                 {fileName || 'No file chosen'}
@@ -150,16 +170,19 @@ const New_Paper_Submission = (props) => {
               />
               <label
                 htmlFor='fileInput'
-                className='ml-4 px-4 py-2 bg-green-400 text-white rounded-lg cursor-pointer hover:bg-green-500'
+                className='ml-4 px-4 py-2 rounded-lg cursor-pointer'
+                style={{ backgroundColor: props.color2, color: 'white' }}
               >
                 Choose File
               </label>
             </div>
           </div>
+
           {/* Submit Button */}
           <button
             type='submit'
-            className='w-full bg-green-400 text-white py-2 rounded-lg hover:bg-green-500 transition duration-200'
+            className='w-full py-2 rounded-lg transition duration-200'
+            style={{ backgroundColor: props.color2, color: 'white' }}
           >
             Submit Paper
           </button>
@@ -167,7 +190,7 @@ const New_Paper_Submission = (props) => {
       </div>
 
       <AboutLocation />
-      <AboutFooter theme1={props.color1} theme2={props.color2}/>
+      <AboutFooter theme1={props.color1} theme2={props.color2} />
     </div>
   );
 };
