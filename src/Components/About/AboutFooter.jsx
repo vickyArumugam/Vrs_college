@@ -9,6 +9,8 @@ const AboutFooter = (props) => {
   const [isLoadingEvent, setIsLoadingEvent] = useState(true);
   const [isLoadingImage, setIsLoadingImage] = useState(true);
   const [error, setError] = useState(null);
+  const [copyRight, setCopyRight] = useState([]);
+  const [isLoadingcopyRight, setIsLoadingCopyRight] = useState(true)
 
   const fetchData = async (url, setDataCallback, setLoadingCallback) => {
     try {
@@ -30,6 +32,7 @@ const AboutFooter = (props) => {
     fetchData('http://localhost/mailapp/contact.php', setContact, setIsLoadingContact);
     fetchData('http://localhost/mailapp/updateConference.php', setEventData, setIsLoadingEvent);
     fetchData('http://localhost/mailapp/footerBackgroundImage.php', setImage, setIsLoadingImage);
+    fetchData('http://localhost/mailapp/CopyRights.php', setCopyRight, setIsLoadingCopyRight)
   }, []);
 
   const getYear = (date) => {
@@ -44,7 +47,7 @@ const AboutFooter = (props) => {
     setHoveredImage(null);  // Reset the hovered image when mouse leaves
   };
 
-  if (isLoadingContact || isLoadingEvent || isLoadingImage) return <div>Loading...</div>;
+  if (isLoadingContact || isLoadingEvent || isLoadingImage || isLoadingcopyRight) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (contact.length === 0) return <div>No contact information available.</div>;
 
@@ -76,52 +79,12 @@ const AboutFooter = (props) => {
               Mobile: +91 {contact[0]?.mobile || 'N/A'}
             </h1>
           </div>
-          <div className="w-full h-20 flex justify-center items-center gap-6 sm:gap-10 mt-0 lg:mt-10">
-            <img
-              src="/images/facebook_5968764 (1).png"
-              alt="facebook-icon"
-              className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
-              style={{
-                borderColor: hoveredImage === 1 ? props.theme2 : '',
-              }}
-              onMouseEnter={() => handleMouseEnter(1)}
-              onMouseLeave={handleMouseLeave}
-            />
-            <img
-              src="/images/twitter_3955031.png"
-              alt="twitter-icon"
-              className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
-              style={{
-                borderColor: hoveredImage === 2 ? props.theme2 : '',
-              }}
-              onMouseEnter={() => handleMouseEnter(2)}
-              onMouseLeave={handleMouseLeave}
-            />
-            <img
-              src="/images/instagram_1384015.png"
-              alt="insta-icon"
-              className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
-              style={{
-                borderColor: hoveredImage === 3 ? props.theme2 : '',
-              }}
-              onMouseEnter={() => handleMouseEnter(3)}
-              onMouseLeave={handleMouseLeave}
-            />
-            <img
-              src="/images/social_15707814.png"
-              alt="youtube-icon"
-              className="transform transition-transform duration-200 hover:scale-110 border-3 rounded-full"
-              style={{
-                borderColor: hoveredImage === 4 ? props.theme2 : '',
-              }}
-              onMouseEnter={() => handleMouseEnter(4)}
-              onMouseLeave={handleMouseLeave}
-            />
-          </div>
         </div>
       </section>
-      <div style={{ backgroundColor: '#000', color: props.theme2 }} className="p-2 text-center z-10">
-        Copyright {getYear(eventData?.[0]?.conferenceDate)} - V.R.S. College of Engineering and Technology
+      <div className='bg-footer-bg p-2 text-footer-text  text-center '>
+        <p style={{ Color: '#000', color: props.color2 }} className="p-2 text-center z-10">
+          {copyRight.copyRight}
+        </p>
       </div>
     </div>
   );

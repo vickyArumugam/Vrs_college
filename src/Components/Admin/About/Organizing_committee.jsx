@@ -113,7 +113,7 @@ const OrganizingCommittee = () => {
             {sections.map((section) =>
               section.members.map((member) => (
                 <tr key={member.id}>
-                  <td className="border border-gray-300 px-4 py-2">{section.title}</td>
+                  <td className="border border-gray-300 px-4 py-2 ">{section.title}</td>
                   <td className="border border-gray-300 px-4 py-2">{member.name}</td>
                   <td className="border border-gray-300 px-4 py-2">{member.position}</td>
                   <td className="border border-gray-300 px-4 py-2">

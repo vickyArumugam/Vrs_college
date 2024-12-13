@@ -47,6 +47,14 @@ export default function Theme() {
                         onChange={(e) => setColor1(e.target.value)}
                         className="w-full h-10 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-green-300"
                     />
+                    <span className="text-black">OR</span>
+                    <input
+                        type="text"
+                        value={color1}
+                        onChange={(e) => setColor1(e.target.value)}
+                        className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-300  text-black"
+                        placeholder="Enter HEX code"
+                    />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Select Theme 2</label>
@@ -55,6 +63,14 @@ export default function Theme() {
                         value={color2}
                         onChange={(e) => setColor2(e.target.value)}
                         className="w-full h-10 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-green-300"
+                    />
+                     <span className="text-black">OR</span>
+                    <input
+                        type="text"
+                        value={color2}
+                        onChange={(e) => setColor2(e.target.value)}
+                        className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-300 text-black"
+                        placeholder="Enter HEX code"
                     />
                 </div>
                 <button

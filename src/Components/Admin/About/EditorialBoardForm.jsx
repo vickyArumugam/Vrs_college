@@ -102,7 +102,7 @@ const OrganizingCommittee = () => {
             value={formData.name}
             onChange={handleInputChange}
             placeholder="Name"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none text-black"
           />
           <input
             type="text"
@@ -110,7 +110,7 @@ const OrganizingCommittee = () => {
             value={formData.position}
             onChange={handleInputChange}
             placeholder="Position"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none text-black"
           />
           <input
             type="text"
@@ -118,7 +118,7 @@ const OrganizingCommittee = () => {
             value={formData.institution}
             onChange={handleInputChange}
             placeholder="Institution"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none text-black"
           />
           <input
             type="text"
@@ -126,7 +126,7 @@ const OrganizingCommittee = () => {
             value={formData.location}
             onChange={handleInputChange}
             placeholder="Location"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none text-black"
           />
         </div>
 

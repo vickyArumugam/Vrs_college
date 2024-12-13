@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Header from '../Core/Header';
+import { useNavigate } from 'react-router-dom';
+
 
 const Home = (props) => {
     const [eventData, setEventData] = useState(null);
@@ -27,7 +28,9 @@ const Home = (props) => {
     const [hoveredIndex, setHoveredIndex] = React.useState(null);
 
 
-    const textColor1 = isHovered ? props.color2 : 'white';
+    // const textColor1 = isHovered ? props.color2 : 'white';
+    const navigate = useNavigate();
+
 
     const handleButtonClick = () => {
         navigate('/author/new_paper_submission');
@@ -122,8 +125,8 @@ const Home = (props) => {
                     <h1 className="text-[30px] sm:text-[50px] mb-6 font-bold font-Kaisei-Decol">
                         {eventData[0].conferenceType}
                     </h1>
-                    <button onClick={handleButtonClick} className="uppercase w-52 sm:w-64 h-12 mb-10 sm:mb-20 mt-5  bg-white text-[20px] sm:text-[23px] font-semibold rounded-full p-2 mr-4 pr-7" style={{ color: props.color2 }}   >
-                        Regester
+                    <button onClick={handleButtonClick} className="uppercase w-52 sm:w-64 h-12 mb-10 sm:mb-20 mt-5   text-[20px] sm:text-[23px] font-semibold rounded-full p-2 mr-4 pr-7" style={{ color: props.color2,backgroundColor: props.color1 }}   >
+                        Regester Here
                     </button>
                 </div>
             </section>
@@ -313,7 +316,7 @@ const Home = (props) => {
                                     {item.name}
                                 </h1>
                                 <div
-                                    className="w-28 h-2 mx-auto mt-1"
+                                    className="w-28 h-[2px] mx-auto mt-1"
                                     style={{ backgroundColor: props.color1 || '#C8F51E' }} // Dynamic divider color
                                 ></div>
                                 <p
@@ -365,7 +368,7 @@ const Home = (props) => {
                             <h1
                                 className="font-roboto text-4xl sm:text-5xl text-center font-bold"
                                 style={{
-                                    color: item.highlightColor || '#FFD700', // Default yellow
+                                    color: item.highlightColor || '#FFD700', 
                                 }}
                             >
                                 {Math.floor(item.value)}
@@ -379,12 +382,12 @@ const Home = (props) => {
                 </div>
             </section>
 
-            <section className=' w-full h-[580px] text-center' style={{ backgroundColor: props.color1 }}>
+            <section className=' w-full h-[450px] text-center' style={{ backgroundColor: props.color1 }}>
                 <div className='flex flex-col'>
-                    <h1 className='text-[54px] font-bold font-Kaisei-Decol  mb-10 mt-10' style={{ color: props.color2 }}>Contact Us</h1>
-                    <h2 className=' text-2xl  lg:text-4xl text-white font-bold font-montserrat-subrayada'>{contact[0].college_name}</h2>
+                    <h1 className='text-[54px] font-bold font-Kaisei-Decol mt-10' style={{ color: props.color2 }}>Contact Us</h1>
+                    <h2 className=' text-2xl  lg:text-4xl mt-6 text-white font-bold font-montserrat-subrayada'>{contact[0].college_name}</h2>
                     <h3 className='  text-xl  lg:text-2xl  my-6 text-yellow-300'>({contact[0].iso_number})</h3>
-                    <span className=' text-xl lg:text-2xl text-white mb-14 font-Playwrite '>
+                    <span className=' text-xl lg:text-2xl text-white font-Playwrite '>
                         <p className='my-2'>{contact[0].village},</p>
                         <p className='my-2'>{contact[0].district}</p>
                         <p className='my-2'>Mobile : +91 {contact[0].mobile}</p>
@@ -421,8 +424,8 @@ const Home = (props) => {
                                 borderColor: hoveredIndex === index ? props.color1 : "transparent", // Change border color on hover
                                 borderWidth: hoveredIndex === index ? "3px" : "2px", // Add visual feedback
                             }}
-                            onMouseEnter={() => setHoveredIndex(index)} // Track hovered link
-                            onMouseLeave={() => setHoveredIndex(null)} // Reset hover state
+                            onMouseEnter={() => setHoveredIndex(index)} 
+                            onMouseLeave={() => setHoveredIndex(null)} 
                         >
                             <img
                                 src={icons[link.platform] || "https://example.com/images/default_icon.png"}
@@ -431,6 +434,11 @@ const Home = (props) => {
                             />
                         </a>
                     ))}
+                </div>
+                <div className='bg-footer-bg p-2 text-footer-text  text-center '>
+                    <p style={{ backgroundColor: '#000', color: props.color2 }} className="p-2 text-center z-10">
+                        {copyRight.copyRight}
+                    </p>
                 </div>
             </section>
         </div>
